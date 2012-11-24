@@ -2,7 +2,7 @@
 
 phpinfo();
 
-echo intval('15C');
+
 
 /* 
 $memcache_obj = new Memcache;
