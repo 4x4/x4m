@@ -1,0 +1,104 @@
+{%section:_catalog_obj%} 
+      
+
+        <div class="cat-cart">
+          <div class="title">{%F:Name%}</div>
+          <div class="cc-left"> 
+          
+          <a class="cc-img" href="{%F:image%}">
+                                           
+                                            {%if(Common::is_file_exists('{F:image}'))%}        
+                                                <img src="{%F:image(E:image_transform(290,180))%}" alt="">                                    
+                                            {%endif%}</a>
+          
+          
+                        
+          {%F:#curr(MAIN:get_currency())%}                                
+            <p>{%F:price(E:number_format(|[2, '.', '']|))%}  {%F:curr>name%}</p>
+            <p class="compare"><input rel="{%F:id%}" {%if({F:incomp})%} checked="1" {%endif%} name="comparse" type="checkbox"> <span>добавить к сравнению</span></p>
+            <a class="button"  href="{%F:@AddToCartLink(catalog:get_ishop_link({F:id}))%}">В корзину</a>     
+        </div>  
+        
+        
+        
+         {%F:@prev(catalog:get_prev({F:id}))%}
+         
+         {%F:@next(catalog:get_next({F:id}))%}
+         
+         
+         
+         
+         
+            {%F:#addprops(catalog:get_subproperties({F:id},addprops))%}
+        
+            {%F:#afddprops(catalog:get_subgroup_elements(7437,addprops))%}
+        
+          <div class="cc-right">
+            
+            
+            <table class="s-table">
+              <tbody>
+            
+            {%each({F:addprops},k,val)%}
+                
+                <tr>
+                    <td><strong>{%F:val>alias%}</strong></td>
+                    <td>
+                            {%if('{F:val>type}'=='BOOL')%}
+                            
+                                  
+                                {%if('{F:val>value}')%}
+                                    
+                                     Да
+                                      
+                                    {%else%}
+                                    
+                                    Нет
+                                    
+                                {%endif%}
+                                
+                                
+                            {%else%}
+                            
+                                {%F:val>value%}
+                                
+                            {%endif%}
+                            
+                    </td>
+                </tr>
+            
+            {%endeach%}
+            </tbody></table>
+          
+            {%F:description%}
+          </div>
+          
+        </div>
+
+                             
+
+
+{%endsection:_catalog_obj%}
+
+
+                                   <div id="tab2" class="tab">
+                                    {%F:+c(E:call_module(comments.front))%}                                        
+                                    
+                                    {%F:+b(E:add_file_section(_common/extended/comments.html))%}      
+                                    
+                                    {%F:#comments(comments:show_comments(catalog,{F:id},{F:Name}))%}                                        
+                                    
+                                    {%->:_send_comments_form%}
+                                    {%->:_comments%}
+                                    
+                                    <a class="all" href="#">Все отзывы ({%F:@cm(comments:count_comments(catalog,{F:id}))%})</a>
+                                   </div>
+                                    
+                                    
+
+
+
+
+{%section:_catalog_object_not_found%}
+    <p>Объект не найден</p>
+{%endsection:_catalog_object_not_found%}

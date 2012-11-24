@@ -1,0 +1,107 @@
+{%section:show_random_questions%}
+<p>{question_topic}</p>
+<select id="category" class="validate-selection">
+</select>
+<p>{template_output}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{number_of_questions}</p>
+<input class="validate-number" id="num_per_page" type="text" />
+{%endsection:show_random_questions%}
+
+
+{%section:show_faq_server%}
+<p>{template_output_question}</p>
+<select id="qTemplate" class="validate-selection"></select>
+<p>{template_output_categories}</p>
+<select id="cTemplate" class="validate-selection"></select>
+<p>{quantity_questions}</p>
+<p style="font-weight:normal;">({zero_or_empty_no_restrictions})</p>
+<input id="OnPage" name="OnPage" type="text" value='0'/>
+<p>{root}</p>
+<select name="root" id="root"></select>
+<p>{action_carried_out_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')">
+</select>
+<div id="secondary_properties"></div>
+<div id="secondary_signals"></div>
+{%endsection:show_faq_server%}
+
+
+{%section:show_categories%}
+<p>{group_of_faq_default}</p>
+<select name="folder" id="folder"></select>
+<p>{template_display_sections}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{page_transition}</p>
+<select id="page" class="validate-selection">
+</select>
+{%endsection:show_categories%}
+
+
+{%section:show_selected_category%}
+<p>{section_issues_displayed_by_default}</p>
+    <input id="categoryAlias" class="inp-b1" readonly />
+    <input id="category" class="required" type="hidden" value=""/>
+    <a class="button small" href="javascript:void(0)" id="startXlistGroup">{select}</a> <p>{page_transition}</p>
+<select id="Destination_page">
+</select>
+<div class="i1">
+<p>{template_output}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{number_of_questions_on_this_page}</p>
+<p style="font-weight:normal;">({0_or_blank_put_everything_on_one_page})</p>
+<input class="validate-number" id="num_per_page" type="text" />
+{%endsection:show_selected_category%} 
+
+
+{%section:show_faq_search%}
+<p>{page_transition}</p>
+<select id="Destination_page" class="validate-selection">
+</select>
+<p>{template_output}</p>
+<select id="Template" class="validate-selection">
+</select>
+{%endsection:show_faq_search%}
+
+
+{%section:show_faq_search_server%}
+
+<p>{template_output}</p>
+<select id="MTemplate" class="validate-selection"></select>
+
+<p>{number_of_questions_on_this_page}</p>
+<p style="font-weight:normal;">({0_or_blank_put_everything_on_one_page})</p>
+<input class="validate-number" id="OnPage" name="OnPage" type="text" />
+
+<p>{page_transition_results}</p>
+<select id="MDestination_page" class="validate-selection">
+</select>
+
+
+<p>{action_carried_out_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')" class="validate-selection">
+</select>
+<div id="secondary_properties"></div>
+<div id="secondary_signals"></div>
+{%endsection:show_faq_search_server%}
+
+
+
+
+{%section:show_folder_questions%}
+<p>{group_of_faq_default}</p>
+<select name="folder" id="folder"></select>
+<p>{template_display_sections}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{page_transition}</p>
+<select id="page" class="validate-selection">
+</select>
+<p>{quantity_questions}</p>
+<p style="font-weight:normal;">({zero_or_empty_no_restrictions})</p>
+<input class="validate-number" id="num_per_page" type="text" />
+
+{%endsection:show_folder_questions%} 

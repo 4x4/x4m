@@ -1,0 +1,14 @@
+<div id="e-form">
+  <form id="add_subscribe">
+    <input type="hidden" id="category" name="category" value=""/>
+    <input type="hidden" id="status" name="status" value="incoming"/>
+    <p>{dispatch_title} ({if_it_is_not_specified_theme_takes_from_group})</p>
+    <input type="text" id="theme" name="theme" value="" class="validate-alpha"/>
+    <div id="msgplace"></div>
+    <p>{news}</p>
+    <ul class="chk" id="newslist">
+    </ul>
+    <div id="newsplace">{any_section_news_it_is_not_chosen}.</div>
+  </form>
+  <div id="file_loader"></div>
+  <a class="button" onclick="XTR_subscribe.save_subscribe(this);" href="javascript:void(0);" id="save_button">{save}</a> </div>

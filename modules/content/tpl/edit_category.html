@@ -1,0 +1,44 @@
+<div id="e-form">
+  <form id="edit_category">
+    <p>{group_name}</p>
+    <!--<input class="required validate-alpha" type="text" name="basic"  value="" />-->
+    <input id="Name" class="required validate-alpha" type="text" name="Name"  value="" />
+    
+    <ul class="chk">
+      <li>
+        <input type="checkbox" id="Disable" name="Disable" /> {off_object}
+      </li>
+      <li>
+        <input type="checkbox" id="view_group" name="view_group" value="" /> {view_group_in_list}
+      </li>
+    </ul>
+    
+    
+    <p>{description}</p>
+    <textarea ondblclick="XTR_main.apply_xinha(this)" name="description" id="description"></textarea>
+    
+    <p>{assign_the_default_template}</p>
+    <select id="Template"></select>
+    
+  </form>
+  <a class="button" href="javascript:void(0)" onclick="XTR_content.save_edited_category(this)">{save}</a>
+</div>
+
+
+<div id="slotzcontainer">
+  <div id="addtunescontainer">
+        <div id="tunescontainer">
+          <form id="add_tunes">
+            <p>{replace_the_title_for_the_page_object}</p>
+            <input name="Title" id="Title">
+            <p>{replace_the_keywords_for_the_page_object}</p>
+            <input name="Keywords" id="Keywords">
+            <p>{description}</p>
+            <input name="Description" id="Description" class="inp">
+            <p>{linkword} <a onclick="XTR_content.generate_link()" href="javascript:void(0)">({generate})</a></p>
+            <input name="basic" id="basic" class="is-none-catobj">
+          </form>
+        </div>
+  </div>
+</div>
+

@@ -1,0 +1,125 @@
+{%section:main%}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+
+{%F:xoadHeader%}
+
+<link rel="stylesheet" type="text/css" href="{%F:XJS%}/_components/windows/dhtmlxwindows.css">
+<link rel="stylesheet" type="text/css" href="{%F:XJS%}/_components/windows/skins/dhtmlxwindows_dhx_skyblue.css">
+<style type="text/css">@import url("_adm/xres/xcss/x4.css");</style>
+</head><body>
+
+
+
+<script type="text/javascript">
+  var xConnector = {%F:xConnector%};
+</script> 
+
+<script src="{%F:XJS%}_core/prototype/prototype17.js" type="text/javascript"></script> 
+<script src="{%F:XJS%}_lang/{%F:lang%}.js" type="text/javascript"></script> 
+
+
+
+<!-- PB [begin] --> 
+<script type="text/javascript" src="{%F:XJS%}_components/pb/pb.js"></script> 
+<script type="text/javascript">
+  var progress_bar = new Control.ProgressBar('loadline', {interval:0, step:3,effects:1});
+  progress_bar.step(5);
+  $('ll-txt').update('{loading_library_core}');
+</script> 
+<!-- PB [end] --> 
+
+
+<script src="{%F:XJS%}_components/modal/control.modal,{%F:XJS%}_components/slotz/slotz.cjs" type="text/javascript"></script> 
+
+
+<script type="text/javascript" src="{%F:XJS%}_components/ckeditor/ckeditor.js"></script> 
+
+<!-- debugmode
+<script src="{%F:XJS%}_components/modal/control.modal.js" type="text/javascript"></script>
+<script src="{%F:XJS%}_components/slotz/slotz.js"></script>
+[end] --> 
+
+<script type="text/javascript">
+    progress_bar.step(25);
+    $('ll-txt').update('{initializing_visual_editor_and_tree}');
+</script> 
+<!-- tree [begin] -->
+
+<link href="{%F:XJS%}_core/tree/dhtmlXTree.css" type="text/css" rel="stylesheet"/>
+<!--<script type="text/javascript" charset="ISO-8859-1"  src="{%F:XJS%}_core/tree/dhtmlXTree.js"></script> -->
+<script type="text/javascript">
+    $('ll-txt').update('{loading_external_components}');
+    progress_bar.step(35);
+</script> 
+
+
+<script src="{%F:XJS%}_components/growler/growlerr,{%F:XJS%}_components/validation/validation,{%F:XJS%}_components/datepicker/datepicker,{%F:XJS%}_components/pcm/pcm,{%F:XJS%}_components/fabs/fabtabulous,{%F:XJS%}_components/xpop/xpop.cjs" type="text/javascript"></script> 
+<script src="{%F:XJS%}_components/xlist/xlist.js" type="text/javascript"></script> 
+<script src="{%F:XJS%}_components/codepress/codepress.js" type="text/javascript"></script> 
+<script src="{%F:XJS%}_components/grid/dhtmlxcommon.js" type="text/javascript"></script> 
+
+<!-- <script src="{%F:XJS%}_components/lightbox/lightbox.js" type="text/javascript"></script> -->
+
+<script src="{%F:XJS%}_components/dhtmlxtree/dhtmlxtree.js" type="text/javascript"></script>                    
+
+<script src="{%F:XJS%}_components/grid/dhtmlxgrid,{%F:XJS%}_components/grid/ext/dhtmlxgrid_filter,{%F:XJS%}_components/grid/ext/dhtmlxgrid_splt,{%F:XJS%}_components/grid/ext/dhtmlxgrid_hmenu,{%F:XJS%}_components/grid/ext/dhtmlxgrid_srnd,{%F:XJS%}_components/grid/ext/dhtmlxgrid_mcol,{%F:XJS%}_components/grid/ext/dhtmlxgrid_drag,{%F:XJS%}_components/grid/dhtmlxgridcell.cjs" type="text/javascript"></script> 
+
+<script src="{%F:XJS%}_components/windows/dhtmlxwindows,{%F:XJS%}_components/windows/dhtmlxcontainer,{%F:XJS%}_components/grid/dhtmlxtreegrid,{%F:XJS%}_components/dhtmlxmenu/sources/dhtmlxmenu,{%F:XJS%}_components/dhtmlxmenu/sources/ext/dhtmlxmenu_ext.cjs" type="text/javascript"></script> 
+
+
+<script src="{%F:XJS%}modulePrototype.js" type="text/javascript"></script> 
+<script src="{%F:XJS%}main.js" type="text/javascript"></script> 
+<script type="text/javascript">
+   $('ll-txt').update('{system_starts}...');  
+   progress_bar.step(10);
+</script> 
+<script src="{%F:XJS%}_components/matrixview/matrixview,{%F:XJS%}_components/matrixview/swfupc,modules/recycle/js/recycle.cjs" type="text/javascript"></script> 
+
+<!-- debugmode
+<script src="{%F:XJS%}_components/matrixview/matrixview.js" type="text/javascript"></script> 
+<script src="{%F:XJS%}_components/matrixview/swfupc.js" type="text/javascript"></script> 
+[end] --> 
+
+<!--
+<script type="text/javascript">  
+   progress_bar.step(15);
+   $('ll-txt').update('{loading_modules}');
+  </script>
+ Modules <script src="{%->:js_modules%}.cjs"> </script> --> 
+
+{%->:js_modules%} 
+<script type="text/javascript">
+   $('ll-txt').update('{system_starts}...');  
+   progress_bar.step(25);
+</script>
+</body>
+</html>
+{%endsection:main%}
+
+
+{%section:module_menu%}
+<li><a class="{%F:name%}"  onclick="javascript:XTR_main.load_module('{%F:name%}','normal')" href="javascript:void(0);"><span></span>{%F:alias%}</a></li>
+{%endsection:module_menu%}
+
+
+{%section:js_modules->%}
+<script src="modules/{%F:name%}/js/{%F:name%}.js" type="text/javascript"></script>
+{%endsection:js_modules%}
+
+{%section:fw_module_all->%}
+<li>
+  <ul>
+    {%F:fw_module%}
+  </ul>
+</li>
+{%endsection:fw_module_all%}
+
+{%section:fw_module%}
+<li><a href="javascript:XTR_main.load_module('{%F:name%}','normal')" class="{%F:name%}"><span></span><strong>{%F:alias%}</strong></a>
+  <p>{%F:info%}</p>
+</li>
+{%endsection:fw_module%}

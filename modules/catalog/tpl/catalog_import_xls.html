@@ -1,0 +1,32 @@
+<div id="e-form">
+  <form id="importXLS">
+    <p><strong>{select_file_to_import} (*.xls,*.csv):</strong></p>
+    <input name="filename" id="filename" class="inp-b1" readonly />
+    <a class="button small" href="javascript:void(0)" title="Выбрать файл" onclick="xFileManager.selectFile('filename',['.txt','.xls','.csv'])">{select}</a>
+    <p>{type_for_downloadable_categories}</p>
+    <select id="categoryType" class="required" name="categoryType" type="text" >
+    </select>
+    <p>{type_for_downloadable_objects}</p>
+    <select id="objectType" class="required" name="objectType" type="text" >
+    </select>
+    <p>{category_related_sites}</p>
+    <input id="showGroup" class="inp-b1" readonly />
+    <input id="showGroupId" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    <p>{encoding}</p>
+    <select class="inp" id="encoding">
+      <option value="windows-1251">windows-1251</option>
+      <option value="utf8">utf-8</option>
+    </select>
+<ul class="chk">
+  <li>    
+    <input type="checkbox" name="clearbase">{clear_before_loading}
+    </li>
+</ul>
+    
+    <p>{step_load}</p>
+    <input name="step_l" type="text" value="100"/>
+    <div id="loading_progress"> </div>
+    <a class="button" href="javascript:XTR_catalog.importXLS()">{start_import}</a>
+  </form>
+</div>

@@ -1,0 +1,50 @@
+{%section:currency%}
+ 
+<script language="javascript">
+$(function(){
+  
+    
+    
+    $('#currency').html($('.cur-list a.selected').html());
+    
+    $('#currency').toggle(function()
+        {
+              $('.cur-list').show(200);
+        },
+        
+        function()
+        {
+              $('.cur-list').hide(200);
+        }
+    );
+    
+    $('.cur-list a').click(function(e){
+        
+        e.preventDefault();
+        $('#curid').val(this.id);
+        $('#curform').submit();        
+    });
+    
+});
+
+</script>
+
+ <p class="price"><img src="/templates/_ares/images/icon_calc.png"><span>Отображать цены в <a id="currency" href="#"> </a>
+    <div class="cur-list" style="display:none">
+                 <ul>{%->:currency_item%}</ul>            
+    </div>
+ </span></p> 
+            
+            <form id="curform" action="{%F:action%}" method="POST">
+                <input id="curid" value="" type="hidden" name="curid">
+                <input type="hidden" value="1" name="changecurrency">
+            </form>
+
+{%endsection:currency%}
+
+
+{%section:currency_item->%}
+
+<li><a id="{%F:id%}" href="#" {%if('{F:selected}')%} class="selected" {%endif%} >{%F:alias%}</a></li>
+
+{%endsection:currency_item%}

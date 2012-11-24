@@ -1,0 +1,21 @@
+
+{%section:ishop_basket_status%}
+ 
+ <script>
+ $(document).ready(function()
+ {
+ 
+    $('a[rev=tocart]').ishopToBasket({basketCountSelector:'#cartcount'});    
+     
+ });
+ 
+ </script>
+ 
+ <p class="basket"><img src="/templates/_ares/images/icon_basket.png"><span>В <a href="{%F:cartPageLink%}">корзине</a> <strong id="cartcount">
+ {%F:count%}</strong>   {%F:@tov(E:declination({F:count},|{0:"товар",1:"товара",2:"товаров"}|))%}</span></p>
+ <ul class="basket-container">
+</ul>
+ 
+{%endsection:ishop_basket_status%}
+
+

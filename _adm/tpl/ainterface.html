@@ -1,0 +1,19 @@
+<div class="pw-edit popup">
+  <form id="tune_actions">
+    <p>{module_name_in_slot}</p>
+    <input class="required" id="Alias" type="text"/>
+    <p>{module_will_execute_action}</p>
+    <select onchange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value)" id="Action" class="inp validate-selection is-none-uniq">
+    </select>
+    <div id="action_properties"></div>
+   
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="CacheModule" />
+        {cache_this_module}
+         </li>
+      <li>
+      </ul>
+  </form>
+  
+  <a class="button" href="javascript:XTR_ModulelistEditor.create_slot_module();XTR_ModulelistEditor.mw.close();"> {save_and_close_window}</a> </div>

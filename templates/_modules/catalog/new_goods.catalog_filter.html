@@ -1,0 +1,37 @@
+
+{%section:_catalog_show_filter%}
+  
+{%F:#objects(catalog:get_objects_by_filter(|{"options":{"startpage":"0",Onpage:"3","catalogurl":"/catalog"},"filter":{"equal":{"new_good":1}}}|))%}    
+
+{%if({F:objects})%}              
+                 
+<div class="cat">
+<div class="title"><a href="#">Новинки</a></div>
+  
+    <ul>
+      {%F:#curr(MAIN:get_currency())%}  
+      
+      {%each({F:objects},id,obj)%}
+      
+                  <li> 
+                  <a class="pic" href="{%F:obj>props>image%}"><img src="{%F:obj>props>image(E:image_transform(82,82))%}" alt="" /></a> 
+                  
+                  <a class="name" href="{%F:obj>Link%}">{%F:obj>props>Name%}</a>
+                  <p>{%F:obj>props>description%}</p>
+                  
+                
+                  <p class="cost">{%F:obj>props>price(E:number_format(|[2, '.', '']|))%}  {%F:curr>name%}</p>
+                  
+                  <a id="{%F:id%}" rev="tocart" name="myfunc" class="button" href="#">В корзину</a> 
+                  </li>
+                              
+      {%endeach%}
+      </ul>
+                                
+</div> 
+{%endif%}
+
+  
+  {%endsection:_catalog_show_filter%}
+
+ 

@@ -1,0 +1,31 @@
+{%section:name%}
+    
+    Платежная система ЕРИП
+    
+{%endsection:name%}
+
+{%section:paysystem%}
+
+<div class="pw-edit big-window">
+  <form id="paysystem">
+
+  <input type="hidden"  name="paysystem" value="erip">
+    
+    <p>{erip_ftp_address}</p>
+    <input class="required" name="erip_ftp_address" value="" >
+    
+    <p>{erip_login}</p>    
+    <input class="required"  name="erip_login" value="">
+    
+    <p>{erip_password}</p>    
+    <input class="required"  name="erip_password" value="">
+
+    
+    </form>
+    <a class="button" href="javascript:void(0)" onclick="XTR_ishop.save_paysystem()">{save}</a> 
+
+</div>
+
+{%endsection:paysystem%}
+
+

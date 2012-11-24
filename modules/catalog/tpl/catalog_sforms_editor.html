@@ -1,0 +1,33 @@
+<div id="e-form" class="pw-edit">
+  <form id="add_sfield">
+  <div class="pw-edit-b">
+    <p>{sfield_name}</p>
+    <input class="required validate-alpha" name="sname" type="text" />
+    <p>{select_property_set}</p>
+    <select class="validate-selection" name="property_set" onchange="javascript:XTR_catalog.change_sform_property_set(this.options[this.selectedIndex].value)">
+    </select>
+    <p>{select_property}</p>
+    <select class="validate-selection" name="property">
+    </select>
+    
+    
+    
+    <p>{select_criteria}</p>
+    <select class="validate-selection" name="criteria">
+      <option value=""></option>
+      <option value="equal">{equal}</option>
+      <option value="less">{less}</option>
+      <option value="larger">{larger}</option>
+      <option value="interval">{interval}</option>
+      <option value="rlike">{rlike}</option>
+      <option value="lrlike">{lrlike}</option>
+      <option value="rwords">{rwords}</option>
+    </select><br/>
+    
+    <a class="button" href="javascript:void(0)" onclick="XTR_catalog.add_sfield_handler(this)">
+        {add_sfield}
+        </a>
+    
+        </div>
+  </form>
+</div>

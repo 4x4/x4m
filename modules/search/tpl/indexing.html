@@ -1,0 +1,13 @@
+<form id="indexing" action="">
+  <div class="pw-edit big-window">
+    <p>{indexation_options}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" id="sitemap" name="sitemap" checked="checked" />
+        {generate} sitemap.xml (Yandex,Google)</li>
+    </ul>
+    <a class="button" href="javascript:void(0);" onclick="javascript:XTR_search.start_indexing($('sitemap').checked);">{start_indexation}</a>
+    <p>{results_indexation}</p>
+    <div id="indexing_results" style="width:1150px"></div>
+  </div>
+</form>

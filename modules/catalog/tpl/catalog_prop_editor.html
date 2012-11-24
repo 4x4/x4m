@@ -1,0 +1,23 @@
+<div class="pw-edit popup">
+  <div id="e-form">
+    <form id="one_property_edit" onsubmit="javascript:return false;">
+      <p>{name_of_the_properties_latin_only}</p>
+      <input id="Name" class="required validate-alpha" name="Name" type="text" />
+      <p>{alias_properties}</p>
+      <input  class="required validate-alpha" name="Alias" type="text" />
+      <p>{subgroup_properties}</p>
+      <select name="Prop_subgroup" id="Prop_subgroup">
+      </select>
+      <p>{type_of_property}</p>
+      <div id="property_type"></div>
+      <ul class="chk">
+        <li>
+          <input id="isComparse" name="isComparse" type="checkbox" />
+         {not_compare_to_this_property}
+        </li>
+      </ul>
+      <div id="property_type_editor"></div>
+      <a class="button" href="javascript:XTR_catalog.cat_editor.save_property()">{save}</a>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+{%section:message%}
+<html><head>
+<title>Форма с сайта</title>
+<meta http-equiv="Content-Type" content="text/html; charset={%F:charset%}">
+</head>
+<body>
+<b>{%F:subject%}</b><br><br>
+<table border="1" cellpadding="10" cellspacing="0">{%->:rows%}</table>
+</body>
+</html>
+{%endsection:message%}
+
+
+{%section:row->rows%}
+  <tr>
+    <td class="fname">{%F:name%}</td>
+    <td>{%F:value%}</td>
+  </tr>
+{%endsection:row%}
+
+
+
+
+{%section:saved_message%}
+<p><b>Форма с сайта</b>: {%F:subject%}</p>
+<table cellpadding="0" cellspacing="0">{%->:rows%}</table>
+{%endsection:saved_message%}
+
+
+{%section:success%}
+<div class="text" style="color:green">{%F:message_after%}</div>
+{%endsection:success%}
+
+
+{%section:failed%}
+<div class="text">
+ <font color="red"><b>Ошибка - Проблема с отсылкой формы.</b></font><br><br>
+ </div>
+{%endsection:failed%}

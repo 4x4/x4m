@@ -1,0 +1,21 @@
+{%section:_search_form%}
+            <div class="r-menu" style="float:right; margin-left : 10px;">
+                  <div class="r-menu-top"><h2>Поиск по вопросам и ответам</h2></div>
+                  <div class="r-menu-middle">
+                    <ul class="r-menu-mid">
+                        <form id="faqsform" action="{%F:action%}" onSubmit="return(Noaccent())" method="post">
+                          <label for="faq_q"><img src="media/images/search_label.png" style="float :left; padding:14px 7px 0 5px;"/></label>
+                          {%if('{F:value}')%}
+                          <input type="text" name="faqsearch" id="faq_q" style="margin : 10px -3px 3px 0; font: 400 italic 100% serif; width : 149px;" value="{%F:value%}" onfocus="this.select();"/>
+                          {%else%}                                                                                        
+                          <input type="text" name="faqsearch" id="faq_q" style="margin : 10px -3px 3px 0; font: 400 italic 100% serif; width : 149px;" onfocus="this.value='';" value="Введите слово"/>
+                          {%endif%}
+                          <input type="submit" class="submit" value="OK" onclick="$('#faqsform').submit()" />
+                        </form>                        
+                    </ul>
+                  </div>
+                  <div class="r-menu-bottom"></div>
+            </div>
+
+{%endsection:_search_form%}
+

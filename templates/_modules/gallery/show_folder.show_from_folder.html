@@ -1,0 +1,28 @@
+{%section:_show_from_folder%}
+{%F:#gallery(E:get_pictures_from_folder(|{"folder":"{F:image_folder}"}|))%}
+{%if('{F:gallery}')%}
+<link rel="stylesheet" type="text/css" href="js/shadowbox/shadowbox.css">
+<script type="text/javascript" src="js/shadowbox/shadowbox.js"></script>
+<script type="text/javascript">
+Shadowbox.init({
+    handleOversize:     "drag",
+    displayNav:         true,
+    handleUnsupported:  "remove",
+    autoplayMovies:     true
+});
+</script>
+{%F:#tmp(E:assign(0))%}
+    <ul class="gallery">
+        <li>
+            <ul>
+            {%each({F:gallery},k,picture)%}
+                {%F:#pic(E:get_from({F:picture},image))%}
+                {%if({F:tmp}%3==0)%}</ul></li><li><ul>{%endif%}
+                <li><a href="{%F:pic%}" rel="shadowbox[Mixed]"><img src="{%F:pic(E:image_transform(180,150,,,,,4:3))%}" alt=""></a></li>
+                {%F:#tmp(E:calc({F:tmp}+1))%}
+                {%endeach%}
+            </ul>
+        </li>
+    </ul>
+{%endif%}
+{%endsection:_show_from_folder%}                                            

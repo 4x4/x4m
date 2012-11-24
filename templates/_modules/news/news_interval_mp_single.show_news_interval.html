@@ -1,0 +1,33 @@
+{%section:_news_interval%}
+
+<div class="wrapper">
+                    <div class="content">
+            {%->:_news_node%}                            
+        </div>      
+        </div>      
+{%endsection:_news_inrterval%}
+
+{%section:_news_node->%}
+
+                        <div class="post">
+                            <strong class="title"><a href="{%F:link%}">{%F:header%}</a></strong>
+                            
+                            <div class="default-text">
+                            
+                                {%if('{F:img_small}')%}
+                                    <img src="{%F:img_small(E:image_transform(200,150))%}"  class="alignleft"/>
+                                {%endif%}           
+                                
+                                <p>{%F:news_long%}</p>
+                                <p><a href="{%F:link%}">Далее</a></p>
+                            
+                                </div>
+                            </div>
+                        
+
+              
+            
+              
+              
+{%endsection:_news_node%}
+

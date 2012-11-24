@@ -1,0 +1,30 @@
+{%section:_news_interval%}
+<div class="news"> 
+    <div class="title">Новости <a href="{%F:archive_link%}">Архив новостей</a></div>
+    <ul>                              
+                      {%->:_news_node%}                            
+        </ul>      
+    </div>        
+
+                    
+        {%F:#rss(news:get_rss_link({F:id}))%}
+        
+        <!--<a href="{%F:rss%}">Подписаться на RSS </a> -->
+                
+        
+{%endsection:_news_inrterval%}
+
+{%section:_news_node->%}
+
+        <li {%if('{F:islast}')%} class="last" {%endif%}>
+              <p class="n-date">{%F:news_date(E:date_ru(d x Y h:i:s,1))%}</p>
+              <a href="{%F:link%}">{%F:header%}</a>
+              <p>{%F:news_short%}</p>
+            </li>
+    
+
+              
+              
+{%endsection:_news_node%}
+
+

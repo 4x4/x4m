@@ -1,0 +1,65 @@
+<div id="e-form">
+  <form id="edit_form">
+    <p>{form_name}</p>
+    <input class="required validate-alpha" type="text" name="Name" value="" />
+    <ul class="chk">
+      <li>
+        <input type="checkbox" id="Disable" name="Disable" /> {off_object}
+      </li>
+    </ul>
+    <p>{subject}</p>
+    <input class="required validate-alpha" type="text" name="subject"  value="" />
+    <p>{address_form_submission}</p>
+    <input type="text"  class="required validate-email " name="email" id="email" value="" />
+    <input type="hidden" name="category" id="category" value="" />
+    <p>{charset}</p>
+    <select id="charset" name="charset">
+      <option value="utf-8">utf-8</option>
+      <option value="windows-1251">windows-1251</option>
+    </select>
+    <p>{timeout}</p>
+    <input type="text" name="timeout" id="timeout" value="60" />
+    <p>{comment}</p>
+    <textarea name="comment" id="comment" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+    <p>{message_after_sending}</p>
+    <textarea name="message_after" id="message_after" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="save_to_server" id="save_to_server"/>
+        {saves_the_results_to_the_server}
+      </li>
+      <li>
+        <input type="checkbox" id="use_captcha" name="use_captcha"/>
+        {use_the_CAPTCHA}
+      </li>
+      <li>
+        <input type="checkbox" name="async" />
+        {async}
+      </li>
+    </ul>
+    <p>{complexity_recognizers_CAPTCHA}</p>
+    <select id="captcha_settings" name="captcha_settings">
+      <option value="4-110">{captcha_easy}</option>
+      <option value="6-145">{captcha_medium}</option>
+      <option value="10-210">{captcha_high}</option>
+      <option value="14-265">{captcha_very_high}</option>
+    </select>
+  </form>
+  <a class="button" href="javascript:XTR_forms.save_edited_form();">{save}</a> </div>
+<div class="form-filds">
+  <div id="elemselector">
+    <p>{type_field} *:</p>
+    <select id="typef" name="typef">
+      <option value="textfield">{text_field}</option>
+      <option value="textarea">{big_text_field}</option>
+      <option value="select">{drop_down_list}</option>
+      <option value="multiselect">{list_of_multiple_choice}</option>
+      <option value="flag">{flag}</option>
+      <option value="file">{file}</option>
+      <!--<option value="data">{date}</option>-->
+    </select>
+    <a class="button nomarg" onclick="javascript:XTR_forms.add_field()" href="javascript:void(0)">{add_field}</a></div>
+  <form id="fields_form">
+    <div id="fields" class="fields"></div>
+  </form>
+</div>

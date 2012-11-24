@@ -1,0 +1,17 @@
+{%section:xtr_search%}
+
+<script>
+$(document).ready(function()
+    {
+        $('#search').mainFieldWith({initalWord:'введите поисковое слово'});
+    });
+    
+</script>
+      <div class="search">
+          <div><form id="sform" action="{%F:action%}" method="GET">
+          <input id="search" type="text" name="search" value="введите поисковое слово" /><span>|</span>
+          <a href="javascript:void(0)" onclick="$('#sform').submit()">ок</a>
+          </form>
+          </div>
+      </div>
+{%endsection:xtr_search%}

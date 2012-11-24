@@ -1,0 +1,88 @@
+{%section:album%}
+{%F:+(E:add_file_section(_common/extended/paginator.gallery.html))%}  
+<script type="text/javascript" src="{%F:_ARES%}js/jquery.jcarousel.pack.js"></script>
+<div class="mg-pic"> 
+    <a class="prev" id="mycarousel-prev" href="javascript:void(0);"></a>
+    <a class="next" id="mycarousel-next" href="javascript:void(0);"></a>
+
+   <h1>{%F:Name%}</h1>
+   <p>фото <span id="photo_shown">{%F:start%}</span> из {%F:counter%}</p>
+   <div id="mycarousel">
+       <ul>{%->:photos%}</ul>
+       <h2 id="picture_name"></h2> 
+   </div>
+   
+   {%->:preview%}
+   {%->:page_line%} 
+</div>  
+
+
+<script type="text/javascript">
+photo_pos={%F:start%};
+photo_pos_min={%F:start%};
+photo_pos_max={%F:end%};
+
+function mycarousel_initCallback(carousel) {
+            
+    jQuery('.jcarousel-control a').bind('click', function() {
+        photo_pos=parseInt(jQuery(this).attr('rev'));
+        carousel.scroll(jQuery.jcarousel.intval(photo_pos-photo_pos_min+1));
+        $('#photo_shown').html(photo_pos);
+        return false;
+    });
+
+    jQuery('#mycarousel-next').bind('click', function() {
+        photo_pos=Math.min(photo_pos_max-1, photo_pos+1);
+        carousel.next();
+        $('#photo_shown').html(photo_pos);
+        return false;
+    });
+    jQuery('#mycarousel-prev').bind('click', function() {
+        photo_pos=Math.max(photo_pos_min, photo_pos-1);
+        
+        carousel.prev();
+        $('#photo_shown').html(photo_pos);
+        return false;
+    });
+};
+
+jQuery(document).ready(function() {
+jQuery("#mycarousel").jcarousel({
+    scroll: 1,
+    initCallback: mycarousel_initCallback,
+    buttonNextHTML: null,
+    buttonPrevHTML: null
+});
+}); 
+        
+</script>
+{%endsection:album%}
+
+
+{%section:preview->%} <table class="jcarousel-control"><tr>{%->:preview_photo%}</tr></table> {%endsection:preview%}
+
+{%section:preview_photo->%} 
+{%F:#tmp(E:calc({F:_num}%{F:inRow}))%}
+{%if('{F:tmp}' == '0' && {F:_num} > 1 )%}</tr><tr>{%endif%} 
+
+    <td><a href="{%F:img_src%}" rel="{%F:_num%}" title="{%F:Name%}" rev="{%F:_num_abs%}"><img width="90" alt="" src="{%F:img_src(E:image_transform(90))%}"></a></td>
+{%endsection:preview_photo%}
+
+
+
+{%section:photo->photos%} 
+    <li><a href="javascript:void(0);" title="{%F:Name%}"><img alt="" src="{%F:img_src(E:image_transform(460,320))%}"></a></li>
+{%endsection:photo%}
+
+
+
+
+
+
+
+{%section:gallery_empty%} 
+            <div class="text">
+            <h1>{%F:gallery%}</h1>
+            Галлерея пуста
+        </div>
+{%endsection:gallery_empty%}

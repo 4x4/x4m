@@ -1,0 +1,80 @@
+{%section:MAIN%}                 
+    {%->:HEADER%}
+    {%->:TOP%}
+    {%->:MIDDLE%}
+    {%->:FOOTER%}
+{%endsection:MAIN%}                 
+
+{%section:HEADER->%}                 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="description" content="{%F:Description%}">
+<meta name="keywords" content="{%F:Keywords%}">
+{%F:Meta%}               
+<title>{%F:Title%}</title>  
+<BASE href="{%F:_HOST%}">   
+<link rel="icon" href="/favicon.ico" type="image/x-icon">  
+<link rel="stylesheet" type="text/css" href="{%F:_ARES%}css/global.css" media="screen" />
+<script type="text/javascript" src="{%F:_ARES%}js/jquery.js"></script>
+{%F:_XFRONT_API%}             
+<script type="text/javascript" src="/modules/ishop/js/ishop.front.js"></script>
+<script type="text/javascript" src="{%F:_ARES%}js/main.js"></script>
+{%endsection:HEADER%}                
+
+
+{%section:TOP->%}        
+<body>
+<div class="minWidth">
+  <div class="maincontainer">
+    <div class="top"> <a href="{%F:_HOST%}" class="logo"></a>
+            {%MF:top%}
+         
+    </div>
+{%endsection:TOP%}                                       
+      
+
+{%section:MIDDLE->%}                    
+    <div class="middle">
+      <div class="col1">
+       
+       <!-- слот левой колонки сайта(выбор названий слотов произовльный) -->
+       
+            {%MF:left-side%}
+       </div>
+       
+      <div class="col2">
+      <!-- слот центра сайта -->
+	  <!--<index>-->
+            {%MF:center%}
+			<!--</index>-->
+      </div>
+      
+      <div class="col3">
+      <!-- слот правой колонки сайта -->
+            {%MF:right-side%}
+      </div>
+    </div>
+{%endsection:MIDDLE%}             
+
+
+{%section:FOOTER->%}             
+    </div>
+  <div class="clear"></div>
+</div>
+
+<div id="added" style="display:none;height:16px;width:110px;background-color:#FFF;padding:10px;border:1px solid black;position:absolute">Добавлено в корзину</div>
+
+<div class="bottom">
+  <div class="bottom-inner">
+        
+        {%MF:footer%}
+        
+  </div>
+</div>
+</body>
+</html>
+{%endsection:FOOTER%}
+
+ 

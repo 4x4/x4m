@@ -1,0 +1,22 @@
+<div id="e-form">
+  <form id="edit_category">
+    <p>{group_name}</p>
+    <input  class="required validate-alphanum is-uniq" type="text" name="basic"  value="" />
+    <p>{group_alias}</p>
+    <input  class="required validate-alpha" type="text" name="Name"  value="" />
+
+    <p>{short_description}</p>
+    <textarea ondblclick="XTR_main.apply_weditor(this)" name="description" id="description"></textarea>
+    <p>{email}, {which_will_be_sent_a_notice_to_the_issue}</p>
+    <input  class="validate-email" type="text" name="email"  value="" />
+    <p>{default_answer_template}</p>
+    <select id="answer_template" class="validate-selection"></select>
+    
+    <ul class="chk">
+      <li><input type="checkbox" name="hidden" id="hidden"/>{not_display_in_the_list_of_sections}</li>
+      <li><input type="checkbox" name="moderation" id="moderation"/>{premoderation}</li>
+    </ul>
+    {questions_count}
+    <input type="text" readonly name="count" value="0"/>
+  </form>
+  <a class="button" href="javascript:void(0);" onclick="javascript:XTR_faq.save_edited_category()">{save}</a> </div>

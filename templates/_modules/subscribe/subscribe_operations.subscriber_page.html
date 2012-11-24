@@ -1,0 +1,51 @@
+{%section:success%}   
+  <p>Электронный адрес <b>{%F:email%}</b> был добавлен в список рассылки <b>{%F:subscribe%}</b>. На указанный электронный адрес придёт письмо с кодом подтверждения рассылки.</p>
+{%endsection:success%}
+
+{%section:exists%}   
+  <p>Электронный адрес <b>{%F:email%}</b> уже находится в списке рассылки <b>{%F:subscribe%}</b>.</p>
+{%endsection:exists%}
+
+{%section:exists%}   
+  <p>Электронный адрес <b>{%F:email%}</b> не подписан.</p>
+{%endsection:exists%}
+
+{%section:incorrect_email%}
+  <p>Введите правильный электронный адрес.</p>
+{%endsection:incorrect_email%}
+
+{%section:subscribe_message%}
+  <p>Адрес <b>{%F:email%}</b> был добавлен в базу рассылки <b>{%F:subscribe%}</b>.
+  Eсли ваш адрес был добавлен по ошибке, просто проигнорируйте это письмо.
+  Для завершения подписки перейдите по ссылке <a href="{%F:link%}">{%F:link%}</a></p>
+{%endsection:subscribe_message%}
+
+{%section:subscribe_message_header%}
+  Подтверждение подписки на рассылу
+{%endsection:subscribe_message_header%}
+
+{%section:subscribe_completed%}   
+  <h1>Подписка на рассылку <b>«{%F:subscribe%}»</b></h1>
+  <p>Электронный адрес <b>{%F:email%}</b> был успешно добавлен в список рассылки <b>{%F:subscribe%}</b>.</p>
+  <p><a href="{%F:HOST%}">Перейти на главную</a></p>
+{%endsection:subscribe_completed%}
+
+{%section:unsubscribe_message%}
+  <p>Eсли вы уверены, что хотите отписаться от рассылки <b>{%F:basic%}</b>, перйдите по ссылке <a href="{%F:link%}">{%F:link%}</a></p>
+{%endsection:unsubscribe_message%}
+
+{%section:unsubscribe_message_header%}
+  Подтверждение отписки от рассылки
+{%endsection:unsubscribe_message_header%}
+
+{%section:unsubscribe_completed%}   
+  <p>Электронный адрес <b>{%F:email%}</b> был успешно отписан от рассылки <b>{%F:subscribe%}</b>.</p>
+{%endsection:unsubscribe_completed%}
+
+{%section:unsubscribe_success%}   
+  <p>На электронный адрес <b>{%F:email%}</b> было отправлено письмо с кодом подтверждения отписки.</p>
+{%endsection:unsubscribe_success%}
+
+{%section:error%}   
+  Подписка не удалась, попробуйте позже. Спасибо.
+{%endsection:error%}

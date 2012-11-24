@@ -1,0 +1,60 @@
+{%section:name%}
+    
+    Платежная система Webpay(Беларусь)
+    
+{%endsection:name%}
+
+{%section:paysystem%}
+
+<div class="pw-edit big-window">
+  <form id="paysystem">
+
+  <input type="hidden"  name="paysystem" value="webpay">
+    
+    <p>{webpay_store_id}</p>
+    <input class="required" name="wsb_storeid" value="" >
+    
+    <p>{webpay_store_name}</p>    
+    <input class="required"  name="wsb_store" value="">
+
+    
+     <ul class="chk">
+      <li>
+      
+      <input type="checkbox" name="wsb_test_server" />
+        <p>{wsb_test_server}</p>    
+        
+        <input type="checkbox" name="wsb_test" />
+        <p>{webpay_enable_test_mode}</p>    
+        </li>
+      </ul>
+      
+ 
+    <p>{webpay_ishop_currency}</p>    
+    <select name="webpay_ishop_currency"></select>
+    
+    <p>{secret_key}</p>    
+    <input  name="secret_key" value="">
+    
+    <p>{wsb_return_url}</p>    
+    <input  name="wsb_return_url" value="">
+    
+    <p>{wsb_cancel_return_url}</p>    
+    <input  name="wsb_cancel_return_url" value="">
+    
+    <p>{wsb_notify_url}</p>    
+    <input  name="wsb_notify_url" value="">
+    
+    </form>
+    <a class="button" href="javascript:void(0)" onclick="XTR_ishop.save_paysystem()">{save}</a> 
+
+</div>
+
+{%endsection:paysystem%}
+
+<!--<input type="hidden" name="wsb_currency_id" value="BYR" >
+<input type="hidden" name="wsb_signature" value="40aa8af3ce7a1f7c3635ac2227475094a59d574c" >
+<input type="hidden" name="wsb_seed" value="1242649174">
+-->
+
+

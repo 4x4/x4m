@@ -1,0 +1,35 @@
+{%section:GA%}
+
+
+<script type="text/javascript">
+
+var gaJsHost = (("https:" == document.location.protocol) ?
+
+"https://ssl." : "http://www.");
+
+document.write(unescape("%3Cscript src='" + gaJsHost +
+
+"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+</script>
+
+<script type="text/javascript">
+
+var firstTracker = _gat._getTracker("{%F:Gacode%}");
+
+firstTracker._addOrganic("tut.by", "query");
+
+firstTracker._addOrganic("search.tut.by", "query");
+
+firstTracker._addOrganic("all.by", "query");
+
+firstTracker._addOrganic("nova.rambler.ru", "query");
+
+firstTracker._addOrganic("go.mail.ru", "q");
+
+firstTracker._initData();
+
+firstTracker._trackPageview();
+</script>
+
+{%endsection:GA%}

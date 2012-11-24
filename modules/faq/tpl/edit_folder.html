@@ -1,0 +1,11 @@
+<div id="e-form">
+  <form id="edit_folder">
+    <p>{group_name}</p>
+    <input  class="required validate-alpha" type="text" name="Name"  value="" />
+    <p>{group_alias}</p>
+    <input  class="required validate-alphanum is-uniq" type="text" name="basic"  value="" />
+    <p>{short_description}</p>
+    <textarea  ondblclick="XTR_main.apply_weditor(this)" name="description" id="description"></textarea>
+    
+  </form>
+  <a class="button" href="javascript:void(0);" onclick="javascript:XTR_faq.save_edited_folder()">{save}</a> </div>

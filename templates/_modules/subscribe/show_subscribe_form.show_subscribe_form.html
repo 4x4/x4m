@@ -1,0 +1,75 @@
+{%section:subscribe_form%}
+<div class="mailer"> <span>Подписаться на рассылку</span>
+      
+      <form method="post" action="{%F:action%}" id="subscribe_form" onsubmit="subscribe(this);">
+          <input id="email" value="Ваш e-mail" name="email">
+         <input type="hidden" id="mod_id" name="mod_id" value="{%F:__module_id%}" />
+        
+          <a href="#">Подписаться</a> 
+        
+      </form>
+      <div id="email_message"></div>
+</div>
+            
+            
+{%F:#(moduleAbstract:get_this_module_data())%}
+<script type="text/javascript">
+$(function(){ 
+
+    $('#email').focus(function(){if($(this).val()=='Ваш e-mail'){this.value='';}})
+               .blur(function(){if(!$(this).val()){this.value='Ваш e-mail';}});
+    
+    
+    var xsubscribe = new fConnector('subscribe');
+        xsubscribe.execute({getSubscribes:true});
+            if(xsubscribe.result.subs){
+                var chkbxs = $('#chkbxs'), content = '';
+                    $.each(xsubscribe.result.subs, function(k, item){
+                        $('#chkbxs').html($('#chkbxs').html() + '<li><a href="javascript:void(0)" rel="' + item.id + '" id="sub_ ' + item.id + '" class="newscat">' + item.basic + '</a></li>');
+                    });
+            }
+
+    $('#chkbxs .newscat').toggle(
+        function(){
+            $(this).addClass('selected');
+        },
+        function(){
+            $(this).removeClass('selected');
+        }
+    );
+    
+    $('.sent_data').click(function(){
+        var div = $('div.subscribe');
+        var mod_id = $('#mod_id').val();
+        var email = $('#email').val();
+        var content;
+            if(email.match(/\w{1,}[@][\w\-]{1,}([.]([\w\-]{1,})){1,3}$/)){
+                $('#email_message').html('');
+                var subs = new Array();
+                    $('#chkbxs .selected').each(function(i){
+                        subs[i] = $(this).attr('rel');
+                    });
+                var params = new Array();
+                    params['mod_id'] = mod_id;
+                    params['subscribe_id'] = subs;
+                    params['email'] = email;
+                    params['unsubscribe'] = ($(this).attr('id') == 'unsubscribe') ? true : false;
+                    
+                xsubscribe.execute({subscribe:params});
+                    if(content = xsubscribe.result.content){
+                        $('#email_message').html(content).show();
+                    }
+            } else {
+                $('#email_message').html('Укажите верный email!');
+            }
+        return false;
+    });
+    
+    $('document').keypress(function(e){
+        if(e.which == 13){
+            return false;
+        }
+    });
+});
+</script>
+{%endsection:subscribe_form%}

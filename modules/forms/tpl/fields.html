@@ -1,0 +1,269 @@
+{%section:fields%}
+    {%->:fields%}
+{%endsection:fields%}
+
+
+{%section:textfield->fields%}
+<div class="field-form" id="textfield_{%F:num%}">
+  <form id="field_{%F:num%}">
+    <h1 class="handler-ftop">{text_field}</h1>
+    <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+    <p>{field_name}</p>
+    <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+    <input class="validate-alpha" type="hidden" id="field_type" name="field_type" value="textfield" />
+    <input class="validate-alpha" type="hidden" id="flid" name="flid" value="{%F:flid%}" />
+    
+    <p>{type_field}</p>
+    <select id="type" class="type-textfield">
+      <option value="text" {%F:text%}>{text}</option>
+      <option value="email" {%F:email%}>{email}</option>
+      <option value="url" {%F:url%}>{url}</option>
+      <option value="hidden" {%F:hidden%}>{hidden}</option>
+      <option value="numerical" {%F:numerical%}>{numerical}</option>
+    </select>
+    
+    <ul class="chk">
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+      </li>
+    </ul>
+    
+    <div class="compulsory_to_fill">
+      <p>{valid_message}</p>
+      <input class="validate-alpha" type="text" id="valid_message" name="valid_message" value="{%F:valid_message%}"/>
+      <p>{failure_message}</p>
+      <input class="validate-alpha" type="text" id="failure_message" name="failure_message" value="{%F:failure_message%}"/>
+      <div>
+        <p>{additional_failure_message}</p>
+        <input class="validate-alpha" type="text" id="additional_failure_message" name="additional_failure_message" value="{%F:additional_failure_message%}"/>
+      </div>
+    </div>
+    
+    <a class="additional_options" href="javascript:void(0)">{additional_options}</a>
+    
+    <div class="additional_options">
+      <p>{identifier}</p>
+      <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+      <p>{default_value}</p>
+      <input class="validate-alpha" type="text" id="default_value" name="default_value" value="{%F:default_value%}"/>
+      <p>{pattern}</p>
+      <input type="text" id="pattern" name="pattern" value="{%F:pattern%}" />
+      <ul class="chk">
+        <li>
+          <input type="checkbox" id="readonly" name="readonly" {%F:readonly%} />
+          {readonly} </li>
+      </ul>
+    </div>
+  </form>
+</div>
+{%endsection:textfield%}
+
+
+{%section:textarea->fields%}
+<div class="field-form" id="textarea_{%F:num%}">
+<form id="field_{%F:num%}">
+  <h1>{big_text_field}</h1>
+  <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+  <p>{field_name}</p>
+  <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+  <input class="validate-alpha" type="hidden" id="field_type" name="field_type"  value="textarea" />
+  <input class="validate-alpha" type="hidden" id="flid" name="flid"  value="{%F:flid%}" />
+  
+  <ul class="chk">
+    <li>
+      <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+      {compulsory_to_fill} </li>
+  </ul>
+  
+  <div class="compulsory_to_fill">
+    <p>{valid_message}</p>
+    <input class="validate-alpha" type="text" id="valid_message" name="valid_message" value="{%F:valid_message%}" />
+    <p>{failure_message}</p>
+    <input class="validate-alpha" type="text" id="failure_message" name="failure_message" value="{%F:failure_message%}" />
+  </div>
+  
+  <a class="additional_options" href="javascript:void(0)">{additional_options}</a>
+  
+  <div class="additional_options">
+    <p>{identifier}</p>
+    <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+    <p>{default_value}</p>
+    <input class="validate-alpha" type="text" id="default_value" name="default_value" value="{%F:default_value%}"/>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" id="readonly" name="readonly" {%F:readonly%} />
+        {readonly} </li>
+    </ul>
+  </div>
+</form>
+</div>
+{%endsection:textarea%}
+
+
+{%section:select->fields%}
+<div class="field-form" id="select_{%F:num%}">
+<form id="field_{%F:num%}">
+  <h1>{drop_down_list}</h1>
+  <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+  
+  <p>{field_name}</p>
+  <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+  <input class="validate-alpha" type="hidden" id="field_type" name="field_type"  value="select" />
+  <input class="validate-alpha" type="hidden" id="flid" name="flid"  value="{%F:flid%}" />
+  
+  <p>{elements_of_the_list}</p>
+  <textarea name="values" id="values">{%F:values%}</textarea>
+  
+  <!--<ul class="chk">
+    <li>
+      <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+      {compulsory_to_fill} </li>
+  </ul>
+  
+  <div class="compulsory_to_fill">
+    <p>{valid_message}</p>
+    <input class="validate-alpha" type="text" id="valid_message" name="valid_message" value="{%F:valid_message%}"/>
+    <p>{failure_message}</p>
+    <input class="validate-alpha" type="text" id="failure_message" name="failure_message" value="{%F:failure_message%}"/>
+  </div>-->
+  
+  <a class="additional_options" href="javascript:void(0)">{additional_options}</a>
+  
+  <div class="additional_options">
+    <p>{identifier}</p>
+    <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+  </div>
+</form>
+</div>
+{%endsection:select%}
+
+
+{%section:multiselect->fields%}
+<div class="field-form" id="multiselect_{%F:num%}">
+  <form id="field_{%F:num%}">
+    <h1>{list_of_multiple_choice}</h1>
+    <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+    <p>{field_name}</p>
+    <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+    <input class="validate-alpha" type="hidden" id="field_type" name="field_type"  value="multiselect" />
+    <input class="validate-alpha" type="hidden" id="flid" name="flid"  value="{%F:flid%}" />
+    
+    <p>{elements_of_the_list}</p>
+    <textarea name="values" id="values">{%F:values%}</textarea>
+    
+    <!--<ul class="chk">
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+    </ul>
+    
+    <div class="compulsory_to_fill">
+      <p>{valid_message}</p>
+      <input class="validate-alpha" type="text" id="valid_message" name="valid_message" value="{%F:valid_message%}"/>
+      <p>{failure_message}</p>
+      <input class="inp validate-alpha" type="text" id="failure_message" name="failure_message" value="{%F:failure_message%}"/>
+    </div>-->
+    
+    <a class="additional_options" href="javascript:void(0)">{additional_options}</a> 
+    
+    <div class="additional_options">
+      <p>{identifier}</p>
+      <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+    </div>
+  </form>
+</div>
+{%endsection:multiselect%}
+
+
+{%section:flag->fields%}
+<div class="field-form" id="flag_{%F:num%}">
+  <form id="field_{%F:num%}">
+    <h1>{flag}</h1>
+    <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+    <p>({for_example_i_agree_to_the_terms_of_the_agreement})<br />{field_name}</p>
+    <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+    <input class="validate-alpha" type="hidden" id="field_type" name="field_type"  value="flag" />
+    <input class="validate-alpha" type="hidden" id="flid" name="flid"  value="{%F:flid%}" />
+    
+    <a class="additional_options" href="javascript:void(0)">{additional_options}</a>
+
+    <div class="additional_options">
+      <p>{identifier}</p>
+      <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+    </div>
+  </form>
+</div>
+{%endsection:flag%}
+
+
+
+{%section:data->fields%}
+<div class="field-form" id="data_{%F:num%}">
+  <form id="field_{%F:num%}">
+    <h1>{date}</h1>
+    <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+    <p>({allows_you_to_enter_the_date_of_the_event_or_select_a_time_interval})</p>
+    <p>{field_name}</p>
+    <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+    <input class="validate-alpha" type="hidden" id="field_type" name="field_type"  value="data" />
+    <input class="validate-alpha" type="hidden" id="flid" name="flid"  value="{%F:flid%}" />
+    
+    <ul class="chk">
+      <li>
+        <input type="checkbox" id="compulsory_to_fill" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill} </li>
+      <li>
+    </ul>
+    <a class="additional_options" href="javascript:void(0)">{additional_options}</a>
+    
+    <div class="additional_options">
+      <p>{identifier}</p>
+      <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+      <p>{pattern}</p>
+      <input type="text" id="pattern" name="pattern" value="{%F:pattern%}"/>
+    </div>
+  </form>
+</div>
+{%endsection:data%}
+
+
+
+{%section:file->fields%}
+<div class="field-form" id="file_{%F:num%}">
+  <form id="field_{%F:num%}">
+    <h1>{file}:</h1>
+    <a class="ff-close" onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"></a>
+    <p>{field_name}</p>
+    <input class="validate-alpha" type="text" id="Name" name="Name"  value="{%F:Name%}" />
+    <input class="validate-alpha" type="hidden" id="field_type" name="field_type"  value="file" />
+    <input class="validate-alpha" type="hidden" id="flid" name="flid"  value="{%F:flid%}" />
+    
+    <ul class="chk">
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill} </li>
+    </ul>
+     
+    <div class="compulsory_to_fill">
+      <p>{valid_message}</p>
+      <input class="validate-alpha" type="text" id="valid_message" name="valid_message" value="{%F:valid_message%}"/>
+      <p>{failure_message}</p>
+      <input class="validate-alpha" type="text" id="failure_message" name="failure_message" value="{%F:failure_message%}"/>
+    </div>
+    
+    <a class="additional_options" href="javascript:void(0)">{additional_options}</a> 
+    
+    <div class="additional_options">
+      <p>{identifier}</p>
+      <input class="validate-alpha" type="text" id="identifier" name="identifier" value="{%F:identifier%}"/>
+      <p>{button_name}</p>
+      <input class="validate-alpha" type="text" id="button_name" name="button_name" value="{%F:button_name%}"/>
+      <p>{file_types_for_users}</p>{file_types_for_users_example}
+      <input class="validate-alpha" type="text" id="file_types_for_users" name="file_types_for_users" value="{%F:file_types_for_users%}"/>
+      <p>{file_types}</p>{file_types_example}
+      <input class="validate-alpha" type="text" id="file_types" name="file_types" value="{%F:file_types%}"/>
+    </div>
+  </form>
+</div>
+{%endsection:file%}

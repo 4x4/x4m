@@ -1,0 +1,23 @@
+<div id="e-form">
+  <form id="user_edit">
+    <p>{login}</p>
+    
+    <input  id="login" class="required validate-alpha" name="login" type="text" />
+    
+    <p>{fio}</p>
+    <input id="Name" class="required validate-alpha" name="Name" type="text" />
+    <p>{email}</p>
+    <input id="Email" class="required validate-email" name="Email" type="text" />
+    <a class="button" onclick="javascript:$('passChange').style.display='block'" href="javascript:void(0)">{change_password}</a>
+    <div id="passChange">
+      <p>{new_password}</p>
+      <input id="Password" class="required validate-password"
+         onkeypress="passwordComplexity(this)"
+         onkeyup="passwordComplexity(this)"
+          name="Password"  type="password"/>
+      <div id="passwordComplextity"></div>
+      <p>{password_repeat}</p>
+      <input id="passwordAgain" class="required validate-password-again" name="passwordAgain" type="password"/>
+    </div>
+  </form>
+  <a class="button" href="javascript:XTR_users.save_user()">{save}</a> </div>

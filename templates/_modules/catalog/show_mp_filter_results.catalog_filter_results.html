@@ -1,0 +1,79 @@
+{%section:_catalog_category_list%}
+
+  {%F:+v(catalog:set_dynamic_filter(|{"equal":{"isnew":1}}|))%}          
+  
+<script>  
+$(document).ready(function() {
+    $(".carousel ul li").hover(function(){$(this).find('.e-txt').addClass('hover');},function(){$(this).find('.e-txt').removeClass('hover');})
+    
+    $(".carousel").jCarouselLite({
+       btnNext: ".next",
+       btnPrev: ".prev",
+       visible: 4,
+       wheel:true,
+       circular: true
+  });
+}); 
+
+$(document).ready(function() 
+    {
+        $('.carousel ul li:last').css({background:''});
+    }
+);
+
+</script>  
+  <div class="l-catalog"> 
+        <a href="javascript:void(0)" class="prev"></a>
+        
+        
+        <div class="carousel">
+        
+              <ul>          
+                {%->:_catalog_list_item%}
+              </ul>
+              
+              </div>
+              <a href="javascript:void(0)" class="next"></a> 
+          </div>
+          
+          
+
+
+{%->:page_line%}
+
+{%endsection:_catalog_category_list%}
+
+
+
+{%section:_catalog_list_item->%}
+
+
+  <li> <a href="{%F:Link%}">
+              <div class="e-img">
+              {%if(Common::is_file_exists('{F:image}'))%}
+                        <img src="{%F:image(E:image_transform(70,70))%}" alt="{%F:Name%}"/>
+                        {%endif%}                                           
+              
+              </div>
+              
+              <div class="e-txt">
+                <h1>{%F:Name%}</h1>
+                <p>Арт {%F:articul%}</p>
+                <p>цвет &ndash; {%F:color%}</p>
+              </div>
+              </a>
+  </li>
+
+                 
+                          
+
+{%endsection:_catalog_list_item%}
+
+
+
+{%section:_catalog_search_failed%}
+
+
+{%endsection:_catalog_search_failed%}
+
+

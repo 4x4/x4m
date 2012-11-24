@@ -1,0 +1,25 @@
+{%section:categories_list%}   
+
+<div class="title">
+<h1>{%F:description%}</h1>
+</div>
+<div class="tx-inner">
+<br/>
+
+
+<ul>
+{%->:buff%}
+</ul>   
+<br>
+</div>
+
+
+
+{%endsection:categories_list%}
+
+
+{%section:category_item->buff%} 
+      <li><a href="{%F:Link%}"><strong>{%F:Name%}</strong></a></li>
+{%endsection:category_item%}
+
+{%if('{F:description}')%}<li>{%F:description%}</li>{%endif%}

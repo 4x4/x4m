@@ -1,0 +1,30 @@
+{%section:show_vote%}
+<p>{select_voting}</p>
+<input id="showvotesName" class="inp-b1 validate-selection"/>
+<input id="votesId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<p>{voting_template}</p>
+<select id="Template" class=" validate-selection">
+</select>
+<p>{Page_conclusion_of_results}</p>
+<select class="validate-selection" id="page" name="page">
+</select>
+{%endsection:show_vote%}
+
+{%section:show_vote_server%}
+<p>{template_results}</p>
+<select id="Template" class="validate-selection">
+</select>
+{%endsection:show_vote_server%}
+
+{%section:show_random_vote%}
+<p>{select_group_of_interrogation}</p>
+<select class="validate-selection" id="category" name="category">
+</select>
+<p>{voting_template}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{Page_conclusion_of_results}</p>
+<select class="validate-selection" id="page" name="page">
+</select>
+{%endsection:show_random_vote%} 

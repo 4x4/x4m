@@ -1,0 +1,50 @@
+
+{%section:_catalog_show_filter%}
+  
+  {%F:#objects(catalog:get_objects_by_filter(|{"options":{"catalogurl":"/catalog","startpage":"0",Onpage:"1"},"filter":{"equal":{"sale_leader":1}}}|))%}                     
+                                                                        
+{%if({F:objects})%}              
+                            
+<div class="pop">
+          <div class="title"><a href="">Лидеры продаж</a></div>
+  
+  {%each({F:objects},id,obj)%}
+  
+  
+          <div class="pop-inner"> 
+            <a class="pic" href="{%F:obj>Link%}"><img src="{%F:obj>props>image(E:image_transform(80,80))%}" alt="" /></a>
+           
+           {%F:link%}
+                    <a href="{%F:obj>Link%}">{%F:obj>props>Name%}</a>
+            <p>{%F:obj>props>description%}</p>
+            <ul>
+              <li><span>Кол-во:</span>
+                <input name="count" value="1">
+              </li>
+              
+                                                    <!--  <li> <span>Цвет: </span>
+                                                        <select>
+                                                          <option>-Светлое-</option>
+                                                          <option>-Темное-</option>
+                                                        </select>
+                                                      </li>      -->
+            </ul>
+            
+            {%F:#curr(MAIN:get_currency())%}  
+            <p class="cost">{%F:obj>props>price(E:number_format(|[2, '.', '']|))%}  {%F:curr>name%}</p>
+          </div>
+          
+         <a id="{%F:obj>id%}" class="button" rev="tocart" href="#">Добавить товар в корзину</a> 
+         
+
+         
+                          
+  {%endeach%}
+                                
+              </div>  
+{%endif%}
+
+  
+  {%endsection:_catalog_show_filter%}
+
+

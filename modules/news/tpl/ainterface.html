@@ -1,0 +1,59 @@
+{%section:show_news_interval%}
+<p>{select_category_of_news}</p>
+<select id="Category">
+</select>
+<p>{template_display_of_news}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{quantity_displayed_news}</p>
+<p style="font-weight:normal;">({zero_or_empty_no_restrictions})</p>
+<input id="OnPage" type="text" value='0'/>
+<p>{transition_page}</p>
+<select id="Destination_page">
+</select>
+<ul class="chk">
+  <li>
+    <input id="DateIndependent" name="DateIndependent" type="checkbox">
+    {display_news_irrespective_of_date} </li>
+</ul>
+{%endsection:show_news_interval%}
+
+
+
+{%section:show_news_categories%}
+<p>{template_display_categories_of_news}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{template_display_category}</p>
+<select id="TemplateInterval" class="validate-selection">
+</select>
+<p>{transition_page}</p>
+<p style="font-weight:normal;">{if_it_is_not_specified_that_current_page}</p>
+<select id="Destination_page">
+</select>
+{%endsection:show_news_categories%}
+
+
+{%section:show_news_by_author%}
+<p>{select_author}</p>
+<select id="author_id"></select>
+<p>{template_display_of_news}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{quantity_displayed_news}</p>
+<p style="font-weight:normal;">({zero_or_empty_no_restrictions})</p>
+<input id="OnPage" type="text" value='0'/>
+<p>{transition_page}</p>
+<select id="Destination_page"></select>
+{%endsection:show_news_by_author%} 
+
+{%section:show_news_server%}
+<p>{template_display_news}</p>
+<select id="MTemplate" class="validate-selection">
+</select>
+<p>{action_carried_out_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')" class="validate-selection">
+</select>
+<div id="secondary_properties"></div>
+<div id="secondary_signals"></div>
+{%endsection:show_news_server%} 

@@ -1,0 +1,43 @@
+<div id="e-form">
+  <form id="group_new">
+    <p>{group_name}</p>
+    <input id="Name" class="required validate-alpha-ext" name="Name" type="text" />
+    <p>{link}</p>
+    <input id="basic" class="inp-b1 required validate-alphanum is-none-uniq" type="text" name="basic" value=""/>
+    <a class="button small" href="javascript:void(0)" onclick="trans_rus_lat('Name','basic',12)">{create}</a>
+    <p>{group_situation}</p>
+    <input id="showGroup" class="inp-b1 required" readonly />
+    <input id="showGroupId" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    <p>{template_page_group_default}</p>
+    <select id="Template">
+    </select>
+    <p>{group_visibility}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="Visible">
+        {do_not_display_the_global_menu}</li>
+      <li>
+        <input type="checkbox" name="DisableGlobalLink">
+        {disconnect_the_link_from_the_global_menu}</li>
+      <li>
+        <input type="checkbox" name="DisableMapLink">
+        {disconnect_the_link_from_the_site_map}</li>
+      <li>
+        <input type="checkbox" name="DisablePath">
+        {do_not_display_in_the_way_of_the_page}</li>
+    </ul>
+    
+   
+    <p>{Icon}</p>     
+    <input class="inp-b2" id="Icon" name="Icon">
+    <a onclick="xFileManager.selectImage('Icon')" href="javascript:void(0)" class="button small">{select}</a>
+
+    <p>{Comment}</p>   
+    <textarea name="Comment" id="Comment" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+    
+  </form>
+  <a class="button" href="javascript:XTR_pages.save_new_group()">{save}</a> </div>
+<div id="slotzcontainer">
+  <div id="slotz"></div>
+</div>

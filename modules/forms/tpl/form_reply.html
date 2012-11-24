@@ -1,0 +1,13 @@
+<div id="hader-smc">
+    <div id="hader-smc-title">{reply_form}</div>
+    <div id="buttonClose"> <a href="javascript:void(0)" onclick="javascript:Control.Modal.close('forms')"/> </div>
+</div>
+<div id="f_reply">
+    <form id="reply_form">
+        <p><strong>{reply_to}</strong></p>
+        <input id="reply_to" class="inp" type="text" name="reply_to" size="40" value="" />
+        <p><strong>{reply_message}</strong></p>
+        <textarea id="reply_message" class="inp" name="reply_message" cols="50" rows="10"></textarea>
+        <p><b><a href="javascript:XTR_forms.send_reply_message()" id="asubmit">{submit}</a></b></p>
+    </form>
+</div>

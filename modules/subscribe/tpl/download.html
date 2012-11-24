@@ -1,0 +1,9 @@
+<p>{select_file_for_dispatch}</p>
+<input name="file_name" class="inp-b2" id="file_name" readonly />
+<a class="button small" href="javascript:void(0)" title="{select_file}" onclick="xFileManager.selectFile('file_name')">{select}</a> <a class="button small iclear" href="javascript:void(0)" title="{clear}" onclick="javascript:$('file_name').value=''"><span></span>&nbsp;</a> <a class="button" onclick="XTR_subscribe.add_file();" href="javascript:void(0);">{add_file_in_the_list}</a>
+<br /><br />
+<p>{list_files}</p>
+<table class="filetable">
+  <tbody id="filelist">
+  </tbody>
+</table>

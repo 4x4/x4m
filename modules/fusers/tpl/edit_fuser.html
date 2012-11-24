@@ -1,0 +1,42 @@
+<div id="e-form">
+  <form id="fuser_edit">
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="Active" />
+        {user_is_active}</li>
+    </ul>
+    <p>{login}</p>
+    <input id="basic" readonly class="required validate-alpha" name="basic" type="text" />
+    <p>{fio}</p>
+    <input id="Name" class="required validate-alpha" name="Name" type="text" />
+    <p>{email}</p>
+    <input id="Email" class="required validate-email" name="Email" type="text" />
+    <p>{company}</p>
+    <input id="Company" name="Company" type="text" />
+    <p>{sait}</p>
+    <input id="Site" name="Site" type="text" />
+    <p>{address}</p>
+    <input id="Address" name="Address" type="text" />
+    <p>{phone}</p>
+    <input id="Phone" name="Phone" type="text" />
+    <p>{sex}</p>
+    <select name="Sex" id="Sex">
+      <option value="M" >{male} </option>
+      <option value="F" >{female} </option>
+    </select>
+    <p>{scheme_offers}</p>
+    <select name="DiscountScheme" id="DiscountScheme">
+    </select>
+    <a class="button" href="javascript:void(0)" onclick="$('passChange').style.display='block'">{change_password}</a>
+    <div id="passChange" style="display:none;">
+      <p>{password}></p>
+      <input id="Password" onkeypress="passwordComplexity(this)" onkeyup="passwordComplexity(this)" name="Password"  type="password"/>
+      <div id="passwordComplextity"></div>
+      <p>{password_repeat}</p>
+      <input id="passwordAgain" class="inp validate-password-again" name="passwordAgain" type="password"/>
+    </div>
+  </form>
+  <a class="button" href="javascript:XTR_fusers.save_fuser()">{save}</a> </div>
+<div id="slotzcontainer">
+  <div id="extdata"> </div>
+</div>

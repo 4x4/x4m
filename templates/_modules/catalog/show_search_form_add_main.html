@@ -1,0 +1,217 @@
+
+{%section:_catalog_show_search%}
+{%F:#usergroupName(E:get_session_module_param(siteuser,usergroupName))%}
+{%F:#extuserdata(E:get_session_module_param(siteuser,extuserdata))%}
+{%F:#ucurrency(E:get_from({F:extuserdata},currency))%}
+<script>               
+$(function(){
+    
+        
+    
+        subm=function()
+        {
+            $('#scform').submit();    
+        }
+
+         $('#changecurrency option').each(function()
+                {
+                   if($(this).val()==$(this).parent().attr('pval'))
+                   {
+                        $(this).attr('selected',1);
+                   }
+                    
+                });
+                
+        $('#changecurrency').change(function()
+        {
+         
+            
+            fusers = new fConnector('fusers');               
+            
+            fusers.execute({changecurrency:{cur:$(this).val()}});
+            window.location.reload(true);
+            
+            
+        });
+    
+});
+
+</script>               
+
+{%if('{F:usergroupName}')%}
+     <div class="s-param"> <em class="tra"/></em> <em class="bra"/></em>
+          <h1>Валюта расчета:</h1>
+          <ul>
+            <li>
+              <select id="changecurrency" pval="{%F:ucurrency%}" style="width:150px">
+                    <option value="BLR">Белорусский рубль</option>
+                    <option value="RUR">Российский рубль</option>
+                    <option value="USD">Доллар</option>
+                    <option value="EUR">Евро</option>
+              </select>
+            </li>
+          </ul>
+          </div>
+{%endif%}          
+<div  class="s-param"> <em class="tra"/></em> <em class="bra"/></em>                     
+          
+          <h1>Поиск по параметрам:</h1>
+          <form id="scform" action="{%F:action%}" method="POST">
+          <ul>
+          <li><span>Ключевое слово:</span>   
+            <input onKeyPress="return submitenter(this,event)"  name="search[rwords][Keywords]" value="{%F:value%}">   
+          </li>
+          
+                    {%->:sfields%}
+          </ul>
+          </form>
+           <a onclick="subm()" class="button" href="javascript:void(0)">Подбор</a> 
+          </div>
+
+  {%endsection:_catalog_show_search%} 
+
+
+{%section:_catalog_search_interval->sfields%}
+    {%F:-(E:clear_section(options))%}
+        <li><span>{%F:sname%}</span>
+                        
+                        
+                        {%if('{F:catselector}' and '{F:type}'!='CURRENCY')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                     <select  class="small_from" name="{%F:from%}"  value="{%F:from_value%}" >    
+                                    <option selected></option>
+                                     {%each({F:catselector},key,val)%}
+                                    
+                                         {%if('{F:key}'=='{F:to_value}')%}
+                                            <option selected value="{%F:key%}">{%F:val%}</option>
+                                         {%else%}
+                                            <option value="{%F:key%}">{%F:val%}</option> 
+                                         {%endif%}
+
+                                    {%endeach%}
+                                    
+                                    </select><select  class="small_from" name="{%F:to%}" value="{%F:to_value%}>    
+                                    <option selected></option>
+                                     {%each({F:catselector},key,val)%}
+                                    
+                                         {%if('{F:key}'=='{F:from_value}')%}
+                                            <option selected value="{%F:key%}">{%F:val%}</option>
+                                         {%else%}
+                                            <option value="{%F:key%}">{%F:val%}</option> 
+                                         {%endif%}
+
+                                    {%endeach%}
+                                    
+                                    </select>
+                        {%else%}
+                            <input    onKeyPress="return submitenter(this,event)" style="width:30px" name="{%F:from%}" value="{%F:from_value%}">
+                             <input onKeyPress="return submitenter(this,event)" style="width:30px" name="{%F:to%}" value="{%F:to_value%}">
+                        {%endif%}
+                       
+                       </li>
+                            
+{%endsection:_catalog_search_interval%}
+
+{%section:_catalog_search_larger->sfields%}
+  {%F:-(E:clear_section(options))%}
+            <li><span>{%F:sname%}</span>     
+                       
+                       
+                        {%if('{F:catselector}')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                
+                                 <select  name="{%F:input_name%}" value="{%F:value%}">    
+                                    <option selected></option>
+                                    {%each({F:catselector},key,val)%}
+                                    
+                                         {%if('{F:key}'=='{F:value}')%}
+                                            <option selected value="{%F:key%}">{%F:val%}</option>
+                                         {%else%}
+                                            <option value="{%F:key%}">{%F:val%}</option> 
+                                         {%endif%}
+
+                                    {%endeach%}
+                                </select>
+
+                        {%else%}
+                         <input style="50px"   onKeyPress="return submitenter(this,event)" class="small_pad" name="{%F:from%}" value="{%F:value%}">   
+                        {%endif%}
+                        </li>                  
+                        
+                        
+{%endsection:_catalog_search_larger%}
+
+
+{%section:_catalog_search_less->sfields%}
+  {%F:-(E:clear_section(options))%}
+            <li><span>{%F:sname%}</span>   
+                        {%if('{F:catselector}')%}       
+                                 <select  name="{%F:input_name%}" value="{%F:value%}">    
+                                    <option selected></option>
+                                        {%each({F:catselector},key,val)%}
+                                    
+                                         {%if('{F:key}'=='{F:value}')%}
+                                            <option selected value="{%F:key%}">{%F:val%}</option>
+                                         {%else%}
+                                            <option value="{%F:key%}">{%F:val%}</option> 
+                                         {%endif%}
+
+                                    {%endeach%}
+                                </select>
+
+                        {%else%}
+                         <input onKeyPress="return submitenter(this,event)" class="small_pad" name="{%F:from%}" value="{%F:value%}">      
+                        {%endif%}
+</li>
+                                           
+{%endsection:_catalog_search_less%}
+
+{%section:_catalog_search_rwords->sfields%}
+            <li><span>{%F:sname%}</span>     
+                            <input onKeyPress="return submitenter(this,event)" name="{%F:input_name%}" value="{%F:value%}">
+            </li>
+{%endsection:_catalog_search_rwords%}
+
+
+{%section:_catalog_search_rlike->sfields%}
+            <li><span>{%F:sname%}</span>                               
+                            <input onKeyPress="return submitenter(this,event)" name="{%F:input_name%}" value="{%F:value%}">
+            
+            </li>
+{%endsection:_catalog_search_rlike%}
+
+
+{%section:_catalog_search_lrlike->sfields%}
+            <li><span>{%F:sname%}</span>                               
+                            <input onKeyPress="return submitenter(this,event)" name="{%F:input_name%}" value="{%F:value%}">
+            
+            </li>
+{%endsection:_catalog_search_lrlike%}
+
+
+{%section:_catalog_search_equal->sfields%}
+  {%F:-(E:clear_section(options))%}
+            <li><span>{%F:sname%}</span>   
+                        
+                        {%if('{F:catselector}')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                 <select  name="{%F:input_name%}" value="{%F:value%}">    
+                                    <option selected></option>
+          
+                                    {%each({F:catselector},key,val)%}
+                                         {%if('{F:key}'=='{F:value}')%}
+                                            <option selected value="{%F:key%}">{%F:val%}</option>
+                                         {%else%}
+                                            <option value="{%F:key%}">{%F:val%}</option> 
+                                         {%endif%}
+
+                                    {%endeach%}
+                                </select>
+
+                        {%else%}
+                            <input onKeyPress="return submitenter(this,event)" name="{%F:input_name%}" value="{%F:value%}">
+                        {%endif%}            
+            </li>
+
+{%endsection:_catalog_search_equal%}
+

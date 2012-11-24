@@ -1,0 +1,14 @@
+<div id="e-form">
+  <form id="catobj_new">
+    <p>{name_of_the_object_directory}</p>
+    <input id="Name" class="required validate-alpha-ext" name="Name" type="text" />
+    <p>{subject_directory}</p>
+    <input id="showGroup" class="inp-b1 required" readonly />
+    <input id="showGroupId" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    <p>{properties_object}</p>
+    <select class="validate-selection" id="Property_set" onchange="javascript:XTR_catalog.change_property_set(this.options[this.selectedIndex].value)">
+    </select>
+  </form>
+  <div id="properties_holder"> </div>
+  <a class="button" href="javascript:void(0)" onclick="XTR_catalog.save_new_catobj()">{save}</a> </div>

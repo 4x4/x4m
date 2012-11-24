@@ -1,0 +1,17 @@
+<div id="e-form">
+  <form id="add_photo">
+  
+    <p>{image_name}</p>
+    <input  class="required" type="text" name="Name"  value="" />
+    <p>{comment}</p>
+    <textarea name="info" id="info"></textarea>
+    <p>{photoalbum}</p>
+    <input id="ParentCategory" class="inp-b1 required" readonly />
+    <input id="ParentCategoryId" type="hidden" class="required" />    
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    <p>{image}</p>
+    <div id="imageview"></div>
+    <input class="inp-b2" name="image" id="image" readonly />
+    <a class="button small" href="javascript:void(0)" title="Выбрать изображение"  onclick="xFileManager.selectFile('image')">{select}</a> <a class="button small iclear" href="javascript:void(0)" title="Очистить" onclick="javascript:$('image').value=''"><span></span>&nbsp;</a>
+  </form>
+  <a class="button" href="javascript:XTR_gallery.save_new_photo();" id="savadd_photo">{save}</a> </div>

@@ -1,0 +1,13 @@
+{%section:html_message%}   
+  <h1>{%F:basic%}</h1>
+  <p>{%F:msg%}</p>
+  {%->:news%}
+{%endsection:html_message%}
+
+{%section:news->%}
+    {%->:news_item%}
+{%endsection:news%}
+
+{%section:news_item->%}
+    <p><b>{%F:date%}</b> <a href="{%F:link%}">{%F:header%}</a> <br /> {%F:news_short%}</p>
+{%endsection:news_item%}

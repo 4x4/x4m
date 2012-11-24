@@ -1,0 +1,21 @@
+<div id="e-form">
+  <form id="user_new">
+    <p>{group_user}</p>
+    <select id="UserGroup">
+    </select>
+    <p>{login}</p>
+    <input id="UserName" class="input required validate-alphanum" name="UserName" type="text" />
+    <p>{password}</p>
+    <input id="Password" class="required validate-password"
+         onkeypress="passwordComplexity(this)"
+         onkeyup="passwordComplexity(this)"
+          name="Password"  type="password"/>
+    <div id="passwordComplextity"></div>
+    <p>{password_repeat}</p>
+    <input id="passwordAgain" class="required validate-password-again" name="passwordAgain" type="password"/>
+    <p>{fio}</p>
+    <input id="Name" class="required validate-alpha" name="Name" type="text" />
+    <p>{email}</p>
+    <input id="Email" class="required validate-email" name="Email" type="text" />
+  </form>
+  <a class="button" href="javascript:XTR_users.save_new_user()">{save}</a> </div>

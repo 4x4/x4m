@@ -1,0 +1,68 @@
+{%section:show_content%} <br/>
+<p>{select_an_article}</p>
+<input id="showContentName" class="inp-b1 validate-selection"/>
+<input id="contentId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<ul class="chk">
+  <li>
+    <input onclick="$('content_template').show()" type="checkbox" >
+    <p style="font-weight:normal">{set_the_template_output_articles}</p>
+  </li>
+</ul>
+<div style="display:none" id="content_template">
+  <p style="font-weight:normal">({leave_blank_if_you_do_not_need_forced_to_choose_another_template_display})</p>
+  <select id="Template">
+  </select>
+</div>
+{%endsection:show_content%}
+
+
+{%section:show_content_announce%} <br/>
+<p>{select_an_article}</p>
+<input id="showContentName" class="inp-b1 validate-selection"/>
+<input id="contentId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<p>{template_withdrawal_articles}</p>
+<select id="aTemplate">
+</select>
+<p>{page_display_articles}</p>
+<select class="validate-selection" id="page" name="page">
+</select>
+{%endsection:show_content_announce%}
+
+
+{%section:show_contents_list%}
+<p>{display_group_of_articles}</p>
+<select id="Category" class="validate-selection"></select>
+
+<p>{pattern_of_output}</p>
+<select id="xTemplate" class="validate-selection"></select>
+
+<p>{quantity_displayed_articles}</p>
+<p style="font-weight:normal;">({zero_or_empty_no_restrictions})</p>
+<input id="OnPage" type="text" value='0'/>
+
+<p>{page_display_articles}</p>
+<select class="validate-selection" id="page" name="page"></select>
+{%endsection:show_contents_list%}
+
+
+
+{%section:show_contentgroups_list%}
+<p>{Template}</p>
+<select id="Template"></select>
+
+<p>{page_display_articles}</p>
+<select class="validate-selection" id="page" name="page"></select>
+{%endsection:show_contentgroups_list%}
+                                                         
+
+{%section:content_server%}
+<p>{pattern_of_output_instead_of_the_standard}</p>
+<select id="Template"></select>
+
+<p>{action_is_performed_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')">
+</select>
+<div id="secondary_properties"></div>
+{%endsection:content_server%} 

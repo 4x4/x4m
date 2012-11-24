@@ -1,0 +1,15 @@
+{%section:letter_subject%}
+    Вопрос с сайта, категория "{%F:category_name%}"
+{%endsection:letter_subject%}
+
+{%section:letter%}
+    <p><strong>Уважаемый {%F:user%}!</strong></p>
+    <p><b>Ваш вопрос в категории "{%F:category_name%}":</b></p>
+    <p>{%F:question%}</p>
+    <p>Перейдите по <a href="http://{%F:server%}/ru/faq/~show_question/qid/{%F:id%}">ссылке</a>, чтобы увидеть ответ.</p>
+    <p>admin@i{%F:server%}</p>
+{%endsection:letter%}
+
+<!--    <p><strong>Ответ:</strong></p>
+    <p>{%F:answer%}</p>
+-->

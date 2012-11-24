@@ -1,0 +1,32 @@
+{%section:album%}
+<script type="text/javascript" src="{%F:_ARES%}js/shadowbox/shadowbox.js"></script>
+<script type="text/javascript" src="{%F:_ARES%}js/jquery.carousel.js"></script>     
+<link rel="stylesheet" type="text/css" href="{%F:_ARES%}js/shadowbox/shadowbox.css" />
+
+<div id="album{%F:album_id%}" class="album-carousel">
+	<a href="javascript:void(0);" id="prev{%F:album_id%}" class="carousel-prev"></a>
+	<a href="javascript:void(0);" id="next{%F:album_id%}" class="carousel-next"></a>
+	<!--<h1>{%F:Name%}</h1>-->
+	<div>
+    	<ul class="sub-gallery">{%->:photos%}</ul>
+	</div>
+</div>
+
+<script type="text/javascript">
+	Shadowbox.init({ handleOversize: "drag", displayNav: true, handleUnsupported: "remove", autoplayMovies: true });
+	$('#album{%F:album_id%}').jCarouselLite({visible:3,btnNext:'#next{%F:album_id%}',btnPrev:'#prev{%F:album_id%}', mouseWheel: true});
+</script>
+{%endsection:album%}
+
+{%section:photo->photos%} 
+    <li><a href="{%F:img_src%}" title="{%F:Name%}" rel="shadowbox[Mixed{%F:album_id%}]" ><img alt="{%F:Name%}" src="{%F:img_src(E:image_transform(120))%}"></a></li>
+{%endsection:photo%}
+
+
+{%section:gallery_empty%} 
+    <div class="album">
+        <h1>{%F:Name%}</h1>
+        Галлерея пуста
+    </div>
+{%endsection:gallery_empty%}
+

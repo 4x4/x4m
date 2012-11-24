@@ -1,0 +1,89 @@
+{%section:_menu_main_level0%}
+<script type="text/javascript">
+
+$(function() {
+  $('ul.v-menu > li > ul').show();
+  });
+
+</script>
+
+<ul class="v-menu">
+  {%F:menu_buff%}
+</ul>
+
+
+{%endsection:_menu_main_level0%}
+
+{%section:_menu_item_middle_level0%}
+{%F:#usergroupName(E:get_session_module_param(siteuser,usergroupName))%}
+
+{%if('{F:usergroupName}'=='Корпоративные клиенты' or '{F:usergroupName}'=='Рекламные агентства')%}
+    <li>
+        <a href="{%F:link%}"><span>{%F:caption%}</span></a>
+        {%F:submenu%}
+    </li>
+{%endif%}
+
+
+{%endsection:_menu_item_middle_level0%}
+
+{%section:_menu_item_last_level0%}
+{%F:#usergroupName(E:get_session_module_param(siteuser,usergroupName))%}
+
+{%if('{F:usergroupName}'=='Рекламные агентства')%}
+<li>
+    <a href="{%F:link%}"><span>{%F:caption%}</span></a>
+    {%F:submenu%}
+</li>
+
+{%endif%}
+{%endsection:_menu_item_last_level0%}
+
+{%section:_menu_item_first_level0%}
+<li>
+    <a href="{%F:link%}"><span>{%F:caption%}</span></a>
+    {%F:submenu%}
+</li>
+{%endsection:_menu_item_first_level0%}
+
+
+
+
+{%section:_menu_item_first_selected_level0%}
+<li>                
+    <a href="{%F:link%}"><span>{%F:caption%}</span></a>
+    {%F:submenu%}
+</li>
+{%endsection:_menu_item_first_selected_level0%}
+
+
+{%section:_menu_item_middle_selected_level0%}
+<li class="selected" >
+    <a href="{%F:link%}"><span>{%F:caption%}</span></a>
+    {%F:submenu%}
+</li>
+{%endsection:_menu_item_middle_selected_level0%}
+
+
+
+
+
+{%section:_menu_main_level1%}
+<ul>
+  
+  {%F:menu_buff%}
+
+  </ul>
+
+{%endsection:_menu_main_level1%}
+
+
+{%section:_menu_item_middle_level1%}
+
+    <li>
+        <a href="{%F:link%}"><span>{%F:caption%}</span></a>
+    </li>
+
+
+
+{%endsection:_menu_item_middle_level1%}

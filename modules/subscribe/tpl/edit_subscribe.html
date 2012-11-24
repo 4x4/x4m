@@ -1,0 +1,22 @@
+<div id="e-form">
+  <form id="edit_subscribe">
+    <p>{dispatch_condition}</p>
+    <select id="status">
+      <option value="incoming">{sending_expectation}</option>
+      <option value="waiting">{postpone}</option>
+      <option value="sent">{it_is_sent}</option>
+    </select>
+    <input type="hidden" id="category" name="category" value=""/>
+    <input type="hidden" id="id" name="id" value=""/>
+    <p>{dispatch_title} ({if_it_is_not_specified_theme_takes_from_group})</p>
+    <input type="text" id="theme" name="theme" value="" class="validate-alpha"/>
+    <div id="msgplace"></div>
+    <p>{news}</p>
+    <div class="newslist_cont">
+      <ul id="newslist" class="chk">
+      </ul>
+    </div>
+    <div id="newsplace">{any_section_news_it_is_not_chosen}.</div>
+  </form>
+  <div id="file_loader"></div>
+  <a class="button" onclick="XTR_subscribe.save_edited_subscribe(this);" href="javascript:void(0);">{save}</a> </div>

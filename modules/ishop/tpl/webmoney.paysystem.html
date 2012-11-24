@@ -1,0 +1,43 @@
+{%section:name%}
+    
+    Платежная система WEBMONEY
+    
+{%endsection:name%}
+
+
+
+{%section:paysystem%}
+
+<div class="pw-edit big-window">
+  <form id="paysystem">
+
+  <input type="hidden"  name="paysystem" value="webmoney">
+    
+    <p>{webmoney_purse}</p>
+    <input class="required" name="payee_purse" value="" >
+
+    <p>{success_url}</p>
+    <input  name="success_url" value="{%F:success_url%}">    
+
+    
+    <p>{result_url}</p>
+    <input  name="result_url" value="{%F:result_url%}">    
+    
+    
+    <p>{fail_url}</p>
+    <input  name="fail_url" value="{%F:fail_url%}">    
+        
+    
+    <ul class="chk">
+      <li>
+      <input type="checkbox" name="webmoney_test" />
+      <p>{webmoney_test}</p>
+        </li>
+      </ul>
+    
+    </form>
+    <a class="button" href="javascript:void(0)" onclick="XTR_ishop.save_paysystem()">{save}</a> 
+
+</div>
+
+{%endsection:paysystem%}

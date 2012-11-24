@@ -1,0 +1,19 @@
+<div id="e-form">
+  <form id="abanner">
+    <p>{banner_name}</p>
+    <input class="required validate-alpha" type="text" name="basic"  value="" />
+    <input type="hidden"  name="banner_type"  id="banner_type" value="html">
+    <input type="hidden" id="category" name="category"/>
+    <p>{home_date}</p>
+    <input type="text"  name="date1"  id="date1" value="" />
+    <p>{end_date}</p>
+    <input type="text"  name="date2"  id="date2" value="" />
+    <p>{shows}</p>
+    <p style="font-weight:normal;">({zero_or_empty_no_restrictions})</p>
+    <input type="text"  name="times_to_show"  id="times_to_show" value="">
+    <p>{HTML_code_banner}</p>
+    <textarea name="flash_text" id="flash_text"></textarea>
+    <a class="button" id="preview" onclick="XTR_banners.preview_banner()" href="javascript:void(0)">{view_banner}</a>
+  </form>
+  <a class="button" href="javascript:XTR_banners.save_edited_banner();">{save}</a> </div>
+<div id="slotzcontainer"> </div>

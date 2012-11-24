@@ -1,0 +1,7 @@
+<div id="e-form">
+<form id="add_table">
+  <p>{table_file}(*.xls)</p>
+  <input name="file_name" id="file_name" class="inp-b2 required" readonly value=""/>
+  <a class="button small" href="javascript:void(0)" title="Выбрать таблицу" onclick="EFMS.start('file_name',700,600)">{select}</a> <a class="button small iclear" href="javascript:void(0)" title="Очистить" onclick="javascript:$('file_name').value=''"><span></span>&nbsp;</a>
+</form>
+<a class="button" href="javascript:XTR_price.analyze_table();">{analyze_table}</a> </div>

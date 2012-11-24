@@ -1,0 +1,23 @@
+{%section:show_subscribe_form%}
+<p>{select_dispatch}</p>
+<input id="showsubscribeName" class="inp-b1 validate-selection" />
+<input id="subscribeId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<p>{template_of_a_conclusion_form}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{page_transition_form}</p>
+<select id="page">
+</select>
+{%endsection:show_subscribe_form%}
+
+
+{%section:subscriber_page%}
+<p>{template_of_a_conclusion_operations}</p>
+<select id="aTemplate" class="validate-selection">
+</select>
+<p>{action_carried_out_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')">
+</select>
+<div id="secondary_properties"></div>
+{%endsection:subscriber_page%}

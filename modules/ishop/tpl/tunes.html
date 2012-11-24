@@ -1,0 +1,32 @@
+<div class="pw-edit big-window">
+  <form  name="tunes" id="tunes">
+    <p>{name_the_properties_of_the_corresponding_catalog_price_of_the_goods}</p>
+    <p style="font-weight:normal;">({this_property_is_set_in_groups_of_properties_directory})</p>
+    <select name="PriceProperty" class="validate-selection">
+    </select>
+    <p>{name_the_properties_of_the_directory_corresponding_to_the_name_of_product}</p>
+    <p style="font-weight:normal;">({this_property_is_set_in_groups_of_properties_directory})</p>
+    <select name="NameProperty" class="validate-selection">
+    </select>
+    <p>{general_settings}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="GoodsCountList" />
+        {display_field_to_enter_the_number_of_items_in_the_list}</li>
+      <li>
+        <input type="checkbox" name="AuthNeedOrder" />
+        {only_authorized_users_can_order_products}</li>
+      <li>
+    </ul>
+    <p>{post_addresses_for_demands_acceptance_if_a_little_through_a_comma}</p>
+    <input type="text" name="Emails" value=""/>
+    <p>{email_encoding}</p>
+    <select name="EmailEncoding" class="validate-selection">
+      <option value="windows-1251">windows-1251</option>
+      <option value="utf-8">utf-8</option>
+    </select>
+    <p>{email_subject}</p>
+    <input type="text" name="EmailSubject" value="" />
+    <p><a class="button last" onclick="javascript:XTR_ishop.save_tunes();" href="javascript:void(0);">{save}</a></p>
+  </form>
+</div>

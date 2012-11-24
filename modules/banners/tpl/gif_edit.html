@@ -1,0 +1,45 @@
+
+<div id="e-form">
+  <form id="abanner">
+    <p>{banner_name}</p>
+    <input class="required validate-alpha" type="text" name="basic" value="" />
+    <input type="hidden"  name="banner_type"  id="banner_type" value="gif" />
+    <input type="hidden" id="category" name="category"/>
+    
+    <ul class="chk">
+      <li>
+        <input id="use_page" name="use_page" type="checkbox" onchange="javascript:$('int_page').toggle();$('link_block').toggle();" >{use_internal_page}</li>
+    </ul>    
+    
+    <div id="link_block">
+        <p>{link}</p><input type="text" name="link" id="link" value="" />
+    </div>
+
+    
+    <div id="int_page" style="display:none;">
+    <p>{internal_page}</p>
+        <input id="page" class="inp-b2" readonly />
+        <input id="pageId" type="hidden" class="required"/>
+        <a class="button small" href="javascript:void(0)" id="startXlistPage">{select}</a>    
+        <a onclick="javascript:$('page').value='';javascript:$('pageId').value=''" title="очистить" href="javascript:void(0)" class="button small iclear"><span></span>&nbsp;</a>
+    </div>
+
+    <p></p>
+    <p>{alt}</p>
+    <input type="text" name="alt" id="alt" value="" />
+
+    <p>{home_date}</p>
+    <input type="text" name="date1" id="date1" value="" />
+    <p>{end_date}</p>
+    <input type="text" name="date2" id="date2" value="" />
+    <p>{shows}</p>
+    <p>({zero_or_empty_no_restrictions})</p>
+    <input type="text"  name="times_to_show"  id="times_to_show" value="" />
+    <p>{file_banner} (*.gif,*.jpg,*.jpeg,*.png)</p>
+    
+    
+    <input class="inp-b3" name="file_name" id="file_name" readonly />
+    <a class="button small" href="javascript:void(0)" title="{choose_file}" onclick="xFileManager.selectFile('file_name')">{select}</a> <a  class="button small iclear" href="javascript:void(0)" title="{clear}" onclick="javascript:$('file_name').value=''"><span></span>&nbsp;</a> <a class="button small iprev" id="preview" onclick="XTR_banners.preview_banner()" href="javascript:void(0)"><span></span>&nbsp;</a>
+  </form>
+  <a class="button" href="javascript:XTR_banners.save_edited_banner();">{save}</a> </div>
+

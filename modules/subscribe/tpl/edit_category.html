@@ -1,0 +1,41 @@
+<div id="e-form">
+  <form id="edit_category">
+    <p>{group_name}</p>
+    <input  class="required validate-alpha" type="text" name="basic"  value="" />
+    <p>{letter_template}</p>
+    <select id="Template" class="required validate-selection">
+    </select>
+    <p>{dispatch_description}</p>
+    <textarea name="description" id="description"></textarea>
+    <p>{dispatch_title} (letter title)</p>
+    <input class="required validate-alpha" type="text" name="theme"/>
+    <p>{email}</p>
+    <input  class="required validate-email" type="text" name="from"/>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="message"/>
+        {add_message}</li>
+      <li>
+        <input type="checkbox" name="files"/>
+        {resolve_addition_files}</li>
+      <li>
+        <input type="checkbox" name="html"/>
+        {dispatch_in_format_HTML}</li>
+      <!--<li>
+                <p><strong>Максимальный размер файла в мегабайтах:</strong></p>
+                <input type="text" value="" name="basic" class="inp required validate-alpha"/>
+            </li>-->
+    </ul>
+    <div class="field-form">
+      <p>{news}</p>
+      <p>{remove_the_last}</p>
+      <input  class="required validate-alpha" type="text" name="news_number"  value="10" />
+      <p>{page_display_of_news}</p>
+      <select id="news_page" class="required validate-selection">
+      </select>
+      <p>{categories_news}</p>
+      <ul id="news_cats" class="chk">
+      </ul>
+    </div>
+  </form>
+  <a class="button" onclick="XTR_subscribe.save_edited_category(this);" href="javascript:void(0);">{save}</a> </div>

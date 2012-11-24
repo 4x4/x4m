@@ -1,0 +1,70 @@
+{%section:categories_list%}   
+    <script type="text/javascript" src="xjs/livevalidation.js"></script>            
+    <script type="text/javascript" src="/js/faq.js"></script>              
+    {%F:#category(E:assign(100500))%}
+    
+<div class="faq">
+    <form action="{%F:action%}" method="post" id="faq_form{%F:category%}" name="faq_form{%F:category%}">
+    
+    <p id="msgsubmitted{%F:category%}" style="display:none;"><strong>Спасибо, за ваш вопрос. Мы обязательно ответим.</strong></p>
+    <p id="msgerror{%F:category%}" style="display:none; color: red;">Произошла непредвиденная ошибка.</p>
+    
+        
+        <div class="faqform">
+        
+            <h1 style="padding:0;">Задать вопрос</h1>
+            {%->:msg%}
+            <div class="formdescr"><span>*</span> <i>Поля обязательные для заполнения</i></div>
+        
+            
+            <ul class="xform">
+                <li><p>Категория вопроса</p><select name="category">{%->:buff%}</select></li>
+                <li><p>Имя (компания): <span>*</span></p><input type="text" size="40" value="" id="FAQuser{%F:category%}" name="user"/></li>
+                <li><p>Email: <span>*</span></p><input type="text" size="40" value="" id="FAQemail{%F:category%}" name="email"/></li>
+                <li><p>Вопрос: <span>*</span></p><textarea rows="6" cols="41" name="question" id="FAQquestion{%F:category%}"/>{%F:question%}</textarea></li>
+                 
+                
+                <li><img alt="Captcha" id="FAQcaptcha_img{%F:category%}" src="captcha.php?fid={%F:category%}" onclick="updateCaptchaFAQ({%F:category%});"/>
+                    <a href="javascript:void(0)" onclick="updateCaptchaFAQ({%F:category%});">обновить код</a>
+                </li>
+                <li>
+                    <p>Код подтверждения (4 символов): <span>*</span></p>        
+                    <input name="captcha" id="FAQcaptcha{%F:category%}" size="4" maxlength="4" type="text">  
+                </li>
+                
+                <li style="padding : 4px 10px 3px 12px;">
+                    <a href="javascript:void(0)" id="faqsubmit{%F:category%}" class="faqbutton">Отправить</a>
+                </li>
+            </ul>
+            
+            <input type="hidden" value="letter" name="letter_template"/>                    
+        </div>
+    </form>
+<script type="text/javascript">$(function(){ processFAQ(true, 'faq_form{%F:category%}',{%F:category%}, 'faqsubmit{%F:category%}', 
+    function(send){
+        if(send == true){
+            $("#msgsubmitted{%F:category%}").show();
+            $("#faq_form{%F:category%} div.faqform").remove();
+	    $("#msgerror{%F:category%}").hide();
+
+        } else {
+            updateCaptchaFAQ(cat_id);
+            $("#msgerror{%F:category%}").show();
+        }         
+    });
+});
+</script> 
+</div>
+
+{%endsection:categories_list%}
+
+
+<!--<input type="hidden" name="category" value="{%F:category%}">-->
+{%section:category_item->buff%}
+<option value="{%F:id%}">{%F:Name%}</option>
+{%endsection:category_item%}
+
+{%section:msg->msg%} 
+      <br/>
+      <strong><font color=red>Неправильный код подтверждения</font></strong><br/><br/>
+{%endsection:msg%} 

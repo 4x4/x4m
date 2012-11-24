@@ -1,0 +1,16 @@
+<div id="e-form">
+  <form id="edit_user">
+    <p>{user}: <span id="user_email"></span></p>
+    <p>{status_user}</p>
+    <select id="status">
+      <option value="active">{active}</option>
+      <option value="inactive">{inactive}</option>
+    </select>
+    <input type="hidden" name="id" id="id"/>
+  </form>
+  <form id="cats">
+    <p>{it_is_signed_on_dispatches}</p>
+    <ul id="slist" class="chk">
+    </ul>
+  </form>
+  <a class="button" onclick="javascript:XTR_subscribe.save_edited_user(this);" href="javascript:void(0);">{save}</a> <a class="button" onclick="XTR_subscribe.show_users_list(this);" href="javascript:void(0);">{return_to_the_list_of_subscribers}</a> </div>

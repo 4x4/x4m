@@ -1,0 +1,22 @@
+{%section:tpl_slotz%}
+<form name="tpl_slotz" id="tpl_slotz">
+  <table class="temptable" cellspacing="0" cellpadding="0" border="0">
+    <TBODY>
+      <tr>
+        <th>{slot_name}</th>
+        <th>{slot_alias}</th>
+      </tr>
+    {%->:one_slot%}
+      </TBODY>    
+  </table>
+</form>
+<a class="button" href="javascript:XTR_templates.save_slotz_alias()">{save}</a> 
+{%endsection:tpl_slotz%}
+
+
+{%section:one_slot->%}
+<tr>
+  <td>{%F:slot_name%}</td>
+  <td><input name="slot_{%F:slot_id%}" type="text" value="{%F:slot_alias%}"></td>
+</tr>
+{%endsection:one_slot%} 

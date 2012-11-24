@@ -1,0 +1,32 @@
+<div class="fm-top">
+  <input id="pathtofile" value="" />
+  <div class="fmbuttons"> <a  href="javascript:void(0)" onclick="xFileManager.Up()" class="up"><span>{upwards}</span></a> <a  href="javascript:void(0)" onclick="xFileManager.createFolder()" class="create"><span>{create_folder}</span></a> <a  href="javascript:void(0)"  onclick="xFileManager.copy()" class="copy"><span>{copy}</span></a> <a  href="javascript:void(0)" onclick="xFileManager.paste()"  class="insert"><span>{insert}</span></a> <a  href="javascript:void(0)" onclick="xFileManager.unlink()" class="del"><span>{delete}</span></a> </div>
+  <div class="upl-block">
+    <select id="XMselector" onChange="xFileManager.switchmode(this.options[this.selectedIndex].value)">
+      <option value="icon">{icons}</option>
+      <option value="images">{images}</option>
+    </select>
+    <span id="spanButtonPlaceholder"></span> <a href="javascript:void(0)" class="upload"><span>{download_new_files}</span></a> </div>
+</div>
+<div id="xmview" class="xmview"> </div>
+<div id="sfu-upload" style="display:none" >
+  <form id="form1" action="index.php" method="post" enctype="multipart/form-data">
+    <input id="btnCancel" type="button" value="{stop_download}" disabled="disabled"/>
+    <br clear="all" />
+    <div id="divSWFUploadUI">
+      <div class="fieldset flash" id="fsUploadProgress"> </div>
+      <p id="divStatus"></p>
+      <br clear="all" />
+    </div>
+    <div id="divLongLoading" class="content" style="background-color: #FFFF66; border-top: solid 4px #FF9966; border-bottom: solid 4px #FF9966; margin: 10px 25px; padding: 10px 15px;"> {download_files_is_impossible}. </div>
+    <div id="divAlternateContent" class="content" style="background-color: #FFFF66; border-top: solid 4px #FF9966; border-bottom: solid 4px #FF9966; margin: 10px 25px; padding: 10px 15px;">{download_files_disabled_establish_version_FLASH_not_less_than_but_not_above_version}<a href="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash">{download_and_establish_FLASH}</a> </div>
+  </form>
+</div>
+<div id="bottomArea">
+  <div id="selectFolder">
+    <div class="button"><a  href="javascript:void(0)" onclick="xFileManager.submitPath()">{select_folder}</a></div>
+  </div>
+  <div id="selectMultiply">
+    <div class="button"><a  href="javascript:void(0)" onclick="xFileManager.submitMultiply()">{select_multiply}</a></div>
+  </div>
+</div>

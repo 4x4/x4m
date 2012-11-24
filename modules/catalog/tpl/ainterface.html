@@ -1,0 +1,219 @@
+{%section:show_level_catmenu%}
+<p>{select_group_to_display_the_menu}:</p>
+<input id="showGroup" class="inp-b1 validate-selection"/>
+<input id="showGroupId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<p>{page_display_catalog}:</p>
+<select id="Destination_page" class="validate-selection">
+</select>
+<p>{template_menu}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{number_of_levels_in_the_menu}</p>
+<p style="font-weight:normal;">{0_meant_to_show_the_menu_for_any_nested_menu}</p>
+<input id="Levels" type="text" value='0'/>
+<ul class="chk">
+  <li>
+    <input id="GetCatObj" name="GetCatObj" type="checkbox">
+    {select_a_category_and_directory_objects}
+
+  </li>
+</ul>
+<p>{separate_menus_for}</p>
+<p style="font-weight:normal;">{0_do_not_separate_objects}</p>
+<input id="ObjectInRows" type="text" value='0'/>
+
+<p>{schedule_page_for_the_catalog_categories}</p>
+<select id="Cat_destination_page">
+</select>
+<p>{schedule_page_for_the_catalog_objects}</p>
+<select id="CatObjDestination_page">
+</select>
+{%endsection:show_level_catmenu%}
+
+
+
+{%section:show_category%}
+<p>{template_display_a_list_of_categories}</p>
+<select id="InnerCategoryTemplate" class="validate-selection">
+</select>
+<div class="i1">
+  <p>{page_display_catalog}</p>
+  <select id="Destination_page">
+  </select>
+</div>
+<p>{display_category}</p>
+<input id="showGroup" class="inp-b1 validate-selection"/>
+<input id="showGroupId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a> {%->:ishop%}
+<p>{number_of_objects_on_the_page}</p>
+<input id="Onpage_category" class="validate-selection">
+<p>{divided_by_number_of_objects_0_do_not_share}</p>
+<input id="Render_by_items" class="validate-selection" value="0">
+
+<ul class="chk">
+  <li>
+    <input id="GetCatObj" name="GetCatObj" type="checkbox">
+    {select_a_category_and_directory_objects} </li>
+</ul>
+{%endsection:show_category%}
+
+
+{%section:show_catalog_server%}
+<p>{template_display_a_list_of_categories}</p>
+<input id="on_module_save"  type="hidden" name="onmodulesave" value="1"/>
+
+<select id="CategoryTemplate" class="validate-selection">
+</select>
+<p>{template_display_object}</p>
+<select id="ObjectTemplate" class="validate-selection">
+</select>
+
+
+<p>{category_url_point}</p>
+<input id="showBasicPoint" class="inp-b1 validate-selection"/>
+<input id="showBasicPointId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXXlist">{select}</a>
+
+
+
+{%->:ishop%}
+<p>{number_of_objects_on_the_page}</p>
+<input id="Onpage" class="validate-selection">
+<ul class="chk">
+  <li>
+    <input id="GetCatObj" name="GetCatObj" type="checkbox">
+    {select_a_category_and_directory_objects} </li>
+</ul>
+<p>{divided_by_number_of_objects_0_do_not_share}</p>
+<input id="Render_by_items" class="validate-selection" value="0">
+<p>{action_is_performed_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')">
+</select>
+</div>
+<div id="secondary_properties"></div>
+{%endsection:show_catalog_server%}
+
+
+{%section:show_react_menu%}
+<p>{select_the_group_which_will_be_displayed_on_the_menu}</p>
+<input id="showGroup" class="inp-b1 validate-selection"/>
+<input id="showGroupId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<p>{template_display_the_menu}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{show_as_a_group_and_catalog_objects}</p>
+<input id="ShowObj" name="ShowObj" type="checkbox">
+</select>
+
+
+<p>{separate_menus_for}</p>
+<p style="font-weight:normal;">{0_do_not_separate_objects}</p>
+<input id="ObjectInRows" type="text" value='0'/>
+
+
+<p>{schedule_page_for_the_catalog_objects}</p>
+<select id="CatObjDestination_page">
+</select>
+{%endsection:show_react_menu%}
+
+
+{%section:show_search_form%}
+<p>{template_display_search_the_catalog}</p>
+<select id="SearchTemplate" class="validate-selection">
+</select>
+<p>{choose_form_to_show}</p>
+<select id="SearchForm" class="validate-selection">
+</select>
+<p>{page_display_of_search_results_by_product}</p>
+<select id="Destination_page" class="validate-selection">
+</select>
+{%endsection:show_search_form%}
+
+
+{%section:show_branch_info%}
+<p>{template_display_search_the_catalog}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{choose_form_to_show_params}</p>
+<select id="SearchForm" class="validate-selection">
+</select>
+{%endsection:show_branch_info%}
+
+
+
+
+
+
+{%section:show_smart_search_form%}
+<p>{template_display_search_the_catalog}</p>
+<select id="SearchTemplate" class="validate-selection">
+</select>
+<p>{page_display_of_search_results_by_product}</p>
+<select id="Destination_page" class="validate-selection">
+</select>
+<ul class="chk">
+  <li>
+    <input id="FilterPset" name="FilterPset" type="checkbox">
+    {FilterPset} </li>
+</ul>
+{%endsection:show_smart_search_form%}
+
+
+{%section:catalog_filter%}
+<p>{template_filter}</p>
+<select id="FilterTemplate" class="validate-selection">
+</select>
+<p>{page_display_of_search_results_by_product}</p>
+<select id="Destination_page" class="validate-selection">
+</select>
+{%endsection:catalog_filter%}
+
+
+{%section:catalog_filter_results%}
+<p>{template_filter_results}</p>
+<select id="ResultTemplate" class="validate-selection">
+</select>
+<p>{page_display_catalog}</p>
+<select id="Destination_page">
+</select>
+{%->:ishop%}
+<p>{break_apart}</p>
+<input id="Render_by_items" class="validate-selection">
+<p>{number_of_objects_on_the_page}</p>
+<input id="Onpage" class="validate-selection">
+{%endsection:catalog_filter_results%}
+
+
+{%section:catalog_comparsion%}
+<p>{template_comparison_of_the_catalog}</p>
+<select id="ComparsionTemplate" class="validate-selection">
+</select>
+{%->:ishop%} 
+{%endsection:catalog_comparsion%}
+
+
+{%section:show_search_results%}
+<p>{template_display_of_search_results}</p>
+<select id="ResultTemplate" class="validate-selection">
+</select>
+{%->:ishop%}
+<p>{schedule_page_for_the_catalog_categories}</p>
+<select id="Destination_page" class="validate-selection">
+</select>
+
+<p>{divided_by_number_of_objects_0_do_not_share}</p>
+<input id="Render_by_items" class="validate-selection" value="0">
+<p>{number_of_objects_on_the_page}</p>
+<input id="Onpage" class="validate-selection">
+
+
+{%endsection:show_search_result%}
+                                 
+
+{%section:ishop->%}
+<p>{select_a_page_serving_the_basket_this_directory}</p>
+<select id="BasketPage">
+</select>
+{%endsection:ishop%} 

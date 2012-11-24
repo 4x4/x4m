@@ -1,0 +1,29 @@
+{%section:show_price_list%}
+    <p>{choose_group_for_menu_display}</p>
+    <input id="categoryName" class="inp-b1" readonly />
+    <input id="category" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    
+    <p>{number_of_levels}</p>
+    <p style="font-weight:normal">{0_mean_infinite}</p>
+    <input  id="max_level" type="text" value='0'/>    
+
+<p>{template_of_a_conclusion_list_of_prices}:</p>
+<select id="Template" class="validate-selection"></select>
+     <ul class="chk">
+      <li><input type="checkbox" name="hashed_links" id="hashed_links" />{hashed_links}</li>
+      <li><input type="checkbox" name="show_counters" id="show_counters" />{show_counters}</li>
+    </ul>
+{%endsection:show_price_list%} 
+
+{%section:show_folder%}
+<p>{template_of_a_conclusion_list_of_prices}:</p>
+<select id="Template" class="validate-selection"></select>
+
+<p>{SelectFolder}</p>     
+<input class="inp-b2" id="Folder" type="text" name="Folder"/>
+<a onclick="xFileManager.selectFolder('Folder'); var t = document.getElementsByClassName('dhtmlx_window_inactive')[0]; t.style.zIndex='200'; t.className='dhtmlx_window_active';" href="javascript:void(0)" class="button small">{choice}</a>
+     <ul class="chk">
+      <li><input type="checkbox" name="hashed_links" id="hashed_links" />{hashed_links}</li>
+    </ul>
+{%endsection:show_folder%} 

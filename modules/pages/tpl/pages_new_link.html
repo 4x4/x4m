@@ -1,0 +1,29 @@
+<div id="e-form">
+  <form name="new_link" id="new_link">
+    <p>{link_name}</p>
+    <input id="Name" class="required validate-alpha" name="Name" type="text" />
+    <p>{link_situation}</p>
+    <input id="showGroup" name="showGroup" class="inp-b1 required" readonly />
+    <input name="showGroupId" id="showGroupId" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="groupXlist">{select}</a>
+    <p>{link}</p>
+    <input onchange="javascript:$('LinkId').value='';" id="Link" class="inp-b1 required"/>
+    <input id="LinkId" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    <p>{link_visibility}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="DisableMapLink" />
+        {disconnect_the_link_from_the_site_map}</li>
+    </ul>
+    
+    <p>{Icon}</p>     
+    <input class="inp-b2" id="Icon" name="Icon">
+    <a onclick="xFileManager.selectImage('Icon')" href="javascript:void(0)" class="button small">{select}</a>
+
+    <p>{Comment}</p>   
+    <textarea name="Comment" id="Comment" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+  
+  </form>
+  <div  style="display:none" id="xxlist"> </div>
+  <a class="button" href="javascript:XTR_pages.save_new_link()">{save}</a> </div>

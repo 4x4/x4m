@@ -1,0 +1,20 @@
+{%section:question%}
+{%F:#abs(faq:get_abs_num({F:id},{F:ancestor}))%}  
+{%F:#e(faq:set_question_alias(Вопрос №{F:abs}))%}
+<div class="text">
+<h1>{%F:category%} </h1> 
+
+<strong>Вопрос: {%F:question%}</strong><br/>
+{%if('{F:answer}')%}Ответ: {%F:answer%}<br/>
+{%else%}
+    {%if('{F:sanswer}')%}Ответ: {%F:sanswer%}<br/>
+    {%else%}
+    <p>На данный вопрос пока не получено ответа</p>
+    {%endif%}
+    
+{%endif%}
+</div>
+{%endsection:question%}
+
+
+ 

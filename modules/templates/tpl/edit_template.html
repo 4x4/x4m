@@ -1,0 +1,9 @@
+<form id="template_edit">
+  <p>{name_file_template}</p>
+  <input  class="inactive" readonly type="text" name="fullpath"  value="" />
+  <p>{alias_template}</p>
+  <input  id="tplalias" type="text" name="Name"  value="" />
+  <p>{template_maintenance}</p>
+  <textarea style="height:auto; width:auto;" class="codepress html" id="tplbody" cols="120" rows="50" name="tplbody"></textarea>
+</form>
+<a class="button" href="javascript:XTR_templates.save_template()">{save}</a> 

@@ -1,0 +1,29 @@
+<div id="e-form">
+  <form id="link_edit">
+    <p>{link_name}</p>
+    <input id="Name" class="required validate-alpha" name="Name" type="text" />
+    <p>{link}</p>
+    <input onchange="javascript:$('LinkId').value='';" id="Link" class="inp-b1 required"/>
+    <input id="LinkId" type="hidden" />
+    <a class="button small" href="javascsript:void(0)" id="startXlist">{select}</a>
+    <p>{link_visibility}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="DisableMapLink" />
+        {disconnect_the_link_from_the_site_map}</li>
+      <li>
+        <input type="checkbox" name="Visible" />
+        {do_not_display_the_global_menu}</li>
+    </ul>
+    
+   
+    <p>{Icon}</p>     
+    <input class="inp-b2" id="Icon" name="Icon">
+    <a onclick="xFileManager.selectImage('Icon')" href="javascript:void(0)" class="button small">{select}</a>
+
+    <p>{Comment}</p>   
+    <textarea name="Comment" id="Comment" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+
+  
+  </form>
+  <a class="button" href="javascript:XTR_pages.save_edited_link()">{save}</a> </div>

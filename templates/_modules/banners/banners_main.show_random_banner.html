@@ -1,0 +1,17 @@
+{%section:flash%}
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="{%F:width%}" height="{%F:height%}">
+  <param name="movie" value="{%F:fname%}">
+  <param name="quality" value="high">
+  <embed src="{%F:fname%}" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="{%F:width%}" height="{%F:height%}"></embed>
+</object>
+{%endsection:flash%}
+
+{%section:gif%}
+ {%if(Common::is_file_exists('{F:fname}'))%}    
+ <img src="{%F:fname%}" class="top-banner" />
+{%endif%}  
+{%endsection:gif%}
+
+{%section:html%}
+  {%F:html_code%}
+{%endsection:html%}

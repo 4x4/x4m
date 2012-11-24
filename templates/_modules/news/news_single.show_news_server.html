@@ -1,0 +1,28 @@
+{%section:_news_single%}
+
+{%F:+(E:add_file_section(_common/extended/comments_news.html))%}  
+
+  <div class="text">
+    <h1>{%F:header%}</h1>
+  {%F:news_long%}
+  
+  {%if({F:tags})%}      <p>
+                        <p><strong>Тэги:</strong> {%each({F:tags},key,value)%}<a href="{%F:value(E:get(link))%}">{%F:value(E:get(tag))%}</a> {%endeach%}</p>
+                        </p>
+                        
+                    {%endif%}
+  
+  </div>
+
+  {%F:#(E:call_module(comments.front))%}                                    
+  
+  {%F:#comments(comments:show_comments(news,{F:id},{F:header}))%}                                        
+                                    
+  {%->:_send_comments_form%}
+  {%->:_comments%}
+                                    
+
+{%endsection:_news_single%}
+
+
+

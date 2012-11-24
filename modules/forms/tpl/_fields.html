@@ -1,0 +1,233 @@
+<!--failureMessage - сообщение об ошибке-->
+{%section:fields%}
+    {%->:fields%}
+{%endsection:fields%}
+
+
+{%section:textfield->fields%}
+<div class="field-form" id="textfield_{%F:num%}">
+<form>
+  <div class="i6">
+    <p><strong>{text_field}:</strong></p>
+    <br/>
+    <p>{field_name}</p>
+    <input class="inp validate-alpha" type="text" id="name_{%F:num%}" name="textfield"  value="{%F:name%}" />
+    <div class="i6sel">
+      <p>{type_field}</p>
+      <select id="type_{%F:num%}" class="inp">
+        <option value="text" {%F:text%}>{text}</option>
+        <option value="email" {%F:email%}>{email}</option>
+        <option value="url" {%F:url%}>{url}</option>
+        <option value="hidden" {%F:hidden%}>{hidden}</option>
+        <option value="numerical" {%F:numerical%}>{numerical}</option> 
+      </select>
+    </div>
+  </div>
+  <div class="i-chf">
+    <ul>
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill_{%F:num%}" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+        <ul class="compulsory_to_fill">
+            <li>
+                {valid_message} <input class="inp validate-alpha" type="text" id="valid_message_{%F:num%}" name="valid_message" value="{%F:valid_message%}"/>
+            </li>
+            <li>
+                {failure_message} <input class="inp validate-alpha" type="text" id="failure_message_{%F:num%}" name="failure_message" value="{%F:failure_message%}"/>
+            </li>
+        </ul>
+      </li>
+      <li>
+      <a class="additional_options" href="javascript:void(0)"><b>{additional_options}</b></a>
+        <ul class="additional_options">
+            <li>{indefikator} <input class="inp validate-alpha" type="text" id="indefikator_{%F:num%}" name="indefikator" value="{%F:indefikator%}"/></li>
+            <li>{default_value} <input class="inp validate-alpha" type="text" id="default_value_{%F:num%}" name="default_value" value="{%F:default_value%}"/></li>
+            <li>{pattern} <input class="inp" type="text" id="pattern_{%F:num%}" name="pattern" value="{%F:pattern%}"/></li>
+            <li>
+                <input type="checkbox" id="readonly_{%F:num%}" name="readonly" {%F:readonly%}/>
+                {readonly}
+            </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="button slim2"><a onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"><div class="bdel"><span>{delete}</span></div></a></div>
+</form>
+</div>
+{%endsection:textfield%}
+
+
+{%section:textarea->fields%}
+<div class="field-form" id="textarea_{%F:num%}">
+<form>
+  <div class="i5">
+    <p><strong>{big_text_field}:</strong></p>
+    <br/>
+    <p>{field_name}</p>
+    <input class="inp validate-alpha" type="text" id="name_{%F:num%}" name="textarea"  value="{%F:name%}" />
+  </div>
+  <div class="i-chf">
+    <ul>
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill_{%F:num%}" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+        <ul class="compulsory_to_fill">
+            <li>
+                {valid_message} <input class="inp validate-alpha" type="text" id="valid_message_{%F:num%}" name="valid_message" value="{%F:valid_message%}"/>
+            </li>
+            <li>
+                {failure_message} <input class="inp validate-alpha" type="text" id="failure_message_{%F:num%}" name="failure_message" value="{%F:failure_message%}"/>
+            </li>
+        </ul>
+      </li>
+      <li>
+          <a class="additional_options" href="javascript:void(0)"><b>{additional_options}</b></a>
+          <ul class="additional_options">
+            <li>{indefikator} <input class="inp validate-alpha" type="text" id="indefikator_{%F:num%}" name="indefikator" value="{%F:indefikator%}"/></li>
+            <li>{default_value} <input class="inp validate-alpha" type="text" id="default_value_{%F:num%}" name="default_value" value="{%F:default_value%}"/></li>
+            <li>
+                <input type="checkbox" id="readonly_{%F:num%}" name="readonly" {%F:readonly%}/>
+                {readonly}
+            </li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="button slim2"> <a  onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"><div class="bdel"><span>{delete}</span></div></a></div>
+</form>
+</div>
+{%endsection:textarea%}
+
+
+{%section:select->fields%}
+<div class="field-form" id="select_{%F:num%}">
+<form>
+  <div class="i5">
+    <p class="handle"><strong>{drop_down_list}:</strong></p>
+    <br/>
+    <p>{field_name}</p>
+    <input class="inp validate-alpha" type="text" id="name_{%F:num%}" name="select"  value="{%F:name%}" />
+  </div>
+  <p>{elements_of_the_list}</p>
+  <textarea class="inp" name="values" id="values_{%F:num%}" rows="3" style="width:283px;">{%F:values%}</textarea>
+  <div class="i-chf">
+    <ul>
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill_{%F:num%}" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+        <ul class="compulsory_to_fill">
+            <li>{valid_message} <input class="inp validate-alpha" type="text" id="valid_message_{%F:num%}" name="valid_message" value="{%F:valid_message%}"/></li>
+            <li>{failure_message} <input class="inp validate-alpha" type="text" id="failure_message_{%F:num%}" name="failure_message" value="{%F:failure_message%}"/></li>
+        </ul>
+      </li>
+      <li>
+        <a class="additional_options" href="javascript:void(0)"><b>{additional_options}</b></a>
+          <ul class="additional_options">
+            <li>{indefikator} <input class="inp validate-alpha" type="text" id="indefikator_{%F:num%}" name="indefikator" value="{%F:indefikator%}"/></li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="button slim2"><a onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"><div class="bdel"><span>{delete}</span></div></a></div>
+</form>
+</div>
+{%endsection:select%}
+
+
+{%section:multiselect->fields%}
+<div class="field-form" id="multiselect_{%F:num%}">
+<form>
+  <div class="i5">
+    <p><strong>{list_of_multiple_choice}:</strong></p>
+    <br/>
+    <p>{field_name}</p>
+    <input class="inp validate-alpha" type="text" id="name_{%F:num%}" name="multiselect"  value="{%F:name%}" />
+  </div>
+  <p>{elements_of_the_list}</p>
+  <textarea class="inp" name="values" id="values_{%F:num%}" rows="3" style="width:283px;">{%F:values%}</textarea>
+  <div class="i-chf">
+    <ul>
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill_{%F:num%}" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+        <ul class="compulsory_to_fill">
+            <li>{valid_message} <input class="inp validate-alpha" type="text" id="valid_message_{%F:num%}" name="valid_message" value="{%F:valid_message%}"/></li>
+            <li>{failure_message} <input class="inp validate-alpha" type="text" id="failure_message_{%F:num%}" name="failure_message" value="{%F:failure_message%}"/></li>
+        </ul>
+      </li>
+      <li>
+        <a class="additional_options" href="javascript:void(0)"><b>{additional_options}</b></a>
+          <ul class="additional_options">
+            <li>
+                {indefikator} <input class="inp validate-alpha" type="text" id="indefikator_{%F:num%}" name="indefikator" value="{%F:indefikator%}"/>
+            </li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="button slim2"><a onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"><div class="bdel"><span>{delete}</span></div></a></div>
+</form>
+</div>
+{%endsection:multiselect%}
+
+
+{%section:flag->fields%}
+<div class="field-form" id="flag_{%F:num%}">
+<form>
+  <div class="i5">
+    <p><strong>{flag}:</strong></p>
+    <p>({for_example_i_agree_to_the_terms_of_the_agreement})</p>
+    <br/>
+    <p>{field_name}</p>
+    <input class="inp validate-alpha" type="text" id="name_{%F:num%}" name="flag"  value="{%F:name%}" />
+  </div>
+  <div class="i-chf">
+    <ul>
+      <li>
+        <input class="compulsory_to_fill" type="checkbox" id="compulsory_to_fill_{%F:num%}" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>
+        {compulsory_to_fill}
+        <ul class="compulsory_to_fill">
+            <li>{valid_message} <input class="inp validate-alpha" type="text" id="valid_message_{%F:num%}" name="valid_message" value="{%F:valid_message%}"/></li>
+            <li>{failure_message} <input class="inp validate-alpha" type="text" id="failure_message_{%F:num%}" name="failure_message" value="{%F:failure_message%}"/></li>
+        </ul>
+      </li>
+      <li>
+        <a class="additional_options" href="javascript:void(0)"><b>{additional_options}</b></a>
+          <ul class="additional_options">
+            <li>{indefikator} <input class="inp validate-alpha" type="text" id="indefikator_{%F:num%}" name="indefikator" value="{%F:indefikator%}"/></li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="button slim2"> <a onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"><div class="bdel"><span>{delete}</span></div></a></div>
+</form>
+</div>
+{%endsection:flag%}
+
+
+{%section:data->fields%}
+<div class="field-form" id="data_{%F:num%}">
+<form>
+  <div class="i5">
+    <p><strong>{date}:</strong></p>
+    <p>({allows_you_to_enter_the_date_of_the_event_or_select_a_time_interval})</p>
+    <br/>
+    <p>{field_name}</p>
+    <input class="inp validate-alpha" type="text" id="name_{%F:num%}" name="data"  value="{%F:name%}" />
+  </div>
+  <div class="i-chf">
+    <ul>
+      <li><input type="checkbox" id="compulsory_to_fill_{%F:num%}" name="compulsory_to_fill" {%F:compulsory_to_fill%}/>{compulsory_to_fill}</li>
+      <li>
+        <a class="additional_options" href="javascript:void(0)"><b>{additional_options}</b></a>
+          <ul class="additional_options">
+            <li>{indefikator} <input class="inp validate-alpha" type="text" id="indefikator_{%F:num%}" name="indefikator" value="{%F:indefikator%}"/></li>
+            <li>{pattern} <input class="inp" type="text" id="pattern_{%F:num%}" name="pattern" value="{%F:pattern%}"/></li>
+          </ul>
+      </li>
+    </ul>
+  </div>
+  <div class="button slim2"><a onclick="javascript:XTR_forms.field_delete(this)" href="javascript:void(0)"><div class="bdel"><span>{delete}</span></div></a></div>
+</form>
+</div>
+{%endsection:data%}

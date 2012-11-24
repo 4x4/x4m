@@ -1,0 +1,130 @@
+{%section:questions_list%}
+{%F:+(E:add_file_section(_common/extended/paginator.html))%}  
+<div class="faq">
+    <h2>Вопрос ответ</h2>   
+    <h1>{%F:category%} </h1>
+    {%->:buff%}
+    <a class="button" href="javascript:void(0);" id="faqshowform{%F:id%}"></a>
+     <br clear="all" />
+    {%->:page_line%}
+    {%F:_form%}
+</div>
+ 
+  <script type="text/javascript">
+    $(function(){
+        if($('.faq').size()>1) { 
+            $('.col1 .faq').remove();
+        }
+        $('#faqshowform{%F:id%}').click( 
+            function(){
+                $("form[name='faq_form{%F:id%}'] .form").show(); $(this).hide();
+        });
+        $('.to_full').click(function(){
+            var x = $(this).parent();
+            $(this).hide();
+            $('div.answer',x).show();
+            $('div.sanswer',x).hide();
+            
+        });
+    });
+
+</script>
+{%endsection:questions_list%}
+
+
+
+
+
+{%section:form%}
+
+<script type="text/javascript" src="xjs/livevalidation.js"></script>            
+<script type="text/javascript" src="/js/faq.js"></script>            
+<form action="{%F:action%}" method="post" id="faq_form{%F:category%}" name="faq_form{%F:category%}">
+    
+    <p id="msgsubmitted{%F:category%}" style="display:none;"><strong>Спасибо, за ваш вопрос. Мы обязательно ответим.</strong></p>
+    <p id="msgerror{%F:category%}" style="display:none;"><strong>Произошла непредвиденная ошибка. Повторите ещё раз.</strong></p>
+
+    <div class="form" style="display:none;">
+        <h1>Отправьте ваш вопрос:</h1>
+        <div class="formdescr"><span>*</span> <i>Поля обязательные для заполнения.</i></div><br clear="all">
+        {%->:msg%}
+        <ul>
+            <li><p>Имя (компания): <span>*</span></p><input type="text" size="40" value="" id="FAQuser{%F:category%}" name="user"/></li>
+            <li><p>Email: <span>*</span></p><input type="text" size="40" value="" id="FAQemail{%F:category%}" name="email"/></li>
+            <li><p>Вопрос: <span>*</span></p><textarea rows="6" cols="41" name="question" id="FAQquestion{%F:category%}"/>{%F:question%}</textarea></li>
+            <li><img alt="Captcha" id="FAQcaptcha_img{%F:category%}" src="captcha.php?fid={%F:category%}" onclick="updateCaptchaFAQ({%F:category%});"/>
+                <a href="javascript:void(0)" onclick="updateCaptchaFAQ({%F:category%});">обновить код</a>
+            </li>
+            <li>
+                <p>Код подтверждения (4 символов): <span>*</span></p>        
+                <input name="captcha" id="FAQcaptcha{%F:category%}" size="4" maxlength="4" type="text">  
+            </li>
+            <li><a href="javascript:void(0)" class="button" id="faqsubmit{%F:category%}"></a></li>
+        </ul>
+        <input type="hidden" name="category" value="{%F:category%}">               
+        <input type="hidden" value="letter" name="letter_template"/>
+    </div>
+</form>
+<script type="text/javascript">$(function(){ processFAQ(true, 'faq_form{%F:category%}',{%F:category%}, 'faqsubmit{%F:category%}', 
+    function(send){
+        if(send == true){
+            $("#msgsubmitted{%F:category%}").show();
+            $("#faq_form{%F:category%} div.form").remove();
+            $("#msgerror{%F:category%}").hide();
+        } else {
+            updateCaptchaFAQ({%F:category%});
+            $("#msgerror{%F:category%}").show();
+        }         
+    });
+});
+</script> 
+{%endsection:form%}      
+
+
+
+
+
+
+Можно ещё добавить 
+ {%F:date%} <b>{%F:user%}</b>
+ 
+//Отправляемое письмо
+
+{%section:letter_subject%}
+ Вопрос с сайта, категория "{%F:category_name%}"
+{%endsection:letter_subject%}
+
+{%section:letter%}
+    <h1>Вопрос  с сайта</h1>
+    <p><strong>Раздел</strong>: {%F:category_name%}</p>
+    <p><strong>Пользователь</strong> {%F:user%}({%F:email%}) спрашивает:  </p>
+    <p>{%F:question%}</p>
+{%endsection:letter%}
+
+
+
+{%section:success%}
+<div class="text">
+    <b>Вопрос успешно отправлен. </b> <br/>
+    <a href="{%F:backlink%}">Вернутся к списку вопросов</a>
+</div>
+{%endsection:success%}
+                                     
+
+{%section:question->buff%} 
+<div class="question">
+    <p><strong><a href="{%F:link%}">Вопрос:</a></strong> {%F:question%}</p>  
+    {%if('{F:sanswer}')%}
+        <div class="sanswer"><strong>Ответ:</strong>{%F:sanswer%}</div>
+        <a class="to_full" href="javascript:void(0);">полный ответ..</a>
+        <div class="answer" style="display:none;"><strong>Ответ:</strong>{%F:answer%}</div>
+    {%else%}
+    <div class="answer"><strong>Ответ:</strong>{%F:answer%}</div>
+    {%endif%}
+</div>
+{%endsection:question%}
+
+
+
+{%section:empty%}<strong>Вопросы отсутствуют .</strong><br/><br/>{%endsection:empty%}
+{%section:msg->msg%}<br/><strong><font color=red>Неправильный код подтверждения</font></strong><br/><br/>{%endsection:msg%}

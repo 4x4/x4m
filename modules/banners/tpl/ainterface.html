@@ -1,0 +1,32 @@
+{%section:show_selected_banner%}
+<p>{select_banner}</p>
+<input id="showbannersName" class="inp-b1 validate-selection" />
+<input id="bannersId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+<p>{template_output_banner}</p>
+<select id="Template" class="validate-selection">
+</select>
+{%endsection:show_selected_banner%}
+
+{%section:show_random_banner%}
+<p>{display_group_banners}</p>
+<select id="category" class="validate-selection">
+</select>
+<p>{template_output_banner}</p>
+<select id="Template" class="validate-selection">
+</select>
+{%endsection:show_random_banner%}
+
+
+
+
+{%section:show_banners_from_group%}
+<p>{display_group_banners}</p>
+<select id="category" class="validate-selection" name="category"></select>
+<p>{template_output_banner}</p>
+<select id="Template" class="validate-selection" name="Template"></select>
+<p>{quantity_displayed_banners}</p>
+<p style="font-weight:normal;">({zero_or_random})</p>
+<input id="OnPage" type="text" value='0'/>  
+{%endsection:show_banners_from_group%}
+

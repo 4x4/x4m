@@ -1,0 +1,25 @@
+<div class="pw-edit popup">
+  <div id="e-form">
+    <form id="currency_edit" onsubmit="javascript:return false;">
+      
+      <p>{currency_name}</p>
+      
+      <input id="name" class="required validate-alphanum" name="name" type="text" />
+      
+      <p>{currency_alias}</p>
+      <input  class="required validate-alpha" name="alias" type="text" />
+      
+      <p>{currency_rate}</p>
+      
+      <input  class="required validate-float" name="rate" type="text" />      
+      
+      <p>{currency_main}</p>
+      <ul class="chk">
+        <li>
+          <input id="ismain" name="ismain" type="checkbox" />
+        </li>
+      </ul>
+      <a class="button" href="javascript:XTR_ishop.save_currency()">{save}</a>
+    </form>
+  </div>
+</div>

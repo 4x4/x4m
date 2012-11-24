@@ -1,0 +1,113 @@
+{%section:_catalog_comparse%}
+
+{%F:+(catalog:include_main_group_comparse())%}
+{%F:#c_comparse(catalog:count_comparse(true))%}
+
+
+    <table class="compare">
+        <tr class="nostyle space">
+            <td style="vertical-align:bottom">
+            <a class="button" href="{%F:del_comparse_link%}" class="button"> Очистить</a></td>
+            {%->:_catalog_comparse_head%}
+        </tr>
+        
+        {%->:_catalog_comparse_group%}
+    </table>
+
+{%endsection:_catalog_comparse%}
+
+
+
+
+{%section:_catalog_comparse_head->%}
+{%F:#ilink(catalog:get_ishop_link({F:id}))%}
+
+<td>
+
+    {%if(Common::is_file_exists('{F:image}'))%}
+    <a href="{%F:Link%}" class="c-img">
+        <img src="{%F:image(E:image_transform(80,80))%}" />
+    </a>
+    {%endif%}
+    
+    <p class="cost"><strong>{%F:price(E:number_format())%}</strong> руб.</p>
+    <a  class="button" href="{%F:del_comparse_link%}">Удалить</a>
+        <a href="{%F:Link%}" class="name">{%F:Name%}</a>     
+</td>
+{%endsection:_catalog_comparse_head%}
+
+
+
+
+
+{%section:_catalog_comparse_group->%}
+{%->:_catalog_comparse_line%}
+{%endsection:_catalog_comparse_group%}
+
+
+
+{%section:_catalog_comparse_line->%}
+{%F:#(E:parse_section(cs,|{colspan:"{F:colspan}"}|))%}
+    <tr>{%->:_catalog_comparse_element%}</tr>
+{%endsection:_catalog_comparse_line%}
+
+
+
+{%section:cs->%}
+    <td colspan="{%F:colspan%}">
+{%endsection:cs%}
+
+
+
+{%section:ras->%}
+    <td class="s-table">ras</td>
+{%endsection:ras%} 
+
+
+<img src="images/check.png" />
+{%section:_catalog_comparse_element->%}
+
+{%F:+(E:add_section_vars(type))%}
+    
+    {%if('{F:type}'=='FIRST')%}
+        
+        <td>{%if('{F:value}')%}<p>
+                {%F:value%}
+        
+        </p>
+        {%else%} - 
+        {%endif%}</td>
+        
+    {%else%}
+    
+
+    
+
+        <td>
+        
+       {%if('{F:type}'=='BOOL')%}    
+       
+        {%if('{F:value}'=='1')%}
+                    <img src="/templates/_ares/images/yes_icon.gif">
+                {%else%}
+                    <img src="/templates/_ares/images/no_icon.gif">
+                {%endif%}
+       
+       {%else%}
+       
+       
+                    {%F:value%}        
+       
+       
+       {%endif%}
+        
+        </td>    
+        
+    {%endif%}
+{%endsection:_catalog_comparse_element%}
+
+
+
+{%section:_catalog_comparse_failed%}
+    <p>Отсутствуют объекты для сравнения</p>
+{%endsection:_catalog_comparse_failed%}

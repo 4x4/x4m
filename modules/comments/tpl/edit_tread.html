@@ -1,0 +1,42 @@
+    <div id="e-form">
+      <form id="edit_tread">
+        
+          <p><strong>{tread_alias}:</strong></p>
+          <input  class="inp input required validate-alpha-ext" type="text" name="Alias"  value="" />
+        
+        
+        
+          <p><strong>{tread_name}:</strong></p>
+          <input  class="inp input required validate-alphanum is-none-uniq" type="text" name="basic" id="basic"  value="" />
+        
+          
+            <ul class="chk">
+                <li>
+                  <input type="checkbox"  name="Moderation" />
+                    {tread_moderation} 
+                  </li>
+                
+                <ul>
+
+          
+            <p><strong>{tread_sorting}:</strong></p>
+              
+              <select id="TreadSort" name="TreadSort">
+                  
+                  <option value="asc">{asc}</option>
+                  <option value="desc">{desc}</option>
+                  
+              </select> 
+        
+         <ul class="chk">
+            <li><input type="checkbox" name="Active" />{tread_activity} </li>
+            <li><input type="checkbox" name="Captcha" />{captcha} </li>
+
+            <ul>
+
+
+      </form>
+      
+      <a class="button" href="javascript:void(0)" onclick="javascript:XTR_comments.save_edited_tread();">{save_tread}</a> </div>
+      
+    </div>

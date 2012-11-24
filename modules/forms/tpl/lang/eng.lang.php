@@ -1,0 +1,93 @@
+<?php$LANG=array (
+  'add_form' => 
+  array (
+    'use_the_CAPTCHA' => 'Use CAPTCHA Code of verification for prevention of false sendings of the form',
+    'complexity_recognizers_CAPTCHA' => 'Complexity recognizers CAPTCHA',
+    'captcha_easy' => 'Easy',
+    'captcha_medium' => 'Medium',
+    'captcha_high' => 'High',
+    'captcha_very_high' => 'Very high',
+    'subject' => 'Subject',
+    'charset' => 'Сharset',
+    'async' => 'Send asynchronously',
+    'message_after_sending' => 'Message after sending',
+    'fields_form' => 'Form fields',
+    'add_fields' => 'Add fields',
+    'timeout' => 'Timeout (sec.)',
+    'file' => 'File upload',
+  ),
+  'edit_form' => 
+  array (
+    'use_the_CAPTCHA' => 'Use CAPTCHA Code of verification for prevention of false sendings of the form',
+    'complexity_recognizers_CAPTCHA' => 'Complexity recognizers CAPTCHA',
+    'captcha_easy' => 'Easy',
+    'captcha_medium' => 'Medium',
+    'captcha_high' => 'High',
+    'captcha_very_high' => 'Very high',
+    'subject' => 'Subject',
+    'charset' => 'Сharset',
+    'async' => 'Send asynchronously',
+    'message_after_sending' => 'Message after sending',
+    'fields_form' => 'Form fields',
+    'add_fields' => 'Add fields',
+    'timeout' => 'Timeout (sec.)',
+    'file' => 'File upload',
+  ),
+  'settings' => 
+  array (
+    'use_the_CAPTCHA' => 'Use CAPTCHA Code of verification for prevention of false sendings of the form',
+    'complexity_recognizers_CAPTCHA' => 'Complexity recognizers CAPTCHA',
+    'captcha_easy' => 'Easy',
+    'captcha_medium' => 'Medium',
+    'captcha_high' => 'High',
+    'captcha_very_high' => 'Very high',
+    'subject' => 'Subject',
+    'charset' => 'Сharset',
+    'async' => 'Send asynchronously',
+    'message_after_sending' => 'Message after sending',
+    'fields_form' => 'Form fields',
+    'add_fields' => 'Add fields',
+    'timeout' => 'Timeout (sec.)',
+  ),
+  'ainterface' => 
+  array (
+    'select_forms_or_form' => 'Select group forms or one form:',
+    'template_form' => 'Form template:',
+    'template_for_submitting_form' => 'Template for form sending:',
+  ),
+  'form_content' => 
+  array (
+    'text_form' => 'Form Text',
+  ),
+  'fields' => 
+  array (
+    'field_name' => 'Name&frasl;Field heading:',
+    'compulsory_to_fill' => 'Compulsory for filling',
+    'elements_of_the_list' => 'List elements &lang;Each element since a new line &rang;',
+    'for_example_i_agree_to_the_terms_of_the_agreement' => 'For example, &lowast;I accept agreement conditions&lowast;',
+    'allows_you_to_enter_the_date_of_the_event_or_select_a_time_interval' => 'Allows to enter date of event or to select time interval',
+    'valid_message' => 'Valid message',
+    'failure_message' => 'Failure message',
+    'additional_failure_message' => 'Add. failure message',
+    'additional_options' => 'Additional options',
+    'identifier' => 'Identifier',
+    'default_value' => 'Default value',
+    'value' => 'Value',
+    'readonly' => 'Read only',
+    'pattern' => 'Pattern (regular expression)',
+    'file_types_for_users' => 'Display file types for users',
+    'file_types' => 'File types',
+    'button_name' => 'Button name',
+    'text' => 'Text',
+    'url' => 'Url',
+    'hidden' => 'Hidden',
+    'numerical' => 'Numerical',
+    'file' => 'File upload',
+    'file_types_for_users_example' => 'example: *.jpg;*.jpeg;*.gif;*.png',
+    'file_types_example' => 'example: jpg, jpeg, gif, png',
+  ),
+  'define_front_actions' => 
+  array (
+    'show_forms' => 'Show group forms or one form',
+  ),
+)?>

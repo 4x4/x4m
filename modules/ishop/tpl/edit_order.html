@@ -1,0 +1,67 @@
+{%section:order%}
+<div class="pw-edit big-window">
+  <form id="order">
+    <p>{change_the_status_of_your_order}</p>
+    <select name="changeOrderStatus" id="changeOrderStatus">
+    </select>
+    <p><a class="button" href="javascript:void(0)" onclick="XTR_ishop.save_order()">{save}</a></p>
+  </form>
+  <br/>
+  <p>{data_order}</p>
+  <table cellspacing="4" cellpadding="4" border="0" width="100%"  class="s-table">
+    <thead>
+      <tr>
+        <th width="100">{date_and_time_of_receipt_of_the_order}</th>
+        <th width="30">{currency}</th>
+        <th width="200">{delivery_address}</th>
+        <th width="70">{phone2}</th>
+        <th width="70">{delivery_time}</th>
+        <th width="70">{type_delivery}</th>
+        <th width="200">{comment2}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{%F:date%}</td>
+        <td>{%F:currency%}</td>
+        <td>{%F:address%}</td>
+        <td>{%F:phone%}</td>
+        <td>{%F:deliv_time%}</td>
+        <td>{%F:delivery_type%}</td>
+        <td>{%F:comments%}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <p>{information_about_the_customer}</p>
+  <table cellspacing="4" cellpadding="4" border="0" width="100%"  class="s-table">
+    <thead>
+      <tr>
+        <th width="150">{customer}</th>
+        <th width="100">{email}</th>
+        <th width="50">{notices}</th>
+        <th width="100">{personal_code}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{%F:fio%}</td>
+        <td>{%F:email%}</td>
+        <td>{%F:sendspecial%}</td>
+        <td>{%F:uniq_id%}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <p>{ordered_goods}</p>
+  <div id="xgoodslist" style="height:300px"></div>
+    <table cellspacing="4" cellpadding="4" border="0" width="100%" class="s-table">
+    <thead>
+      <tr>
+        <td align="right" width="380">{amount_of_order}:</td>
+        <td width="70">{%F:tsum%}</td>
+      </tr>
+    </thead>
+  </table>
+</div>
+{%endsection:order%}

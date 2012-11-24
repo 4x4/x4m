@@ -1,0 +1,27 @@
+{%section:album%}
+{%F:+(E:add_file_section(_common/extended/paginator.html))%}  
+<script type="text/javascript" src="{%F:_ARES%}js/shadowbox/shadowbox.js"></script>
+<link rel="stylesheet" type="text/css" href="{%F:_ARES%}js/shadowbox/shadowbox.css" />
+<div id="album{%F:album_id%}" class="album">
+    <h1>{%F:Name%}</h1>
+    <ul class="sub-gallery"><li><ul>{%->:photos%}</ul></li></ul>
+    {%->:page_line%}
+</div>
+
+<script type="text/javascript">Shadowbox.init({ handleOversize: "resize", displayNav: true, handleUnsupported: "remove", autoplayMovies: true });</script>
+{%endsection:album%}
+
+{%section:photo->photos%} 
+{%F:#tmp(E:calc({F:_num}%{F:inRow}))%}
+{%if('{F:tmp}' == '0' && {F:_num} > 1 )%}</ul></li><li><ul>{%endif%} 
+    <li><a href="{%F:img_src(E:image_transform(600))%}" title="{%F:Name%}" rel="shadowbox[Mixed{%F:album_id%}]" ><img alt="{%F:Name%}" src="{%F:img_src(E:image_transform(210,140,,,,,210:140))%}"></a></li>
+{%endsection:photo%}
+
+
+{%section:gallery_empty%} 
+    <div class="album">
+        <h1>{%F:Name%}</h1>
+        Галлерея пуста
+    </div>
+{%endsection:gallery_empty%}
+

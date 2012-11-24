@@ -1,0 +1,365 @@
+{%section:ishop_cart%}
+<script language="javascript">
+$(document).ready(function(){
+    
+    function number_format(number, decimals, dec_point, thousands_sep) {
+    // *     example 1: number_format(1234.56);
+    // *     returns 1: '1,235'
+    // *     example 2: number_format(1234.56, 2, ',', ' ');
+    // *     returns 2: '1 234,56'
+    // *     example 3: number_format(1234.5678, 2, '.', '');
+    // *     returns 3: '1234.57'
+    // *     example 4: number_format(67, 2, ',', '.');
+    // *     returns 4: '67,00'
+    // *     example 5: number_format(1000);
+    // *     returns 5: '1,000'
+    // *     example 6: number_format(67.311, 2);
+    // *     returns 6: '67.31'
+    // *     example 7: number_format(1000.55, 1);
+    // *     returns 7: '1,000.6'
+    // *     example 8: number_format(67000, 5, ',', '.');
+    // *     returns 8: '67.000,00000'
+    // *     example 9: number_format(0.9, 0);
+    // *     returns 9: '1'
+    // *    example 10: number_format('1.20', 2);
+    // *    returns 10: '1.20'
+    // *    example 11: number_format('1.20', 4);
+    // *    returns 11: '1.2000'
+    // *    example 12: number_format('1.2000', 3);
+    // *    returns 12: '1.200'
+    // *    example 13: number_format('1 000,50', 2, '.', ' ');
+    // *    returns 13: '100 050.00'
+    number = (number+'').replace(',', '').replace(' ', '');
+    var n = !isFinite(+number) ? 0 : +number, 
+        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+        s = '',
+        toFixedFix = function (n, prec) {
+            var k = Math.pow(10, prec);
+            return '' + Math.round(n * k) / k;
+        };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
+}
+    
+    ishop=new fConnector('ishop');
+    
+});
+
+</script>                                     
+
+<div class="b-basket">
+          <form id="order" action="{%F:orderLink%}" method="POST">  
+          <table class="s-table">
+          
+            <tbody><tr>
+              <th>Наименование</th>
+              <th>Описание </th>
+              <th>Цена </th>
+              <th>Кол-во</th>
+              <th>Сумма (бел. руб.)</th>
+              <th>&nbsp;</th>
+            </tr>
+                        
+                                    
+                    {%->:ishop_cart_object%}    
+            
+            
+            </tbody></table>
+</form>                      
+                    
+                      {%F:#curr(MAIN:get_currency())%} 
+                      <p class="total-price">Итого товаров на сумму: <strong>{%F:orderSum(E:number_format())%} {%F:curr(E:get(name))%}</strong></p>
+                      <a  href="{%F:removeAll%}">Очистить корзину</a> <a class="button" href="{%F:orderLink%}">Оформить заказ</a>
+                      </div>
+          
+    
+{%endsection:ishop_cart%}
+
+{%section:ishop_cart_object->%}
+{%F:#curr(MAIN:get_currency())%}  
+<tr>
+              <td><a href="{%F:CatalogLink%}">{%F:Name%}</a></td>
+              
+              <td>{%F:description%}</td>
+              <td>{%F:Price(E:number_format())%}  {%F:#curr(MAIN:get_currency())%} {%F:curr>name%}</td>
+              <td><input name="count" value="{%F:Count%}"></td>
+              <td><strong>{%F:PriceSum(E:number_format())%} {%F:curr>name%}</strong></td>
+              <td><a class="del" href="{%F:RemoveFromCartLink%}"></a></td>
+</tr>
+            
+{%endsection:ishop_cart_object%}
+
+
+
+
+{%section:ishop_cart_empty%}
+
+   Ваша корзина пуста.
+
+{%endsection:ishop_cart_empty%}
+
+
+
+
+
+
+{%section:ishop_order%}
+        
+                    <div class="default-text cat-description cart-head">
+                        <h1>Моя корзина</h1>
+                        <h2>Шаг 2. Информация для доставки</h2>
+                    </div>
+                
+              {%F:@feorm(ishop:get_paysystem(webpay,0))%}
+              
+              
+        
+              
+              <div class="cart2">
+                        <table class="s-table">          
+                            <tbody>
+                          
+                          {%F:#goods(ishop:get_cart())%}
+                          {%F:#curr(MAIN:get_currency())%}                          
+                                
+                                {%each({F:goods},id,good)%}
+                                <tr>
+                                    
+                                    <td>{%F:good>details>props>Name%}</td>
+                                    <td>{%F:good>count%} шт.</td>
+                                    <td><strong>{%F:good>details>props>price%} {%F:curr>name%}</strong></td>
+                                
+                                </tr>
+                                
+                                {%endeach%}
+                                <tr>
+                                    {%F:#order_info(ishop:calculate_order())%}
+                                    <td colspan="2"> Итого: </td><td><strong>{%F:order_info>sum(E:number_format())%} {%F:curr>name%}</strong></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+                        
+                        <h2>Заполните пожалуйста форму</h2>
+                        
+                         <form id="sendorder" method="POST" class="add-comment" action="{%F:orderLink%}">
+                        
+                        <div class="form">
+                            <ul>
+                                <li>
+                                <p>Ваше имя:<span class="req">*</span></p>
+                                <input name="fio" id="fio" type="text">
+                                </li>
+                            
+                                <li>
+                                    <p >Номер телефона:<span class="req">*</span></p>
+                                    <input name="phone" id="phone" type="text">
+                                </li>
+                                
+                                
+                                <li>
+                                    <p>Адрес:<span class="req">*</span></p>
+                                    <input name="address" id="address" type="text">
+                                </li>
+                                
+                                <li>
+                                    <p>E-mail:</p>
+                                    <input name="email" id="email" type="text">
+                                </li>
+                                
+                                <li>
+                                    <p>Дополнительная информация:</p>
+                                    <textarea name="comments" id="comments"></textarea>
+                                </li>
+                                
+            <li>                    
+                                 <div class="payment_method">
+                    <h1>Способ оплаты</h1>
+                    
+                    <ul>
+                        
+                       <li><label><input id="in_cash" name="payment_method" type="radio" value="in_cash"  checked /> Наличный расчет</label></li>
+                       <li><label><input id="webpay" name="payment_method" type="radio" value="webpay" /> Банковская карта</label>
+                       
+                       </li>
+                       
+     
+                       <li><label><input id="erip" name="payment_method" type="radio" value="erip"  checked /> Оплата через ЕРИП</label></li>
+     
+                                        
+                       <li>
+                        <label class="webmoney"><input id="webmoney" name="payment_method" type="radio" value="webmoney" /> 
+                       webmoney  
+                        </label>
+                       </li>
+                       
+                    </ul>
+                    
+                    </div>
+            </li>                    
+                                <li>
+                                    <a class="button" href="javascript:document.getElementById('sendorder').submit()">Отправить заказ</a>
+                                    
+                                </li>
+
+                            </ul>
+                            
+                            </div>
+                        </form>
+
+                        
+
+                    
+<script src="/xjs/livevalidation.js" language="Javascript"></script>      
+
+<script language="javascript">                   
+            var name = new LiveValidation('fio',{onlyOnSubmit: true });
+            name.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+
+            var address = new LiveValidation('address',{onlyOnSubmit: true });
+            address.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+                        
+            var company = new LiveValidation('phone',{onlyOnSubmit: true });
+            company.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+                        
+            var em = new LiveValidation('email',{onlyOnSubmit: true });
+            em.add( Validate.Email,{failureMessage: "Неправильный email"} );
+            em.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+
+   function submit()
+        {
+            var automaticOnSubmit = em.form.onsubmit;
+            if(r=automaticOnSubmit())
+            {
+               $('#sendorder').submit();
+            }else{
+                return false;
+            }
+        } 
+        
+</script>                   
+
+
+
+
+
+{%endsection:ishop_order%}
+
+
+
+{%section:ishop_order_submit_ok%}
+
+            
+            <div>
+                    <h1>Моя корзина</h1>
+                    <h2>Спасибо за ваш заказ!</h2>
+                     <a class="back-to-shop" href="/catalog"></a>
+                    
+                </div>
+
+{%endsection:ishop_order_submit_ok%}
+
+
+{%section:ishop_order_submit_failed%}
+    
+    Заказ  не отправлен - отсутсвуют товары в корзине. 
+
+{%endsection:ishop_order_submit_failed%}
+
+
+{%section:ishop_cart_email%}
+<h1>Заказчик</h1>
+
+<table cellpadding="5" cellspacing="4" border="1">
+    <tr>
+        <td>Заказчик</td>
+        <td>{%F:Name%}</td>
+    </tr>
+        <tr>
+        <td>E-mail:</td>
+        <td>{%F:email%}</td>
+    </tr>
+    <tr>
+        <td>Адрес:</td>
+        <td>{%F:address%}</td>
+    </tr>
+    
+    <tr>
+        <td>Телефон:</td>
+        <td>{%F:phone%}</td>
+    </tr>
+    
+    <tr>
+        <td>Компания:</td>
+        <td>{%F:company%}</td>
+    </tr>
+    
+    <tr>
+        <td>Комментарии:</td>
+        <td>{%F:comments%}</td>
+    </tr>
+    
+    
+    <tr>
+        <td>Валюта:</td>
+        <td>{%F:currency%}</td>
+    </tr>
+</table>
+
+<h2>Заказанные товары</h2>
+<table cellpadding="5" cellspacing="4" border="1">
+<tr>
+    <th>ID заказа</th>
+    <th>Артикул</th>
+    <th>Наименование</th>   
+    <th>Цена</th>   
+    
+    <th>Комментарии</th>   
+    
+    </tr>
+    {%->:ishop_cart_object_email%}
+
+</table>
+
+{%endsection:ishop_cart_email%}
+
+
+
+
+{%section:ishop_cart_object_email->%}
+<tr>
+    <td>{%F:order_id%}</td>
+    <td>{%F:articul%}</td>
+    <td>{%F:count%}</td>
+    <td>{%F:price%}</td>
+    
+    <td>{%F:comments%}</td>    
+    
+</tr>
+
+
+{%endsection:ishop_cart_object_email%}
+
+
+
+{%section:ishop_order_submit_user_info_failed%}
+
+Заказ не принят - ошибка ввода данных пользователя
+
+{%endsection:ishop_order_submit_user_info_failed%}
+
+
+

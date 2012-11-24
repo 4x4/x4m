@@ -1,0 +1,34 @@
+<div id="e-form">
+  <form id="fuser_new">
+    <p>{user_group}</p>
+    <select id="FUserGroup">
+    </select>
+    <p>{login}</p>
+    <input id="UserName" class="required validate-alphanum" name="UserName" type="text" />
+    <p>{password}</p>
+    <input id="Password" class="required validate-password"
+         onkeypress="passwordComplexity(this)"
+         onkeyup="passwordComplexity(this)"
+          name="Password"  type="password"/>
+    <div id="passwordComplextity" ></div>
+    <p>{password_repeat}</p>
+    <input id="passwordAgain" class="required validate-password-again" name="passwordAgain" type="password"/>
+    <p>{fio}</p>
+    <input id="Name" class="required validate-alpha" name="Name" type="text" />
+    <p>{email}</p>
+    <input id="Email" class="required validate-email" name="Email" type="text" />
+    <p>{address}</p>
+    <input id="Address" name="Address" type="text" />
+    <p>{company}</p>
+    <input id="Company" name="Company" type="text" />
+    <p>{sait}</p>
+    <input id="Site" name="Site" type="text" />
+    <p>{phone}</p>
+    <input id="Phone" name="Phone" type="text" />
+    <p>{sex}</p>
+    <select name="Sex" id="Sex">
+      <option value="M" >{male} </option>
+      <option value="F" >{female} </option>
+    </select>
+  </form>
+  <a class="button" href="javascript:void(0)" onclick="XTR_fusers.save_new_fuser()">{save}</a> </div>

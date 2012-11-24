@@ -1,0 +1,52 @@
+{%section:_news_interval%}
+
+
+
+<div class="news">
+            <div class="title">Архив новостей</div>
+<!--            <ul class="n-cat">
+              <li><a href="">2010</a></li>
+              <li><a href="">2009</a></li>
+              <li><a href="">2008</a></li>
+            </ul>
+            -->
+            
+            <ul>
+                {%->:_news_node%}       
+              
+              
+            </ul>
+          </div>
+          
+              
+    {%->:page_line%}           
+{%endsection:_news_inrterval%}
+
+{%section:_news_node->%}
+
+        <li {%if('{F:islast}')%} class="last" {%endif%}>
+              <p class="n-date">{%F:news_date(E:date_ru(d x Y,1))%}</p>
+              <a href="{%F:link%}">{%F:header%}</a>
+              <p>{%F:news_short%}</p>
+              <p><strong>Тэги:</strong> {%each({F:tags},key,value)%}<a href="{%F:value(E:get(link))%}">{%F:value(E:get(tag))%}</a> {%endeach%}</p>
+            </li>
+              
+{%endsection:_news_node%}
+
+{%section:page_line->%}
+  <ul class="pagination p-inner">
+  {%F:page_line%}
+                    </ul>
+                    
+  
+{%endsection:page_line%}
+
+{%section:one_page%}
+<li>
+  <a href="{%F:link%}">{%F:pnum%}</a>
+  </li>
+{%endsection:one_page%}
+          
+{%section:one_page_selected%}
+  <li class="act"><a class="selected" href="#">{%F:pnum%}</a></li>
+{%endsection:one_page_selected%}

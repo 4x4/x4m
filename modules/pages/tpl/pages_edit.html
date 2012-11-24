@@ -1,0 +1,48 @@
+<div id="e-form">
+  <form id="page_edit">
+    <p>{page_name}</p>
+    <input  class="required validate-alpha-ext" name="Name" type="text" />
+    <p>{link}</p>
+    <input  class="required validate-alphanum is-none-uniq" type="text" name="basic"  value=""/>
+    <p>{page_template}</p>
+    <select id="Template" onchange="javascript:XTR_pages.change_template(this.options[this.selectedIndex].value)">
+    </select>
+    <p>{page_visibility}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="Visible" />
+        {do_not_display_the_global_menu}</li>
+      <li>
+        <input type="checkbox" name="DisableGlobalLink" />
+        {disconnect_the_link_from_the_global_menu}</li>
+      <li>
+        <input type="checkbox" name="DisableMapLink" />
+        {disconnect_the_link_from_the_site_map}</li>
+      <li>
+        <input type="checkbox" name="DisablePath" />
+        {do_not_display_in_the_way_of_the_page} </li>
+      <li>
+        <input type="checkbox" name="DisableCache" />
+        {do_not_cache_this_page} </li>
+    </ul>
+    <p>{page_title}</p>
+    <textarea name="Title"></textarea>
+    <p>{keywords}</p>
+    <textarea name="Keywords"></textarea>
+    <p><strong>{page_description}</strong></p>
+    <textarea name="Description"></textarea>
+    <p><strong>{additional_meta_tags}</strong></p>
+    <textarea name="Meta"></textarea>
+    
+    <p>{Icon}</p>     
+    <input class="inp-b2" id="Icon" name="Icon">
+    <a onclick="xFileManager.selectImage('Icon')" href="javascript:void(0)" class="button small">{select}</a>
+
+    <p>{Comment}</p>   
+    <textarea name="Comment" id="Comment" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+    
+  </form>
+  <a href="javascript:void(0)" onclick="XTR_pages.save_edited_page(this)" class="button">{save}</a> </div>
+<div id="slotzcontainer">
+  <div id="slotz"></div>
+</div>

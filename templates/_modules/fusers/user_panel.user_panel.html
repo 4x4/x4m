@@ -1,0 +1,625 @@
+{%section:fusers_auth_panel_up%}
+        
+        <h1>Вход в кабинет пользователя</h1> 
+        
+        <a href="{%F:forgotpassword_link%}" class="fop">забыли пороль?</a> 
+                
+                Если у вас не аккаунта? <a href="/userpanel/~registration">Зарегистрироваться</a>
+                <br><br>
+                <div class="form">
+                    <form id="authinner" action="{%F:auth_link%}" method="POST">
+                    
+
+                            <ul>
+                                      <li>
+                        <p>Логин:</p>
+                            <input name="login" type="text" value="Логин" onfocus="if(this.value == 'Логин') this.value='';" onblur="if(this.value == '') this.value='Логин';" class="inp"/>
+                        </li>
+                        <li>
+                            <p>Пароль:</p>
+                            <input name="password" type="password" value="Пароль" onfocus="if(this.value == 'Пароль') this.value='';" onblur="if(this.value == '') this.value='Пароль';" class="inp"/>
+                        </li>    
+                          <li> <a  href="javascript:void(0)" onclick="$('#authinner').submit()"  class="button">Войти</a></li>
+                          </ul>
+                          {%if('{F:auth_failed}')%}
+                              <div class="err_text">* неправильный логин или пароль</div>
+                  {%endif%} 
+                    
+                    
+                    </form>
+                    
+                </div>
+
+{%endsection:fusers_auth_panel_up%}
+
+
+{%section:fusers_user_panel%}
+
+  <form action="{F:%auth_link%}" method="POST">
+	
+	login:
+	<input name="login" id="login">
+	password:
+	<input name="password" id="password">
+
+  </form>
+
+{%endsection:fusers_user_panel%}
+
+
+
+
+{%section:fusers_auth_no_access_granted%}
+
+У вас не хватает прав для доступа к этой странице.
+
+{%endsection:fusers_auth_no_access_granted%}
+
+
+
+
+{%section:fuser_logout%}
+    
+    
+     
+    {%F:fusers_auth_panel%}
+    
+{%endsection:fuser_logout%}
+
+<input type="text" value="тот логин кототрый вводили" class="err"/>
+                    
+                    <div class="err_text">* такой логин уже существует</div>                    
+
+{%section:fuser_registration%}
+        <script src="/xjs/livevalidation.js" language="Javascript"></script>      
+
+    
+    
+          <h2>Заявление на регистрацию пользователя</h2>
+          <p>На этой странице вы можете пройти регистрацию на сайте. Если вы уже зарегистрированы вы можете выполнить <a href="/userpanel">вход</a> </p>      
+                    
+                                
+          
+        <div class="regform">
+
+          
+                    
+                            <div style="margin-top:10px;">
+                        {%if({F:fuser_registration_err_internal})%}                                 
+                                <div style="color:red">Внутреняя ошибка.</div>
+                                {%endif%}
+    
+                                {%if({F:fuser_registration_err_incorrect_code})%}                                 
+                                <div style="color:red">Неправильный код валидации.</div>
+                                {%endif%}
+                                
+                                
+                                {%if({F:fuser_registration_err_non_uniq_email})%}                                                                 
+                                    <div style="color:red">Пользователь с таким почтовым адресом уже существует</div>
+                                {%endif%}
+                                
+                                {%if({F:fuser_registration_err_non_uniq})%}                                                                  
+                                    <div style="color:red">Пользователь с таким  логином {%F:login%} уже существует.</div>
+                                {%endif%}
+                                </div>
+                                            
+                </div>
+
+
+                                                      
+          <div class="form">
+                    <form id="new_user" name="new_user"  method="POST" action="{%F:submit_new_user_link%}" >        
+                    
+                    
+          <ul>
+                <li>
+                  <p>Имя пользователя: <span>*</span></p>
+                    <input id="UserName" name="UserName" type="text"  value="{%F:UserName%}"  />
+                    </li>
+                    <li>
+                    
+                    <input type="hidden" id="Password" name="Password"  value="1234567" />
+                    <input type="hidden" id="PasswordAgain" name="PasswordAgain"  value="1234567"/>
+                    
+                    
+                    <li>
+                    <p>Компания: <span>*</span></p>
+                    <input name="Company" type="text" id="Company"  value="{%F:Company%}"  />
+                    </li>
+                    
+                    <li>
+                    <p>ФИО: <span>*</span></p>
+                    <input name="Name" type="text"   value="{%F:Name%}"  />
+                    </li>
+                    
+                    <li>
+                    <p>Телефон: <span>*</span></p>
+                    <input name="Phone"   value="{%F:Phone%}">
+                    </li>
+                        
+                        <li>
+                    <p>Адрес и почтовый индекс: <span>*</span></p>
+                    <input id="Address" value="{%F:Address%}" name="Address"/>
+                    </li>
+                           <li>
+                    <p>Запрашиваемая клиентская категория: <span>*</span></p>
+                    
+                    <select name="ext_user_data[client_category]">
+                    <option value="корпоративный клиент">корпоративный клиент</option>
+                    <option value="рекламное  агентство">рекламное  агентство</option>
+                    <option value="магазин">магазин</option>
+                    </select>
+                    </li>
+
+                    
+                    <li>
+                    <p>E-mail: <span>*</span></p>
+                    <input id="Email"  value="{%F:Email%}" name="Email" />
+                    </li>
+                    
+                                        <li>
+                        <input name="ext_user_data[news_subscribe]" checked="1" type="checkbox" class="chk"/>   
+                        <p>Я желаю получать рассылку новостей </p>
+                        
+                    </li>
+                    
+                    <li>
+                        <input name="ext_user_data[prices_subscribe]" checked="1"  class="chk" type="checkbox"/>
+                        <p>Я желаю получать свежие прайс-листы </p>
+                        
+                    </li>
+                    
+                    <li>
+                        <input name="ext_user_data[other_subscribe]" checked="1"   class="chk" type="checkbox"/>
+                        <p>Я желаю получать извещения об акциях и другую информацию от компании</p>
+                        
+                    </li>
+                    
+                    <input value="EUR" name="ext_user_data[currency]" type="hidden"/>
+                    <li>
+                        <p>Код верификации: <span>*</span></p>        
+                        <input id="captcha" name="captcha" class="inp"  name="Code" type="text" /> 
+						
+                    </li>
+                    <li>
+                     <img onclick="javascript:tmp = new Date();tmp = tmp.getTime();this.src='/captcha.php?'+tmp;" src="/captcha.php" alt="Нажмите для обновления">
+                    </li>
+                    
+                    <li>
+                    <a  href="javascript:void(0)" onclick="submit()"  class="button">Отправить</a>
+                    </li>
+                       </ul> 
+                    </form>
+                </div>
+      
+               
+          
+
+      <script language="Javascript">
+      
+            
+            var addr = new LiveValidation('Address',{onlyOnSubmit: true });
+            addr.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+            
+            var company = new LiveValidation('Company',{onlyOnSubmit: true });
+            company.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+                        
+            var em = new LiveValidation('Email',{onlyOnSubmit: true });
+            em.add( Validate.Email,{failureMessage: "Неправильный email"} );
+            em.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+            
+            var captcha = new LiveValidation('captcha',{onlyOnSubmit: true });            
+            Uname.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+
+   function submit()
+        {
+            var automaticOnSubmit = em.form.onsubmit;
+            if(r=automaticOnSubmit())
+            {
+               $('#new_user').submit();
+            }else{
+                return false;
+            }
+            
+            
+        } 
+
+                
+  </script>
+  </div>
+
+{%endsection:fuser_registration%}
+
+
+
+{%section:fuser_edit_user%} 
+
+          <div class="left">        
+                <h2>Ваша учетная запись</h2>                                
+                <p>Добрый день, {%F:Name%} (<a href=/userpanel/~logout">Выйти</a>)</p>
+
+                               <ul class="user-panel">
+                                  <li><a href="/userpanel/~userpanel/order/current"><img src="/templates/_ares/images/icon_order_history.png">История заказов</a></li>
+                                  <li><a href="javascript:void(0)"><img src="/templates/_ares/images/icon_profile_settings.png">Настройки профиля</a></li>
+                                  <li><a href="/userpanel/~logout"><img src="/templates/_ares/images/icon_exit.png">Выход</a></li>
+          </ul>
+          
+
+<div class="right">  
+        
+                
+<script src="/xjs/livevalidation.js" language="Javascript"></script>      
+       <form id="new_user" name="edit_user" method="POST" action="{%F:save_edit_user_link%}">        
+                                             
+            <div style="color:red">
+            {%->:fuser_registration_err_non_uniq%}
+            {%->:fuser_registration_err_passwords%}
+            {%->:fuser_registration_err_incorrect_code%}   
+            </div>
+                                                                                                                                                                 
+             
+            <ul class="form">
+             <li><h2>Основная информация </h2> </li>
+              <li><p>  Имя пользователя:<span>*</span></p>              
+              <input id="Name" name="Name"  value="{%F:Name%}" type="text" />              
+            </li>
+               
+              <li><p>E-mail:<span>*</span> </p>                 
+              <input id="Email" value="{%F:Email%}"  name="Email" type="text" />              
+              </li>
+            
+            <li><h2>Дополнительная информация</h2></li>
+            
+            <li><p>Компания<span>*</span>:</p><input id="Company"  name="Company" value="{%F:Company%}" type="text" /></li>
+            <li><p>Телефон:<span>*</span></p>              
+              <input id="Phone" value="{%F:Phone%}" name="Phone" type="text" />              
+            </li>
+                <li><p>Адрес:<span>*</span></p>              
+              <input id="Address" value="{%F:Address%}" name="Address" type="text" />
+            </li>
+            
+            
+            <script language="javascript"> 
+            $(function()
+            {
+                
+                $('#currency option').each(function()
+                {
+                   if($(this).val()==$(this).parent().attr('pval'))
+                   {
+                        $(this).attr('selected',1);
+                   }
+                    
+                });
+            });
+            </script>
+            
+            
+                <li><p>Валюта для расчетов:<span>*</span></p>              
+                <select id="currency" name="ext_user_data[currency]" pval="{%F:currency%}" >
+                    <option value="BLR">Белорусский рубль</option>
+                    <option value="RUR">Рубль</option>
+                    <option value="USD">Доллар</option>
+                    <option value="EUR">Евро</option>
+                </select>
+            </li>
+            <li>            
+             <div style="background:#A62000; color:white; padding:5px; display:none;" id="errors">
+            </li>
+          
+          <li>
+                    <p>&nbsp;</p>
+                    <a href="javascript:void(0)" class="button" onclick="submit();return false;">Сохранить</a> </li>
+                    
+          </ul>
+             
+              </div>
+              
+            </div>
+          </form>
+</div> 
+          
+
+
+
+<script language="Javascript">
+            var addr = new LiveValidation('Address',{onlyOnSubmit: true });            
+            addr.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+
+            var phone = new LiveValidation('Phone',{onlyOnSubmit: true });                        
+            phone.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});                        
+             
+             var company = new LiveValidation('Company',{onlyOnSubmit: true });                                     
+             company.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});                        
+            
+            
+            var em = new LiveValidation('Email',{onlyOnSubmit: true });
+            em.add( Validate.Email,{failureMessage: "Неправильный email"} );
+            em.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+            
+            var Uname = new LiveValidation('UserName',{onlyOnSubmit: true});            
+            Uname.add( Validate.Presence,{failureMessage:"Это поле должно быть заполнено"});
+            Uname.add( Validate.Length, { minimum: 5 , tooShortMessage :"Это поле должно быть не менее 5 символов"} );
+            
+            
+            
+            
+
+   function submit()
+        {
+            var automaticOnSubmit =  addr.form.onsubmit;
+            if(r=automaticOnSubmit())
+            {
+               $('#new_user').submit();
+            }else{
+                return false;
+            }
+            
+            
+        } 
+
+</script>                
+
+
+
+
+
+</div>
+
+{%endsection:fuser_edit_user%} 
+
+
+{%section:fuser_email_registration_passed%}     
+    
+    
+       <p>Регистрация вашего аккаунта пройдена успешно. Ваш аккаунт будет включен администратором в течении 24 часов.</p>
+    <p></p>
+    
+
+{%endsection:fuser_email_registration_passed%}     
+
+
+{%section:fuser_registration_passed%}     
+
+    <p>Регистрация вашего аккаунта завершена. <a href="userpanel/~login">Авторизоваться на сайте </a></p>
+    
+{%endsection:fuser_registration_passed%}    
+
+
+
+
+
+{%section:fusers_registration_mail_text%}
+
+Уважаемый {%F:Name%}! Добро пожаловать на upress.by<br>
+Ваша заявка на регистрацию принята. В течение 24 часов, после проверки ваших данных вы получите логин и пароль для доступа на сайт.
+
+
+
+{%endsection:fusers_registration_mail_text%}
+
+
+/-----user panel-----------------------------------------------------------------------------------------------------/
+
+
+{%section:fuser_user_panel%}
+    {%F:#user(E:get_session_module_param(siteuser,userdata)))%}
+    {%F:#session(E:get_session())%}
+    {%F:#userid(E:get_from({F:session},siteuser>id))%}
+               
+     
+     
+     {%F:#order(E:get_request_assoc(order)))%}   
+    
+    
+              <div class="left">   
+                         
+                         
+                <h2>Ваша учетная запись</h2>                                
+                <p>Добрый день, {%F:user>Name%} (<a href="/userpanel/~logout">Выйти</a>)</p>
+
+                               <ul class="user-panel">
+                                  <li><a href="/userpanel/~userpanel/order/current"><img src="/templates/_ares/images/icon_order_history.png">История заказов</a></li>
+                                  <li><a href="{%F:edit_user_link%}"><img src="/templates/_ares/images/icon_profile_settings.png">Настройки профиля</a></li>
+                                  <li><a href="/userpanel/~logout"><img src="/templates/_ares/images/icon_exit.png">Выход</a></li>
+          </ul>
+          
+                               
+                                
+                                
+
+                        </div>
+
+
+    
+    {%F:#(E:call_module(catalog.front))%}           
+    
+     <div class="right">    
+    {%if('{F:order}'=='current')%}     
+        {%F:#orders(ishop:get_client_orders({F:userid},1))%}           
+        <h1>Текущие заказы ({%F:orders(E:count())%})</h1>
+    {%endif%}
+    
+    {%if('{F:order}'=='archive')%}     
+        {%F:#orders(ishop:get_client_orders({F:userid},|[2,3]|))%}
+        <h1>Архив заказов ({%F:orders(E:count())%})</h1>
+    {%endif%}
+    
+    {%if('{F:order}'=='favorite' || !('{F:order}'))%}     
+        {%F:#favorites(catalog:get_favorite())%}           
+        <h1>Избранное:({%F:favorites(E:count())%})</h1>
+        
+        <table width="100%" cellspacing="0" cellpadding="0" border="0" class="s-table bsk">
+            <th>Изображение</th>
+            <th>Артикул</th>
+            <th>Цвет</th>
+            <th>Материал</th>
+            <th></th>
+            {%->:favorites%}
+        </table>
+        
+        
+    {%endif%}
+    
+    {%if({F:favorites})%}        
+        {%F:#(E:parse_section(favorites,{F:favorites},1))%}            
+    {%else%}
+        
+        {%if({F:orders})%}
+            {%F:#(E:parse_section(orders,{F:orders},1))%}    
+            {%->:orders%}    
+        {%endif%}
+        
+    {%endif%}
+    
+    
+        </div>
+
+{%endsection:fuser_user_panel%}
+
+{%section:orders->%}
+<div  style="margin:12px">Заказ от {%F:date%}</div>
+{%F:-(E:clear_section(goods))%}
+
+
+{%F:#goods(ishop:get_order_goods({F:id}))%}
+{%F:#(E:parse_section(goods,{F:goods},1))%}
+
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="s-table bsk">
+                  <tbody>
+                  <tr >
+                    <th>Товар</th>
+                    <th>Цена</th>
+                    <th>Количество</th>
+                    <th>Сумма</th>
+                    <th>Комментарии</th>
+                  </tr>
+                 
+                    {%->:goods%} 
+                  
+                  <tr class="sum">
+                    <td colspan="3" class="itogo">Итого:</td>
+                    <td class="priceblue"> {%F:total_sum%} {%F:currency%} </td>
+                  </tr>                  
+                </tbody></table>
+
+{%endsection:orders%}
+
+{%section:favorites->%}
+    
+                 <tr>
+                    {%F:#obj(catalog:get_obj_params({F:obj_id}))%}                    
+                    
+                    <td><a href="/icatalog/catalog/~showobj/id/{%F:obj_id%}">{%F:#image(E:get_from({F:obj},props>image))%}
+                    
+                    {%if(Common::is_file_exists('{F:image}'))%}
+                            <img src="{%F:image(E:image_transform(90,90))%}" alt="{%F:Name%}"/>
+                        {%else%}
+                            <img src="/images/nomage.jpg" alt="{%F:Name%}"/>
+                        {%endif%}  
+                        
+                    </td>
+                    
+                    <td><a href="/icatalog/catalog/~showobj/id/{%F:obj_id%}">{%F:obj(E:get(props>Name))%}</td>
+                    <td>{%F:obj(E:get(props>color))%}</td>                
+                    <td>{%F:obj(E:get(props>material))%}</td>                
+                    <td> <a class="delfavorite" lang="{%F:obj_id%}" href="javascript:void(0)">Удалить</a></td>
+                  </tr>
+
+{%endsection:favorites%}
+
+{%section:goods->%}
+    
+                  <tr>
+                    <td>{%F:name%}</td>
+                    <td>{%F:price(E:number_format(|[2,"."]|))%} {%F:currency%}</td>
+                    <td>{%F:count%} шт. </td>                   
+                     
+                    <td> {%F:#calc(E:calc({F:price}*{F:count}))%}  {%F:calc(E:number_format(|[2,"."]|))%} {%F:currency%}</td>                      
+                    <td>{%F:comments%}</td>                   
+                  </tr>
+
+{%endsection:goods%}
+
+
+
+
+
+
+
+{%section:fuser_account_confirm%}
+    
+    Ваш аккаунт успешно подтвержден.
+    
+{%endsection:fuser_account_confirm%}
+
+
+{%section:fuser_account_deleted%}
+
+{%endsection:fuser_account_deleted%}
+
+{%section:fuser_account_not_exists%}
+
+{%endsection:fuser_account_not_exists%}
+
+
+
+
+
+{%section:fuser_forgot_password_enter_email%}
+<script src="/xjs/livevalidation.js" type="text/javascript"></script>
+<link href="css/lv.css" rel="stylesheet" type="text/css" />
+<h2>Забыли пароль?</h2>
+<p>Чтобы получить пароль, введите полный адрес электронной почты, который Вы указали при регистрации.</p>
+<div style="color:red;">{%F:error%}</div> 
+<form id="enter_email" name="enter_email" method="post" action="">        
+<div class="form">
+    <ul>
+        <li>
+            <p>Email: <span>*</span></p>   
+            <input id="Email" value="{%F:Email%}" size="40" name="Email" type="text" />
+        </li>
+        <li>
+            <a href="javascript:void(0)" id="submit" class="button">Отправить</a>
+        </li>
+    </ul>
+</div>
+</form>
+
+<script type="text/javascript">
+    var Form = document.getElementById('enter_email');
+    var Email = new LiveValidation('Email',{onlyOnSubmit:false});
+        Email.add(Validate.Email,{failureMessage: "Неправильный email"} );
+        Email.add(Validate.Presence,{failureMessage:"Обязательно для заполнения"});
+
+    var submitEmail = function(){
+        var automaticOnSubmit = Email.form.onsubmit;
+            if(automaticOnSubmit()){Form.submit();}
+            else {return false;}
+    }
+    
+document.getElementById('submit').onclick = submitEmail;
+</script>
+{%endsection:fuser_forgot_password_enter_email%}
+
+
+{%section:fuser_forgot_password_email_send%}
+    <p>На Ваш Email выслан новый пароль для <a href="{%F:auth_link%}">входа</a> в панель пользователя сайта.</p>
+{%endsection:fuser_forgot_password_email_send%}
+
+
+{%section:fuser_forgot_password_email_notsend%}
+    <h2>Сообщение не отправлено или новый пароль не сохранен. Повторите попытку.</h2>
+{%endsection:fuser_forgot_password_email_notsend%}
+
+
+{%section:fuser_forgot_password_email_notuser%}
+    Пользователь с этим адресом электронной почты не найден. Повторите попытку.
+{%endsection:fuser_forgot_password_email_notuser%}
+
+
+{%section:fuser_forgot_password_mailtext%}
+    <p>Новый пароль для <a href="{%F:auth_link%}">входа в профиль</a> ({%F:HOST%}) - {%F:new_password%}</p>
+{%endsection:fuser_forgot_password_mailtext%}
+
+

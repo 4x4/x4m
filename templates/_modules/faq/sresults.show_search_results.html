@@ -1,0 +1,29 @@
+{%section:_faq_search_results%}
+{%F:+(E:add_file_section(_common/extended/paginator.html))%} 
+<h3>Результаты поиска</h3>
+<p>Найдено : <strong>{%F:total%}</strong></p>
+<ul>{%->:_search_list_item%}</ul>
+{%->:page_line%}
+{%endsection:_faq_search_results%}
+
+
+
+
+{%section:_search_list_item->%}
+{%F:#tp(E:cut_words2({F:question}, ,40))%}
+{%F:#cat(faq:get_category({F:cat_id},{F:Destination}))%}
+<li><a href="{%F:cat>Link%}">{%F:cat>params>Name%}</a> >> <a href="{%F:Link%}">{%F:tp%}</a></li>
+{%endsection:_search_list_item%}
+
+
+
+
+{%section:_no_request%}
+<h3>Результаты поиска</h3>
+<p>Вы отправили пустой запрос</p>
+{%endsection:_no_request%}
+
+{%section:_no_results%}
+<h3>Результаты поиска</h3>
+<p>По вашему запросу "<strong>{%F:request%}</strong>" найдено 0 совпадений.</p>
+{%endsection:_no_results%}

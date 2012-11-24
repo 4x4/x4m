@@ -1,0 +1,49 @@
+
+RewriteEngine on
+
+
+RewriteRule ^admin$ /admin.php [NC,L]
+
+#AddDefaultCharset Off
+
+
+#RewriteCond %{REQUEST_FILENAME} -f 
+#RewriteCond %{REQUEST_FILENAME} \.(gif|jpg|png|jpeg|JPG|JPEG|GIF|PNG)$  
+#RewriteRule ^.*$ - [S=40]
+#RewriteRule . image.php [L]
+
+
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*\.)(js)$ jcompress.php?q=$1$2 [L,NC]
+RewriteRule ^((.*)\.)(cjs)$ jcompress.php?m=$2 [L,NC] 
+
+
+RewriteCond %{REQUEST_FILENAME} /sitemap.xml$ [NC]
+RewriteRule ^ /index.php?action=sitemap [L]
+
+RewriteCond %{REQUEST_FILENAME} /robots.txt$ [NC]
+RewriteRule ^ /index.php?action=robots [L]
+
+RewriteCond  %{REQUEST_URI} !^/xjs/_components/Xinha/*|index.html|admin.php|cron.php|upload.php|image.php|license|tree_xml_server.php|upl.php|install.php|login.php|php.php|jcompress.php|captcha.php|download.php|swfupload.php|^/backup/*|^/lz/*|^/media/*|^/uploads/*
+ 
+
+
+
+
+RewriteCond  %{REQUEST_FILENAME} !\.(xls|rar|zip|tar|ico|jpg|jpeg|gif|png|htc|css|pdf|js|rar|html|xml|png|swf|JPG|JPEG|GIF|PNG|txt|html)$  
+RewriteRule  ^(.*)$ _run.php
+DirectoryIndex _run.php
+
+#php_flag eaccelerator.enable off
+#php_value session.bug_compat_42 1
+#php_value session.bug_compat_warn 0
+#php_value magic_quotes_gpc 1
+#php_value magic_quotes_runtime 0
+#php_value magic_quotes_sybase 0
+#php_value variables_order EGPCS
+#php_value upload_max_filesize 20M
+#php_value register_globals 0
+#php_value short_open_tag 1
+php_value display_errors 1
+#php_value output_buffering 1
+#php_value include_path .

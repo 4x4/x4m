@@ -1,0 +1,29 @@
+{%section:xtr_search_results%}
+{%F:+(E:add_file_section(_common/extended/paginator.html))%}  
+<div class="text">
+  <h1 class="t-title">Результаты поиска</h1>
+  <h2>Результаты поиска  по запросу "{%F:query%}" найдено {%F:query_num%} совпадений </h2>
+  <ul>
+    {%->:xtr_search_result%}          
+  </ul>
+  {%->:page_line%}    
+  </div>      
+{%endsection:xtr_search_results%}
+
+{%section:xtr_search_result->%}
+<li>
+  [{%F:num%}] <b>{%F:title%}</b> <a target="_blank" href="{%F:url%}">{%F:url%}</a>
+  <p style="font-size:11px;">{%F:body%}</p>
+</li>
+{%endsection:xtr_search_result%}
+
+{%section:xtr_search_nothing_found%}
+<div class="text">
+  <h2>По вашему запросу "{%F:query%}" ничего не найдено</h2>
+    </div>  
+{%endsection:xtr_search_nothing_found%}
+
+{%section:xtr_search_empty%}
+  <h2>Вы отправили пустой запрос</h2>
+{%endsection:xtr_search_empty%}
+

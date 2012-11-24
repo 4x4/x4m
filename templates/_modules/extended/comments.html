@@ -1,0 +1,62 @@
+{%section:_comments->%}
+
+    {%->:_comment%}
+    
+    
+{%endsection:_comments%}
+
+                                
+{%section:_comment->%}
+<div class="comment default-text">
+        <p> <strong>{%F:Header%}</strong>,  {%F:Date(E:date_ru(d x Y))%}</p>
+        <p>{%F:Message%}</p>
+        <p><strong>Имя: </strong>{%F:UserName%}</p>
+        </div>
+{%endsection:_comment%}
+
+
+
+{%section:_send_comments_form->%}
+<form class="add-comment" name="comments" id="comments" method="POST">
+                                            <div>
+                                                <label for="title">Заголовок<span class="req">*</span></label>
+                                                <input type="text" name="Header" id="title">
+                                            </div>
+                                            <div>
+                                                <label for="name">Ваше имя</label>
+                                                <input type="text" class="short" id="name" name="UserName">
+                                            </div>
+                                            <div>
+                                                <label for="feedback">Отзыв<span class="req">*</span></label>
+                                                <textarea id="feedback" name="Message"></textarea>
+                                            </div>
+
+                                            
+                                            <div class="test">
+                                                <label for="title">Оценить<span class="req">*</span></label>
+                                                <img alt="" src="/templates/_ares/images/stars.gif"><br>
+                                                <input checked name="stars" type="radio">
+                                                <input name="stars" type="radio">
+                                                <input name="stars" type="radio">
+                                                <input name="stars" type="radio">
+                                                <input name="stars" type="radio">
+                                                <input type="submit" value="Отправить" onclick="sendComments(this,'{%F:tread%}',{%F:CobjectId%},'{%F:Marker%}','news')">
+                                            </div>
+                                            
+                                            
+</form>
+                                        
+<script language="javascript">
+function sendComments(element,tread,id,marker,module)
+{
+    var comments=new fConnector('comments');
+    comments.execute({add_comment:{Marker:marker,Module:module,tread:tread,id:id,comment:xoad.html.exportForm(element.form)}});
+}
+</script>
+
+
+
+
+{%endsection:_send_comments_form%}
+
+

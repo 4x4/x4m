@@ -1,0 +1,29 @@
+<div id="e-form">
+  <form id="edit_votes">
+    <p>{voting_name}</p>
+    <input  class="required validate-alpha" type="text" name="basic"  value="" />
+    <p>{question}</p>
+    <textarea  class="required validate-alpha" name="question" id="question"></textarea>
+    <input type="hidden" name="category" id="category" />
+    <p>{date_begin}</p>
+    <input readonly type="text"  name="date1"  id="date1" value="">
+    <p>{date_end}</p>
+    <input readonly type="text"  name="date2"  id="date2" value="">
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="vote_multiple" id="vote_multiple"/>
+        {resolve_a_choice_of_several_variants} </li>
+    </ul>
+    <p>{answer_variants}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="another_variant" id="another_variant"/>
+        {another_variants}</li>
+    </ul>
+    <a class="button" onclick="javascript:XTR_votes.add_variant()" href="javascript:void(0)">{add_variants}</a> <br/>
+    <br/>
+  </form>
+  <form id="vars_form">
+    <div id="variants"></div>
+  </form>
+  <a class="button" href="javascript:void(0)"  onclick="XTR_votes.save_edited_votes();">{save}</a> </div>

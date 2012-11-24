@@ -1,0 +1,53 @@
+<div id="e-form">
+  <form id="edit_news">
+    <p>{news_title}</p>
+    <input  class="required validate-alpha-ext" type="text" name="header" value="">
+    <p>{news_group}</p>
+    <select id="ctg_id"  name="ctg_id">
+    </select>
+    <p>{publication_date}</p>
+    <input readonly type="text" id="news_date" name="news_date" value="">
+    <p>{short_text_news}</p>
+    <textarea ondblclick="XTR_main.apply_weditor(this)" name="news_short" id="news_short"></textarea>
+    <p>{full_text_news}</p>
+    <textarea ondblclick="XTR_main.apply_weditor(this)" name="news_long" id="news_long"></textarea>
+    <p>{tegs_news}</p>
+    <textarea name="tags"></textarea>
+    <p>{news_image}</p>
+    <input class="inp-b2" name="img_small" id="img_small" readonly />
+    <a class="button small" onclick="xFileManager.selectImage('img_small')" href="javascript:void(0)">{select}</a> <a class="button small iclear" href="javascript:void(0)" onclick="javascript:$('img_small').value=''"><span></span>&nbsp;</a>
+    <p>{image_folder}</p>
+    <input class="inp-b2" name="image_folder" id="image_folder" readonly />
+    <a class="button small" onclick="xFileManager.selectFolder('image_folder')" href="javascript:void(0)">{select}</a> <a class="button small iclear" href="javascript:void(0)" onclick="javascript:$('image_folder').value=''"><span></span>&nbsp;</a>
+  </form>
+  <a class="button" href="javascript:void(0)" onclick="javascript:XTR_news.save_edited_news();">{save_news}</a></div>
+<div id="slotzcontainer">
+  <div id="addtunescontainer"> 
+
+
+    <div id="tunescontainer">
+       
+        <form id="add_tunes">
+        
+        <p>{author_id}</p>        
+        <input readonly  name="author_id">  
+          
+          <p>{author_type}</p>        
+        <input readonly  name="author_type">
+        
+        
+        
+        <p>{replace_the_title_for_the_page_object}</p>
+        <input name="Title" id="Title">
+        <p>{replace_the_keywords_for_the_page_object}</p>
+        <input name="Keywords" id="Keywords">
+        <p>{description}</p>
+        <input name="Description" id="Description" class="inp">
+        
+        <p>{linkword}</p>
+        <input name="Basic" id="Basic" class="inp is-uniq required">
+        
+      </form>
+    </div>
+  </div>
+</div>

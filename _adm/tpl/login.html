@@ -1,0 +1,47 @@
+{%section:main%}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset={%F:charset%}">
+<title>X3M</title>
+<link href="/_adm/xres/xcss/login.css" rel="stylesheet" type="text/css">
+<script language="javascript" src="{%F:XJS%}_core/prototype/prototype17.js"></script>
+<script language="javascript" src="{%F:XJS%}login.js"></script>
+
+</head>
+<body>
+{%->:error%}
+<form id="login" method="POST" action='/login.php'>
+  <div class="login">
+    <div class="inputs">
+      <p>{login}:</p>
+      <input name="login" value="admin">
+      <p>{password}:</p>
+      <input name="password"  type="password"   value="demo"/>
+    </div>
+    <a href="javascript:void(0)" id="cache" class="cache"><span></span>{clear_cache}</a>
+    <div class="lang"><a href="javascript:void(0)" id="langs" class="l-button"></a>
+      <ul>
+        <li lang="rus">На русском</li>
+        <li lang="eng"><a href="javascript:void(0)" style="display:none;">On english</a></li>
+        <li lang="rus"><a href="javascript:void(0)" style="display:none;">На русском</a></li>
+      </ul>
+    </div>
+      <input id="clearGSTORAGE" name="clearGSTORAGE" type="hidden"> 
+      <input id="langInput" name="lang" type="hidden">           
+      
+      <a href="javascript:void(0)" id="loginbutton" class="enter">{enter}</a>
+     <div class="bottom-text">
+      <p>{version}: {%F:version%}</p>
+      <p>{license}: <span style="font-size:4px">{%F:code%}</span></p>
+    </div>
+  </div>
+</form>
+</body>
+</html>
+{%endsection:main%}
+
+
+{%section:error->error%}
+<div class="log-error">{error_login_message}</div>
+{%endsection:error%}

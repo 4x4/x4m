@@ -1,0 +1,106 @@
+{%section:_catalog_category_list%}
+                 {%F:+(E:add_file_section(_common/extended/paginator.html))%}  
+
+
+                  {%->:page_line%}
+                
+                <ul class="catalog">
+                    
+                    {%->:_catalog_list_item%}
+                    
+                    </ul>
+                
+                  {%->:page_line%}
+                  
+
+
+                  {%->:_catalog_empty%}
+
+{%endsection:_catalog_category_list%}
+
+
+
+{%section:_catalog_list_item->%}
+{%F:#usergroupName(E:get_session_module_param(siteuser,usergroupName))%}
+{%F:#extuserdata(E:get_session_module_param(siteuser,extuserdata))%}  
+{%F:#ucurrency(E:get_from({F:extuserdata},currency))%}
+{%F:#pricea(catalog:get_selector_property({F:Property_set},price,1))%}
+                      
+                      
+                      {%if({F:ucurrency})%}
+                      {%if({F:ucurrency}!={F:currency})%}                        
+                      
+                            {%F:#kurs(E:get_from({F:pricea},{F:currency}{F:ucurrency}))%}                                                                            
+                            
+                            {%else%}
+                        {%F:#kurs(E:assign(1))%}
+                      {%endif%}
+                      {%endif%}
+                      
+                      
+                
+                <li>
+                    <a href="{%F:Link%}">
+                    <div class="left">
+                        {%if(Common::is_file_exists('{F:image}'))%} 
+                                <p>
+                                {%if({F:bestseller})%}
+                                    <img src="images/bestseller.png" />
+                                {%endif%}
+                                {%if({F:sale})%}
+                                    <img src="images/sale.png" />
+                                {%endif%}
+                                </p>
+                                <img src="{%F:image(E:image_transform(100,100))%}" alt="{%F:Name%}"/>
+                            {%else%}
+                                <img src="/images/nomage.jpg" alt="{%F:Name%}"/>
+                            {%endif%}                                           
+
+                    </div>
+                    
+                    <div class="right">
+                      <h1>Артикул: {%F:articul%}</h1>
+                    {%F:#brandimg(catalog:get_obj_param({F:brand},brandimage))%}
+                      <p>{%if(Common::is_file_exists('{F:image}'))%}                                                
+                                <img src="{%F:brandimg(E:image_transform(90))%}"/>                        
+                    
+                    {%endif%}
+                    </p>
+                    
+                      <p><strong>Материал:</strong> {%F:material%}</p>
+                      
+                      {%if('{F:usergroupName}')%}
+                      <p><strong>Остаток товара:</strong> {%if('{F:remain}')%}{%F:remain%} {%else%} 0 {%endif%}шт.</p>
+                      <p><strong>Резерв:</strong> {%if('{F:reserved}')%}{%F:reserved%} {%else%} 0 {%endif%}шт.</p>
+                      {%endif%}
+                      
+                      {%F:#corp_price(E:str_replace(|[",",".","{F:corp_price}"]|))%}   
+                      {%F:#adv_price(E:str_replace(|[",",".","{F:adv_price}"]|))%}  
+                      {%F:#adv_price(E:calc({F:kurs}*{F:adv_price}))%}
+                      {%F:#corp_price(E:calc({F:kurs}*{F:corp_price}))%}
+                      
+                      {%if('{F:usergroupName}'=='Корпоративные клиенты')%}
+                        <p><strong>Цена:</strong> {%F:corp_price%} <b>{%F:ucurrency%}</b></p>                      
+                      {%endif%}
+                      
+                      {%if('{F:usergroupName}'=='Рекламные агентства')%}
+                        <p><strong>Цена:</strong> {%F:adv_price%} <b>{%F:ucurrency%}</b></p>                      
+                      {%endif%}
+                      
+                    </div>
+                    </a>
+              </li>
+
+{%endsection:_catalog_list_item%}
+
+
+{%section:_catalog_empty->%}
+    <p>Нет элементов для отображения</p>
+{%endsection:_catalog_empty%}
+
+
+{%section:_catalog_search_failed%}        
+
+<p>Ничего не найдено по данному запросу</p>
+{%endsection:_catalog_search_failed%}
+

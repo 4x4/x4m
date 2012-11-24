@@ -1,0 +1,35 @@
+<div id="e-form">
+  <form id="edit_question">
+    <p>{section}</p>
+    <input id="categoryAlias" class="inp-b1" readonly />
+    <input id="category" class="required" type="hidden" value="1"/>
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a> 
+    <input type="hidden" name="id" id="id"  value="" />
+    
+    <p>{date}</p>
+    <input readonly type="text" id="date" name="date" value="">
+
+    <p>{user}</p>
+    <input  class="validate-alpha" type="text" name="user" id="user"  value="" />
+    <p>{email}</p>
+    <input  class="validate-email" type="text" name="email" id="email"  value="" />
+    <ul class="chk">
+
+      <li><input type="checkbox" name="active" id="active"/>{active}</li>
+      <li><input type="checkbox" name="send_answer" id="send_answer" onchange="if (this.checked) { $('answer_template').show();} else {$('answer_template').hide();}" />{send_response_to_the_email}</li>
+    </ul>
+    <div id="answer_template" style="display:none;">
+        <p>{letter_template}</p>
+        <select id="lTemplate">
+        </select>
+    </div>
+   
+    <p>{question}</p>
+    <textarea ondblclick="XTR_main.apply_weditor(this)" name="question" id="question"></textarea>
+    <p>{short_answer}</p>
+    <textarea  ondblclick="XTR_main.apply_weditor(this)" name="sanswer" id="sanswer"></textarea>
+    <p>{full_answer}</p>
+    <textarea  ondblclick="XTR_main.apply_weditor(this)" name="answer" id="answer"></textarea>
+    
+  </form>
+  <a class="button" href="javascript:void(0);" onclick="javascript:XTR_faq.save_edited_question();">{save}</a> </div>

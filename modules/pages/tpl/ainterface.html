@@ -1,0 +1,67 @@
+{%section:showLevelMenu%}
+
+<p>{select_group_to_display_the_menu}</p>
+<input id="showGroup" class="inp-b1 validate-selection"/>
+<input id="showGroupId" type="hidden"/>
+<a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a>
+
+<p>{template_menu}</p>
+<select id="Template" class="validate-selection">
+</select>
+
+<p>{number_of_levels_in_the_menu}</p>
+
+<p style="font-weight:normal">{0_mean_to_show_the_menu_for_this_level}</p>
+<input  id="levels" type="text" value='0'/>
+
+<ul class="chk">
+  <li>
+    <input id="dynamicAdapt" name="dynamicAdapt" type="checkbox" shows="_upLevels">
+    {show_up_to_the_selected_menu_item}    
+  </li>    
+</ul>
+
+
+<div id="_upLevels">
+    <p>{show_up_level_interval}</p>
+    <input id="upLevels" type="text" value='0'/>
+</div>
+
+
+<p>{separate_menus_for_columns}</p>
+<p style="font-weight:normal">{if_0_not_to_share_objects} </p>
+<input id="objectInRows" type="text" value='0'/>
+
+{%endsection:showLevelMenu%}
+
+
+
+
+
+
+{%section:show_path%}
+<p>{template_display_ways}</p>
+<select id="Template" class="validate-selection">
+</select>
+<ul class="chk">
+  <li>
+    <input id="HideRootPage" name="HideRootPage" type="checkbox">
+    {HideRootPage}</li>
+</ul>
+{%endsection:show_path%}
+
+
+{%section:show_map%}
+    <p>{template_map}</p>
+    <select id="Template" class="validate-selection">
+    </select>
+{%endsection:show_map%}
+
+{%section:show_user_menu%}
+<p>{select_menu}</p>
+<select id="menu" class="requiired validate-selection">
+</select>
+<p>{select_template}</p>
+<select id="Template" class="required validate-selection">
+</select>
+{%endsection:show_user_menu%} 

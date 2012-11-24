@@ -1,0 +1,146 @@
+
+
+{%section:_catalog_comparse%}
+<script language="javascript">
+$(function(){
+    $("tr[lang=u]:odd").addClass('two');
+    
+    $('.minus').toggle(
+    function(){
+
+        $(this).removeClass('minus').addClass('plus');
+        h=$(this).parents("tr.header").nextAll();
+        for(i=0;i<h.length;i++)
+        {
+            if(h[i].className=='header')break;
+             $(h[i]).fadeOut();
+           
+        }        
+        
+    },
+    function(){
+        
+        $(this).removeClass('plus').addClass('minus');
+        
+        h=$(this).parents("tr.header").nextAll();
+        for(i=0;i<h.length;i++)
+        {
+            if(h[i].className=='header')break;
+             $(h[i]).fadeIn();
+           
+        }        
+        
+    }
+    );
+});
+</script>
+
+
+                <div class="bord4"><img src="/images/0.gif" alt="" width="1" height="1" /></div>
+                
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                  <tr>
+                    <td class="bottom"><a href="{%F:del_comparse_link%}"><img src="/images/btn_clear_rez.gif" alt="" /></a></td>             
+                
+                
+                    {%->:_catalog_comparse_head%}
+                    
+                  </tr>
+             
+                    {%->:_catalog_comparse_group%}  
+             
+                  
+                </table>
+    
+
+    
+    <a href="{%F:del_comparse_link%}"><img src="/images/btn_clear_rez.gif" alt="" /></a>
+
+{%endsection:_catalog_comparse%}
+
+
+
+{%section:_catalog_comparse_head->%}
+
+    <td>
+                        <div class="pic3">
+                        {%if(Common::is_file_exists('{F:image}'))%}
+                            <img  src="{%F:image(E:image_transform(99,86))%}" alt="{%F:Name%}"/>
+                        
+                        {%endif%}                                           
+                        
+
+                        <a href="#" class="ttl3">{%F:Name%}</a>
+                        <div class="har">{%F:Model%}</div>
+                        <div class="price_compare">{%F:price.RUB(E:number_format())%}<span> руб.</span></div>
+                        <a href="{%F:del_comparse_link%}" class="ttl_compare dot">удалить из сравнения</a>
+                        
+                        {%F:#ilink(catalog:get_ishop_link({F:id}))%}
+                        <div class="comp"><a href="{%F:ilink%}"><img src="/images/btn_in_basket.gif" alt="В КОРЗИНУ" width="81" height="21" /></a></div>
+                    </td>
+
+
+{%endsection:_catalog_comparse_head%}
+
+
+{%section:_catalog_comparse_group->%}
+                   <tr class="header">
+              {%->:cs%}   
+                <table cellspacing="0" cellpadding="0" border="0" width="100%" class="ttl4">
+                <tr>
+                    <td width="250">{%F:Name%}</td>
+                    <td><a class="minus" href="javascript:void(0)" lang="{%F:id%}"><img height="13" width="13" alt="" src="images/0.gif"/></a></td>
+                  </tr>
+                </table>
+                       </tr>
+                        
+                        {%->:_catalog_comparse_line%}
+              {%->:ras%}        
+                 
+                  
+                 
+                
+{%endsection:_catalog_comparse_group%}
+
+
+{%section:_catalog_comparse_line->%}
+    
+                             
+    {%F:#(E:parse_section(cs,|{colspan:"{F:colspan}"}|))%}       
+            
+    {%F:#(E:clear_section(ras))%}       
+    {%F:#(E:parse_n_section(ras,{F:colspan}))%}   
+    
+    <tr lang="u">{%->:_catalog_comparse_element%}</tr>
+    
+
+{%endsection:_catalog_comparse_line%}  
+
+{%section:cs->%}
+    
+    <td colspan="{%F:colspan%}" class="none">  
+    
+{%endsection:cs%}
+
+{%section:ras->%}
+    
+    <td><img height="1" width="191" alt="" src="images/0.gif"/></td>
+    
+{%endsection:ras%}
+
+{%section:_catalog_comparse_element->%}
+    {%F:+(E:add_section_vars(type))%}
+    
+    {%if('{F:type}'=='FIRST')%}
+        <td width="219" >{%F:value%}</td>    
+        {%else%}
+        <td width="193" >{%F:value%}</td>    
+    {%endif%}
+
+{%endsection:_catalog_comparse_element%}  
+
+
+
+{%section:_catalog_comparse_failed%}
+    <p>Отсутствуют объекты для сравнения</p>
+{%endsection:_catalog_comparse_failed%}

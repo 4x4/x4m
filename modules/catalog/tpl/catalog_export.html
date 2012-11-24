@@ -1,0 +1,18 @@
+<div id="e-form">
+  <form id="catalogExport">
+    <p>{file_name_for_export}</p>
+    <input id="filename" class="required validate-alphanum" name="filename" type="text" />
+    <p>{properties_object}</p>
+    <select id="Property_sets" multiple style="height:100px">
+    
+    </select>
+    <p>{export_format_file}</p>
+    <select class="validate-selection" id="Template" name="Template"></select>
+    <p>{encoding}</p>
+    <select id="encoding">
+      <option value="utf8">utf-8</option>
+      <option value="windows-1251">windows-1251</option>
+    </select>
+    <a class="button" href="javascript:XTR_catalog.start_export()">{export}</a> <a id="downloadfile" target="_blank" href="javascript:void(0)"></a>
+  </form>
+</div>

@@ -1,0 +1,54 @@
+{%section:fusers_auth_panel%}
+<SCRIPT TYPE="text/javascript">
+<!--
+function submitenter(myfield,e)
+{
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+else return true;
+
+if (keycode == 13)
+   {
+   myfield.form.submit();
+   return false;
+   }
+else
+   return true;
+}
+//-->
+</SCRIPT>
+
+
+<div class="authorization">
+          <div class="title">Auth <span>/</span> <a href="{%F:registration_link%}">Registration</a> </div>
+          
+              
+          <form id="authform" method="POST" action="{%F:auth_link%}">    
+          <ul class="form">
+              <li><label><span>Name:</span><input name="login" /></label></li>
+              <li><label><span>Password:<input name="password" onKeyPress="return submitenter(this,event)"  type="password"  value="" />
+                </label></li>
+              </li>
+            </ul>
+          </form>
+          
+
+          <a href="javascript:void(0)" onclick="$('#authform').submit()" class="button">Войти</a>
+          </div>
+
+{%F:#user(E:get_session_module_param(siteuser,usergroupName))%}
+
+{%endsection:fusers_auth_panel%}
+
+
+{%section:fusers_authorized_panel%}
+{%F:#user(E:get_session_module_param(siteuser,userdata)))%}
+<div class="enter">
+<div class="title">Вы авторизованы <strong>{%F:user(E:get(Name))%}</strong></div>
+<ul>
+  <li><a  href="{%F:user_panel_link%}">Войти в «Личный кабинет»</a></li> 
+  <li><a href="{%F:logout%}" class="logout"> Выход</a></li>
+  </ul>
+  </div>
+{%endsection:fusers_authorized_panel%}

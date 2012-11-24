@@ -1,0 +1,19 @@
+<div id="e-form">
+  <form id="catobj_edit">
+    <p>{name_of_the_object_directory}</p>
+    <input id="Name" class="required validate-alpha-ext" name="Name" type="text" />
+    <ul class="chk">
+      <li>
+        <input type="checkbox" id="Disable" name="Disable" />
+        {off_object}</li>
+    </ul>
+    <p>{properties_object}</p>
+    <select class="validate-selection" id="Property_set" onchange="javascript:XTR_catalog.change_property_set(this.options[this.selectedIndex].value)">
+    </select>
+  </form>
+  <div id="properties_holder"></div>
+  <a class="button" href="javascript:void(0)" onclick="XTR_catalog.save_edited_catobj()">{save}</a> </div>
+<div id="slotzcontainer">
+  <div id="addtunescontainer"></div>
+  <div id="tobjc"><a class="button" href="javascript:void(0)" id="startXlist">{add_related_object}</a></div>
+</div>

@@ -1,0 +1,19 @@
+{%section:_bones%}  
+    <ul class="h-menu">
+
+        {%->:bones_item%}        
+    
+        </ul>
+{%endsection:_bones%}
+
+{%section:_bones_item->bones_item%}   
+
+<li><a href="{%F:link%}">{%F:name%}</a></li>
+          
+{%endsection:_bones_item%}        
+
+
+{%section:_bones_item_no_link->bones_item%}    
+    <li>{%F:name%}</li>
+{%endsection:_bones_item_no_link%}
+

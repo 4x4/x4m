@@ -1,0 +1,24 @@
+<div id="e-form">
+  <form id="edit_album">
+
+    <p>{photoalbum_name}</p>
+    <input  class="required validate-alpha" type="text" name="Name"  value="" />
+
+    <p>{Basic}</p>
+    <input  class="required validate-alpha is-none-uniq" type="text" name="Basic" id="Basic" value="" />
+    
+    
+    <p>{description}</p>
+    <textarea  ondblclick="XTR_main.apply_xinha(this)" name="gallery_short" id="gallery_short"></textarea>
+    <p>{width_of_the_thumbnail_images}</p>
+    <input  class="required validate-alpha" type="text" name="thumb_width" id="thumb_width"  length="4" value="180" onfocus="XTR_gallery.get_cat_info();"/>
+    <p>{avatar_galleries}</p>
+    <input class="inp-b2" name="Avatar" id="Avatar" readonly />
+    <a class="button small" href="javascript:void(0)" title="Выбрать изображение" onclick="xFileManager.selectFile('Avatar')">{select}</a> <a class="button small iclear" href="javascript:void(0)" title="Очистить" onclick="javascript:$('Avatar').value=''"><span></span>&nbsp;</a>
+
+    <p>{counter}</p>
+    <input class="inp-b2" name="counter" id="counters" readonly />
+    
+  </form>
+  <a class="button" href="javascript:XTR_gallery.save_edited_album()" id="savecat">{save}</a> </div>
+<div id="slotzcontainer"> </div>

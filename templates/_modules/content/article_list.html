@@ -1,0 +1,16 @@
+{%section:articles_list%}
+{%F:+(E:add_file_section(_common/extended/paginator.html))%}
+        <ul class="b-news">{%->:article%}</ul>
+        {%->:page_line%}
+{%endsection:articles_list%}
+
+
+{%section:article->%}
+            <li>
+                <h1><a href="{%F:link%}">{%F:title%}</a></h1>
+                {%F:article_short%}
+                <div class="b-line">
+                  <a href="{%F:link%}" class="more">Читать далее</a>
+                </div>
+            </li>
+{%endsection:article%}

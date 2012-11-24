@@ -1,0 +1,27 @@
+{%section:_news_interval%}
+
+    <div class="gen-news">
+          <div class="gn-top"></div>
+          <div class="gn-mid">
+            {%->:_news_node%}
+          </div>
+        </div>
+  
+{%endsection:_news_inrterval%}
+
+{%section:_news_node->%}
+            
+            <div class="left"><a href="{%F:link%}">
+                {%if('{F:img_small}')%}
+                    <img src="{%F:img_small(E:image_transform(160,115))%}" /></a>
+                {%endif%}</a>
+            </div>
+            <div class="right">
+                  <h1>{%F:header%}</h1>
+                  <p>{%F:news_short%}</p>
+                  <a href="{%F:link%}">Подробнее</a> 
+              </div>
+                        
+  
+{%endsection:_news_node%}
+

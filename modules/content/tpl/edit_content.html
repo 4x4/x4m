@@ -1,0 +1,78 @@
+{%section:edit_content%}
+<div id="e-form">
+    <form id="edit_content">
+      <p>{article_name}</p>
+      <!--<input  class="required validate-alpha-ext" type="text" name="basic"  value="">-->
+      <input  class="required validate-alpha-ext" type="text" id="Name" name="Name"  value="">
+      
+        <ul class="chk">
+          <li>
+            <input type="checkbox" id="Disable" name="Disable" /> {off_object}
+          </li>
+        </ul>
+      
+      <p>{article_template}</p>
+      <select onchange="javascript:XTR_content.change_fields(this.options[this.selectedIndex].value)" id="Template">
+      </select>
+    </form>
+    <form id="inner_fields">
+      <div id="innerfields"></div>
+    </form>
+    
+    <a class="button" href="javascript:void(0)" onclick="XTR_content.save_edited_content(this)">{save}</a>
+</div>
+ 
+
+
+
+<div id="slotzcontainer">
+  <div id="addtunescontainer">
+        <div id="tunescontainer">
+          <form id="add_tunes">
+            <p>{replace_the_title_for_the_page_object}</p>
+            <input name="Title" id="Title">
+            <p>{replace_the_keywords_for_the_page_object}</p>
+            <input name="Keywords" id="Keywords">
+            <p>{description}</p>
+            <input name="Description" id="Description" class="inp">
+            <p>{linkword} <a onclick="XTR_content.generate_link()" href="javascript:void(0)">({generate})</a></p>
+            <input name="basic" id="basic" class="is-none-catobj">
+          </form>
+        </div>
+  </div>
+</div>
+{%endsection:edit_content%}	
+
+
+{%section:fields%}	
+{%->:element%}  
+{%endsection:fields%}	
+
+
+{%section:INPUT->element%}
+<p>{%F:name%}</p>
+<input name="{%F:_field_name%}" id="{%F:_field_name%}" />
+{%endsection:INPUT%}                  
+
+
+{%section:IMAGE->element%}
+<p>{%F:name%}</p>
+<input class="inp-b2" name="{%F:_field_name%}" id="{%F:_field_name%}" readonly />
+<a class="button small" href="javascript:void(0)" onclick="xFileManager.selectFile('{%F:_field_name%}')">{select}</a> <a class="button small iclear" href="javascript:void(0)" onclick="javascript:$('{%F:_field_name%}').value=''"><span></span>&nbsp;</a> 
+{%endsection:IMAGE%}      
+  
+
+{%section:TEXT->element%}
+<p>{%F:name%}</p>
+<textarea class="big" ondblclick="XTR_main.apply_weditor(this)" name="{%F:_field_name%}" id="{%F:_field_name%}"></textarea>
+{%endsection:TEXT%} 
+  
+
+{%section:ARTICLE->element%}
+<p>{%F:name%}</p>
+<select id="{%F:_field_name%}" name="{%F:_field_name%}">
+  
+{%F:_field_initial%}    
+
+</select>
+{%endsection:ARTICLE%} 

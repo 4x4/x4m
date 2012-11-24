@@ -1,0 +1,95 @@
+﻿
+{%section:diagonal->%}
+    
+    {%F:#HOST(MAIN:get_global_fields_param(_HOST))%}  
+    {%F:#id(E:get_request_assoc(id))%}  
+    
+    {%if(!'{F:id}')%}
+        {%F:#id(E:assign(3737))%}    
+    {%endif%}
+    
+    {%F:#currentfiltervalue(catalog:in_current_filter(equal,{F:filter_prop}))%}
+    
+
+    
+    {%F:#link(catalog:create_filter_link(|{equal:{{F:filter_prop}:{F:key}}}|))%}
+      
+      {%if('{F:currentfiltervalue}'=='{F:key}')%}
+        <span class="on_text">{%F:value%}</span>
+      {%else%}
+        <a href="{%F:HOST%}catalog/~showcat/id/{%F:id%}/{%F:link%}">{%F:value%}</a> &nbsp;
+      {%endif%}
+
+{%endsection:diagonal%}
+
+
+{%section:images_fr->%}
+
+<a href="javascript:void(0)"><img  id="d{%F:_num%}" longdesc="{%F:image%}"  src="{%F:image(E:image_transform(51,51))%}"></a>
+
+{%endsection:images_fr%}
+
+
+
+
+
+{%section:connected->%}
+
+
+                    <td width="144">
+                        <div class="pic1">
+                        
+                        <a href="javascript:void(0)">
+                        
+                        {%if(Common::is_file_exists('{F:image}'))%}       
+                                <img src="{%F:image(E:image_transform(97,97))%}"  class="pic2" /></a> 
+                                {%else%}
+                                <img src="images/pic2.gif" width="97" height="97" alt="" class="pic2" />
+                        {%endif%}  
+                        
+                        </div>
+                        
+                        <a href="{%F:Link%}" class="ttl3">{%F:Name%}</a>
+                        <div class="har3">{%F:model%}</div>
+                        <div class="price3">{%F:price%} руб.</div>
+                    </td>
+                  
+
+{%endsection:connected%}
+
+{%section:properties_main->%}
+    {%F:+(E:add_section_vars(_num))%}
+                    {%if({F:_num}%2==1)%}
+                    <tr class="two">     
+                     
+                    {%else%}
+                    <tr>                 
+                    {%endif%}
+                    
+                        <td width="351">{%F:key(catalog:get_property_alias({F:property_set}))%}</td>
+                    
+                    
+                    
+                    <td>{%F:value%}</td>
+                  </tr>
+                  
+{%endsection:properties_main%}                  
+
+
+{%section:properties_additional->%}
+ {%F:+(E:add_section_vars(_num))%}
+                    {%if({F:_num}%2==1)%}
+                    <tr class="two">     
+                     
+                    {%else%}
+                    <tr>                 
+                    {%endif%}
+                    
+                        <td width="351">{%F:key(catalog:get_property_alias({F:property_set}))%}</td>
+                    
+                    
+                    
+                    <td>{%F:value%}</td>
+                  </tr>
+                  
+{%endsection:properties_additional%}                  

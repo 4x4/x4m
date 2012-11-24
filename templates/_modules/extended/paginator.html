@@ -1,0 +1,45 @@
+
+{%section:page_line->%}
+
+{%F:+b(E:set_page_nav_move(4))%}      
+
+                  {%->:previous_page%}
+
+              <ul>
+                  {%F:page_line%}
+              </ul>
+
+                  {%->:next_page%}
+</div>              
+
+
+
+
+{%endsection:page_line%}
+
+{%section:next_page->%}
+ 
+<a class="next" href="{%F:link%}">Next</a>  
+{%endsection:next_page%}
+
+{%section:previous_page->%}
+ <a class="prev" href="{%F:link%}">Prev</a>
+
+    
+{%endsection:previous_page%}
+
+{%section:one_page%}
+
+    <li><a href="{%F:link%}">{%F:pnum%}</a><span>/</span></li>
+
+{%endsection:one_page%}
+
+
+          
+{%section:one_page_selected%}
+
+        <li><span>{%F:pnum%}</span></li>
+
+
+{%endsection:one_page_selected%}
+

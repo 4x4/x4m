@@ -1,0 +1,118 @@
+{%section:_catalog_category_list%}
+
+                 {%F:+b(E:add_file_section(_common/extended/paginator.html))%}
+
+<div class="cat">
+          <div class="cat-search">
+            <div class="title">Сортирвать по: <a href="">алфавиту</a>&nbsp;|<a href="/comparse-page">сравнить</a></div>                
+          </div>
+          
+          
+          
+            <ul>      
+                    {%->:_catalog_list_item%}
+            </ul>
+                    
+                </div>
+                
+                    {%->:page_line%}   
+                    
+                    
+                  
+                  <div id="pagelist">
+                        <p>отображать по:</p>
+                    
+                        {%F:#pagess(catalog:get_onpage_list())%}
+
+                        {%each({F:pagess},k,v)%}
+                        
+                        {%if('{F:v}')%}
+                        
+                            <a href="{%F:v%}">{%F:k%}</a>
+                            
+                            {%else%}
+                            
+                            <span>{%F:k%}</span>
+                            
+                        {%endif%}
+                        
+                        
+                        {%endeach%}
+                    </div>
+
+                  {%->:_catalog_empty%}
+
+{%endsection:_catalog_category_list%}
+
+
+
+{%section:_catalog_list_item->%}
+            <li> 
+                        {%if(Common::is_file_exists('{F:image}'))%} 
+                                    <a class="pic" href="{%F:Link%}"><img alt="" src="{%F:image(E:image_transform(100,100))%}"></a>
+                        {%endif%}
+
+            <a class="name" href="{%F:Link%}">{%F:Name%}</a>
+              <p>
+                
+                {%F:description%}
+                
+                <a href="{%F:Link%}">подробнее...</a>
+              </p>
+              <ul>
+              
+              
+                <li><span>Кол-во:</span>
+                  <input  name="count" value="1">
+                </li>
+                
+              <!--  <li> <span>Цвет: </span>
+                  <select>
+                    <option>-Светлое-</option>
+                    <option>-Темное-</option>
+                  </select>
+                </li>      -->
+                
+              </ul>
+              
+              
+                {%F:#incomp(catalog:in_comparse({F:id}))%}  
+                
+              <p class="compare"><input rel="{%F:id%}" name="comparse" {%if({F:incomp})%} checked="1" {%endif%} type="checkbox"> <span>добавить к сравнению</span></p>
+                  
+                  {%F:#curr(MAIN:get_currency())%}  
+                  <p class="cost">{%F:price(E:number_format(|[2, '.', '']|))%}  {%F:curr>name%}</p>
+                  <a id="{%F:id%}" rev="tocart" class="button" href="#">В корзину</a> 
+                  </li>                              
+                                            
+                                              
+                
+
+
+{%endsection:_catalog_list_item%}
+
+
+{%section:_catalog_empty->%}
+    <p>Товары отсутсвуют</p>
+{%endsection:_catalog_empty%}
+
+
+{%section:Title%}
+    
+    {%if('{F:params>Title}')%}
+        
+        {%F:params>Title%}
+        
+        {%else%}
+
+            {%F:#up(catalog:get_up_path({F:id},4224,1))%} 
+            {%F:#up2(php:array_reverse({F:up}))%} 
+        
+        {%each({F:up2},k,v)%} | {%F:v>params>Name%}   {%endeach%}
+        
+    {%endif%}
+    
+    
+    
+{%endsection:Title%}
+

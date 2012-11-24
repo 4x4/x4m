@@ -1,0 +1,72 @@
+{%section:show_gallery_list%}
+<p>{page_transition}</p>
+<select class="validate-selection" id="page" name="page">
+</select>
+
+<p>{GalleryStart}</p>
+<select id="GalleryStartId" name="GalleryStartId" class="validate-selection">
+</select>
+
+    
+    
+
+<p>{template_display_list_of_photo_albums}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{number_of_displayed_photo_album}</p>
+<p style="font-weight:normal;">({0_display_all_the_photo_albums})</p>
+<input class="validate-number" id="count" type="text" value='0'/>
+{%endsection:show_gallery_list%}
+
+
+{%section:show_selected_album%}
+<p>{template_display_photo_album}</p>
+<select id="Template" class="validate-selection">
+</select>
+
+    <p>{album_displayed_by_default}</p>
+    <input id="GalleryStart" class="inp-b1 required" readonly />
+    <input id="GalleryStartId" type="hidden" class="required"/>
+    <a class="button small" href="javascript:void(0)" id="startXlistAlbum">{select}</a>
+
+
+<p>{number_of_images_in_the_series}</p>
+<input id="Levels" type="text" value='3'/>
+<p>{maximum_number_of_rows_per_page}</p>
+<p style="font-weight:normal;">({0_display_all_the_photos_on_one_page})</p>
+<input class="validate-number" id="rows" type="text" value='0'/>
+<p>{default_width}</p>
+<input id="Width" type="text" value=''/>
+
+{%endsection:show_selected_album%}
+
+
+{%section:show_gallery_server%}
+<p>{template_display_photo_album}</p>
+<select id="MTemplate" class="validate-selection">
+</select>
+<p>{number_of_images_in_the_series}</p>
+<input id="Levels" type="text" value='3'/>
+<p>{maximum_number_of_rows_per_page}</p>
+<p style="font-weight:normal;">({0_display_all_the_photos_on_one_page})</p>
+<input class="validate-number" id="max_rows" type="text" value='0'/>
+<p>{action_is_performed_by_default}</p>
+<select id="Default_action" onChange="javascript:XTR_ModulelistEditor.get_action_properties(this.options[this.selectedIndex].value,'secondary')">
+</select>
+</div>
+<div id="secondary_properties"></div>
+<div id="secondary_signals"></div>
+{%endsection:show_gallery_server%}
+
+{%section:show_from_folder%}
+<p>{template_display_photo_album}</p>
+<select id="Template" class="validate-selection"></select>
+                     
+ <p>{imageFolder}</p>     
+ <input class="inp-b2" id="ImageFolder" type="text" name="ImageFolder"/>
+ <a onclick="xFileManager.selectFolder('ImageFolder'); var t = document.getElementsByClassName('dhtmlx_window_inactive')[0]; t.style.zIndex='200'; t.className='dhtmlx_window_active';" href="javascript:void(0)" class="button small">Выбрать</a>
+ 
+<p>{maximum_number_of_rows_per_page}</p>
+<p style="font-weight:normal;">({0_display_all_the_photos_on_one_page})</p>
+<input class="validate-number" id="rows" type="text" value='0'/>
+{%endsection:show_from_folder%}

@@ -1,0 +1,12 @@
+          {%section:letter_subject%}
+ Вопрос с сайта, категория "{%F:category_name%}"
+{%endsection:letter_subject%}
+
+{%section:letter%}
+    <h1>Вопрос  с сайта</h1>
+    <p><strong>Раздел</strong>: {%F:category_name%}</p>
+    <p><strong>Пользователь</strong> {%F:user%}({%F:email%}) спрашивает:  </p>
+    <p>{%F:question%}</p>
+    
+{%endsection:letter%}
+

@@ -1,0 +1,124 @@
+{%section:vote%}
+  <script language="javascript" src="/templates/_ares/js/votes.js"></script> 
+  <div class="questions">
+  <div class="title">Опрос | <a href="{%F:results_link%}">Результаты опроса</a>  </div>
+  <h2>{%F:question%}</h2>
+  <form name="voteForm" method="post" action="{%F:action%}">
+    <ul class="oprelements">{%->:inputs%}</ul>
+    {%->:multiple%}
+    <input type="hidden" id="variant" value="0" name="variant"/> 
+  
+  
+  <a class="button" rel="vote" href="javascript:void(0)">Ответить</a>
+    
+    
+   </div>
+
+  </form>
+{%endsection:vote%}
+
+
+
+
+
+
+{%section:vote_completed%}
+  <div class="voiting">
+    <h1>Опрос завершен</h1>  
+    <div class="vt-top"></div>
+    <div class="vt-mid">
+      <p>{%F:question%}</p>
+    </div>
+    <div class="vt-bottom"></div>
+    <h1><a href="{%F:show_results%}">Просмотреть результаты</a></h1>
+  </div>
+{%endsection:vote_completed%}
+
+{%section:radio->inputs%}
+  
+  <li><a rel="{%F:var_id%}" href="javascript:void(0);">{%F:text%}</a></li>
+    
+  
+{%endsection:radio%}
+
+{%section:check->inputs%}
+  <li>
+    <div class="radio">
+      <a href="javascript:void(0);"></a>
+    </div>
+    <div class="txt">
+      <a href="javascript:void(0);">{%F:text%}</a>
+    </div>
+    <input type="hidden" id="var_{%F:var_id%}"  name="var_{%F:var_id%}"/>
+  </li>
+{%endsection:check%}
+
+{%section:other_radio->inputs%}
+  <li>
+    <div class="radio">
+      <a href="javascript:void(0)"></a>
+    </div>
+    <div class="txt">
+      <a href="javascript:void(0)" id="other_link">Другой вариант ответа</a>
+    </div>
+  </li>
+  <li class="field">
+    <input type="text" id="other_text" name="othertext" class="votes-other" />
+  </li>
+{%endsection:other_radio%}
+
+{%section:other_check->inputs%}
+  <li>
+     <div class="radio">
+      <a href="javascript:void(0)"/>
+    </div>
+    <div class="txt">
+      <a href="javascript:void(0)" id="other_link">Другой вариант ответа</a>
+    </div>
+  </li>
+  <li class="field">
+    <input type="text" id="other_text" name="other_text" class="votes-other" />
+  </li>
+{%endsection:other_check%}
+
+{%section:multiple->%}
+    <input type="hidden" id="multiple" name="multiple" value="{%F:value%}"/>
+{%endsection:multiple%}
+
+{%section:results%}
+  <h1>Результаты голосования</h1>
+  <h2>{%F:question%}</h2>
+  <p>{%->:thanks%}{%->:nothanks%}</p>
+  <h2>Опрос проводится с {%F:date1%} по {%F:date2%}</h2>
+  <ul class="stats">
+    {%->:stats%}
+  </ul>
+  {%->:other_vars%}
+{%endsection:results%}
+
+{%section:thanks->%}
+  <p>Спасибо за ответ, Ваше мнение важно для нас!<p>
+{%endsection:thanks%}
+
+{%section:nothanks->%}
+  <span class='error'>Вы уже голосовали в данном опросе.</span>
+{%endsection:nothanks%}
+
+{%section:result_row->stats%}
+  <li>
+    <p>{%F:text%} (<strong>{%F:count%}</strong>)</p> 
+    <div style="width: {%F:percent%}%;">
+      <span>{%F:percent%}%</span>
+    </div>
+  </li>
+{%endsection:result_row%}
+
+{%section:result_other->other_vars%}
+<h2>Варианты других ответов:</h2>
+  {%->:others%}
+{%endsection:result_other%}
+
+{%section:other_variants->others%}
+  
+  <p>{%F:text%} ({%F:count%})</p>
+{%endsection:other_variants%}

@@ -1,0 +1,17 @@
+<div id="e-form">
+  <form id="group_new">
+    <p>{category_name}</p>
+    <input id="Name" class="required validate-alpha-ext" name="Name" type="text" />
+    <p>{status_categories}</p>
+    <input id="showGroup" class="inp-b1 required" readonly />
+    <input id="showGroupId" type="hidden" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a>
+    <p>{group_of_properties_by_default}</p>
+    <select id="Property_set_default">
+    </select>
+    <p>{properties_category}</p>
+    <select class="validate-selection" id="Property_set" onchange="javascript:XTR_catalog.change_property_set(this.options[this.selectedIndex].value)">
+    </select>
+  </form>
+  <div id="properties_holder"> </div>
+  <a class="button" href="javascript:XTR_catalog.save_new_catgroup()">{save}</a> </div>

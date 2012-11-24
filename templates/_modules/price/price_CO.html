@@ -1,0 +1,20 @@
+{%section:_menu%}    
+
+{%F:#usergroupName(E:get_session_module_param(siteuser,usergroupName))%}
+
+{%if('{F:usergroupName}'=='Корпоративные клиенты' or '{F:usergroupName}'=='Рекламные агентства')%}
+<div class="text">
+<h1>Корпоративным клиентам</h1>
+                        <ul class="list">
+                               {%->:menu_buff%}
+                              </ul>
+  </div>
+                      {%endif%}
+                      
+  
+
+{%endsection:_menu%}
+
+{%section:_menu_item->menu_buff%}
+        <li> <a  href="{%F:link%}">{%F:caption%}</a> Размер:({%F:size%}) Обновлен:{%F:time%} </li>
+{%endsection:_menu_item%}

@@ -1,0 +1,93 @@
+<?php$LANG=array (
+  'add_form' => 
+  array (
+    'use_the_CAPTCHA' => 'использовать CAPTCHA код верификации для предотвращения фальшивых отсылок формы',
+    'complexity_recognizers_CAPTCHA' => 'Сложность распознования CAPTCHA',
+    'captcha_easy' => 'Легкая',
+    'captcha_medium' => 'Средняя',
+    'captcha_high' => 'Сложная',
+    'captcha_very_high' => 'Очень сложная',
+    'subject' => 'Тема письма',
+    'charset' => 'Кодировка',
+    'async' => 'Отправить асинхронно',
+    'message_after_sending' => 'Сообщение после отправки',
+    'fields_form' => 'Поля формы',
+    'add_fields' => 'Добавить поля для формы',
+    'timeout' => 'Тайм-аут между отправкой сообщений (сек.)',
+    'file' => 'Поле для загрузки файла',
+  ),
+  'edit_form' => 
+  array (
+    'use_the_CAPTCHA' => 'использовать CAPTCHA код верификации для предотвращения фальшивых отсылок формы',
+    'complexity_recognizers_CAPTCHA' => 'Сложность распознования CAPTCHA',
+    'captcha_easy' => 'Легкая',
+    'captcha_medium' => 'Средняя',
+    'captcha_high' => 'Сложная',
+    'captcha_very_high' => 'Очень сложная',
+    'subject' => 'Тема письма',
+    'charset' => 'Кодировка',
+    'async' => 'Отправить асинхронно',
+    'message_after_sending' => 'Сообщение после отправки',
+    'fields_form' => 'Поля формы',
+    'add_fields' => 'Добавить поля для формы',
+    'timeout' => 'Тайм-аут между отправкой сообщений (сек.)',
+    'file' => 'Поле для загрузки файла',
+  ),
+  'settings' => 
+  array (
+    'use_the_CAPTCHA' => 'использовать CAPTCHA код верификации для предотвращения фальшивых отсылок формы',
+    'complexity_recognizers_CAPTCHA' => 'Сложность распознования CAPTCHA',
+    'captcha_easy' => 'Легкая',
+    'captcha_medium' => 'Средняя',
+    'captcha_high' => 'Сложная',
+    'captcha_very_high' => 'Очень сложная',
+    'subject' => 'Тема письма',
+    'charset' => 'Кодировка',
+    'async' => 'Отправить асинхронно',
+    'message_after_sending' => 'Сообщение после отправки',
+    'fields_form' => 'Поля формы',
+    'add_fields' => 'Добавить поля для формы',
+    'timeout' => 'Тайм-аут между отправкой сообщений (сек.)',
+  ),
+  'ainterface' => 
+  array (
+    'select_forms_or_form' => 'Выберите группу форм или одну форму:',
+    'template_form' => 'Шаблон формы:',
+    'template_for_submitting_form' => 'Шаблон для отправки формы:',
+  ),
+  'form_content' => 
+  array (
+    'text_form' => 'Текст формы',
+  ),
+  'fields' => 
+  array (
+    'field_name' => 'Название&frasl;заголовок поля:',
+    'compulsory_to_fill' => 'обязательное для заполнения',
+    'elements_of_the_list' => 'Элементы списка &lang;каждый элемент с новой строки)&rang;. Например, значение или значение:название',
+    'for_example_i_agree_to_the_terms_of_the_agreement' => 'например, &lowast;Я принимаю условия соглашения&lowast;',
+    'allows_you_to_enter_the_date_of_the_event_or_select_a_time_interval' => 'позволяет ввести дату события или выбрать интервал времени',
+    'valid_message' => 'Одобряющее сообщение',
+    'failure_message' => 'Сообщение об ошибке',
+    'additional_failure_message' => 'Доп. сообщение об ошибке',
+    'additional_options' => 'Дополнительные опции',
+    'identifier' => 'Идентификатор',
+    'default_value' => 'Значение по умолчанию',
+    'value' => 'Значение',
+    'readonly' => 'Только для чтение',
+    'pattern' => 'Шаблон (регулярное выражение)',
+    'file_types_for_users' => 'Отобразить типы файлов для пользователей',
+    'file_types' => 'Типы файлов',
+    'button_name' => 'Название для кнопки',
+    'text' => 'Текст',
+    'url' => 'Url',
+    'hidden' => 'Скрытое',
+    'numerical' => 'Число',
+    'file' => 'Поле для загрузки файла',
+    'file_types_for_users_example' => 'например: *.jpg;*.jpeg;*.gif;*.png',
+    'file_types_example' => 'например: jpg, jpeg, gif, png',
+  ),
+  'define_front_actions' => 
+  array (
+    'show_forms' => 'Вывести группу форм или одну форму',
+  ),
+)?>

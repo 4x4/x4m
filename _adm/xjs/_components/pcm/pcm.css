@@ -1,0 +1,40 @@
+div.menu {
+	left: 0px; position: absolute; top: 0px
+	}
+div.menu a {
+	display: block;
+	text-decoration: none;
+	font-size:11px;
+	}
+div.menu .separator {
+	padding:0;
+	height: 1px;
+	overflow: hidden;
+	}
+.firefox {
+	background:#ededed;
+	border-top:1px outset #f1efef;
+	border-left:1px outset #f1efef;
+	border-right:2px ridge #727272;
+	border-bottom:2px ridge #727272;
+	padding:2px 0 2px 0;
+	}
+.firefox a {
+	padding:5px 15px 5px 15px;
+	margin: 0px 2px; 
+	color: #555;
+	}
+.firefox a:hover {
+	background: #cf4676; 
+	color:white;
+	}
+.firefox a.disabled {
+	color: #bbb
+}
+.firefox a.disabled:hover {
+	background: #f4f5eb; 
+	color:#bbb
+	}
+.firefox .separator {
+	background: #999; margin: 4px; border-bottom: #fff 1px solid
+	}

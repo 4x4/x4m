@@ -1,0 +1,162 @@
+
+{%section:_catalog_show_search%}
+               
+               <div class="srch_title catpad">Дополнительные параметры</div>
+               
+               <table class="search_table catpad" border="0" cellpadding="0" cellspacing="0">
+
+                   <tbody>
+                    {%->:sfields%}
+                   </tbody>
+               </table>
+               
+               <p  class="findbutton catpad"><a href="javascript:void(0)" class="subm"><img src="images/findbutton.gif" alt="НАЙТИ" width="56" height="21" /></a></p>
+               
+  {%endsection:_catalog_show_search%} 
+
+
+{%section:_catalog_search_interval->sfields%}
+    {%F:-(E:clear_section(options))%}
+        <tr>
+                       <td class="parameter">
+                       {%F:sname%}
+                       </td>
+                   </tr>                             
+                   <tr>
+                       <td>
+                        {%if('{F:catselector}')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                
+                                {%F:#(E:add_replace(options_t,val,{F:to_value}))%}
+                                {%F:#(E:add_replace(options,val,{F:from_value}))%}
+                                
+                                {%F:#(E:parse_section(options,{F:catselector},1,1))%}
+                                
+                                {%F:#(E:parse_section(options_t,{F:catselector},1,1))%}
+                                
+                                    от <select  class="small_from" name="{%F:from%}"  value="{%F:from_value%}" >    
+                                    <option selected></option>
+                                    {%->:options%}
+                                    </select>до<select  class="small_from" name="{%F:to%}" value="{%F:to_value%}>    
+                                    <option selected></option>
+                                    {%->:options%}
+                                    </select>
+                        {%else%}
+                           от <input class="small_pad" name="{%F:from%}" value="{%F:from_value%}">
+                           до  <input class="small" name="{%F:to%}" value="{%F:to_value%}">
+                        {%endif%}
+                       
+                       </td>
+                   </tr>
+
+                            
+{%endsection:_catalog_search_interval%}
+
+{%section:_catalog_search_larger->sfields%}
+  {%F:-(E:clear_section(options))%}
+    <tr>
+                       <td class="parameter">
+                       {%F:sname%}
+                       </td>
+                   </tr>                             
+                   <tr>
+                       <td>
+                        {%if('{F:catselector}')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                {%F:#(E:add_replace(options,val,{F:value}))%}      
+                                {%F:#(E:parse_section(options,{F:catselector},1,1))%}
+                                 <select  name="{%F:input_name%}" value="{%F:value%}">    
+                                    <option selected></option>
+                                    {%->:options%}
+                                </select>
+
+                        {%else%}
+                        от <input class="small_pad" name="{%F:from%}" value="{%F:value%}">   
+                        {%endif%}
+                       </td>
+                   </tr>
+                                           
+{%endsection:_catalog_search_larger%}
+
+
+{%section:_catalog_search_less->sfields%}
+  {%F:-(E:clear_section(options))%}
+    <tr>
+                       <td class="parameter">
+                       {%F:sname%}
+                       </td>
+                   </tr>                             
+                   <tr>
+                       <td>
+                        {%if('{F:catselector}')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                
+                                {%F:#(E:add_replace(options,val,{F:value}))%}   
+                                   
+                                {%F:#(E:parse_section(options,{F:catselector},1,1))%}
+                                 <select  name="{%F:input_name%}" value="{%F:value%}">    
+                                    <option selected></option>
+                                    {%->:options%}
+                                </select>
+
+                        {%else%}
+                        до <input class="small_pad" name="{%F:from%}" value="{%F:value%}">      
+                        {%endif%}
+                       </td>
+                   </tr>
+                                           
+{%endsection:_catalog_search_less%}
+
+{%section:_catalog_search_equal->sfields%}
+  {%F:-(E:clear_section(options))%}
+    <tr>
+                       <td class="parameter">
+                       {%F:sname%}
+                       </td>
+                   </tr>                             
+                   <tr>
+                       <td>
+                        {%if('{F:catselector}')%}
+                                {%F:#catselector(E:asort({F:catselector}))%}
+                                {%F:#(E:add_replace(options,val,{F:value}))%}                                    
+                                {%F:#(E:parse_section(options,{F:catselector},1,1))%}
+                                 <select  name="{%F:input_name%}" value="{%F:value%}">    
+                                    <option selected></option>
+                                    {%->:options%}
+                                </select>
+
+                        {%else%}
+                            <input name="{%F:input_name%}" value="{%F:value%}">
+                        {%endif%}
+                       </td>
+                   </tr>
+                                           
+
+{%endsection:_catalog_search_equal%}
+
+
+{%section:options_t->%}
+    {%F:#(E:add_section_vars(val))%}
+        <option selected value="{%F:key%}">{%F:val%}</option>
+     {%if('{F:key}'=='{F:val}')%}
+        <option selected value="{%F:key%}">{%F:value%}</option>
+     {%else%}
+        <option value="{%F:key%}">{%F:value%}</option> 
+     {%endif%}
+    
+    
+
+{%endsection:options_t%}
+
+
+{%section:options->%}
+{%F:#(E:add_section_vars(val))%}
+
+     {%if('{F:key}'=='{F:val}')%}
+        <option selected value="{%F:key%}">{%F:value%}</option>
+     {%else%}
+        <option value="{%F:key%}">{%F:value%}</option> 
+     {%endif%}
+
+
+{%endsection:options%}

@@ -1,0 +1,28 @@
+<div class="pw-edit popup">
+
+
+  <form id="permission">
+    <p>{role_name}</p>
+    <select id="roles_schemes" onchange="XTR_users.get_permissions(this)"></select>
+  
+  <div id="permissions_boxes" style="display:none;">
+    
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="read" />
+        Read</li>
+      <li>
+        <input type="checkbox" name="write" />
+        Write</li>
+      <li>
+        <input type="checkbox" name="delete" />
+        Delete</li>
+      
+    </ul>
+    
+    </div>
+  </form>
+  
+  <a class="button" href="javascript:XTR_users.save_permissions()">{save}</a> 
+  
+  </div>

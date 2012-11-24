@@ -1,0 +1,15 @@
+<div id="e-form">
+  <form id="edit_category">
+    <p>{group_name}</p>
+    <input  class="required validate-alpha" type="text" name="basic"  value="" />
+    <input  type="hidden" name="id"  id="id" value="" />
+    
+    <p>{description}</p>
+    <textarea  ondblclick="XTR_main.apply_xinha(this)"  name="description" id="description"></textarea>
+    <ul class="chk">
+      <li><input type="checkbox" name="hashed_link" id="hashed_link" />{hashed_links}</li>
+    </ul>
+
+  </form>
+  <a class="button" href="javascript:XTR_price.save_edited_category()">{save}</a> </div>
+<div id="slotzcontainer"> </div>

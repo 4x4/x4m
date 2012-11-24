@@ -1,0 +1,56 @@
+html, body {height:100%;}
+*, html, body, ul, ol, dl, li, dt, dd {margin:0px; padding:0px;}
+* html body {width: expression(document.childNodes[1].offsetWidth < 1000 ? '1000px' : 'auto');}
+body {font:12px Arial; background:#241d28; height:100%; color:#fff; position:relative; min-width:1000px;}
+img {border:0px;}
+a {color:#0095da; outline:none;}
+a:hover {text-decoration:none;}
+li {list-style-type:none;}
+.clear{clear:both; height:0px; font-size:0; overflow:hidden;}
+.minWidth {
+	width:830px;
+	min-height:100%;
+  	_height:100%;
+	margin:0 auto;
+	}
+h1 {font:normal 23px Arial;}
+/*----------------------------------------------------------------------------------------START*/
+.maincontainer {width:830px; padding:0 0 110px 0; float:left;}
+/*-----------------------------------------------------------------------------------------TOP*/
+.top {padding:60px 0 0 0; float:left;}
+.logo {background:url(../images/logo.png) no-repeat; width:159px; height:47px; margin:0 15px 0 0; display:inline; float:left;}
+.top span {font:normal 30px Arial; border-left:1px solid #fff; padding:0 0 0 15px; float:left;}
+/*-----------------------------------------------------------------------------------------MIDDLE*/
+.middle {padding:22px 0 0 0; float:left;}
+.indicator {width:100%; overflow:hidden; padding:0 0 25px 0; float:left;}
+.indicator li {float:left;}
+.indicator li span {background: url(../images/indicator_bg.png) no-repeat; width:136px; height:21px; display:block; color:#fff; text-decoration:none; text-align:center; padding:6px 9px 0 8px; margin:0 0 0 -6px;}
+.indicator li span.selected {background:url(../images/indicator_bg.png) no-repeat 0 -27px;}
+.indicator li.first span {background:url(../images/indicator_bg.png) no-repeat 0 -54px;}
+.indicator li.first span.selected {background:url(../images/indicator_bg.png) no-repeat 0 -81px;} 
+.indicator li.last span {background:url(../images/indicator_bg.png) no-repeat 0 0; width:128px;}
+.indicator li.last span.selected {background:url(../images/indicator_bg.png) no-repeat 0 -27px; width:128px;} 
+.middle h1 {padding:0 0 15px 0;}
+.text {background:#f5f4f5; color:#241d28; border:1px solid #b22b67; line-height:22px; padding:12px 18px;}
+.button {background:#ab1959; color:#fff; text-decoration:none; padding:5px 10px; border:1px solid #bd296a; font-size:17px; display:inline-block; margin:10px 10px 10px 0;}
+.button.back {background:#ab1959 url(../images/marker.png) no-repeat 7px 7px; padding:5px 10px 5px 25px;}
+.descr {background:#4d4452; line-height:22px; padding:12px 18px;}
+.form {font-size:16px; padding:30px 0;}
+.form li {width:100%; overflow:hidden; padding:0 0 7px 0;}
+.form li span {width:140px; float:left;}
+.form li input {width:250px; border:1px solid #b62867; padding:5px 10px; font-size:14px; float:left;}
+textarea{ border:1px solid #b62867; padding:5px 10px; font:14px Arial; line-height: 14pt;}
+.s-table {margin:20px 0; border-collapse:collapse;}
+.s-table th {background:#4d4452; font-weight:normal;}
+.s-table td, .s-table th {padding:7px 20px; text-align:left; border:1px solid #241d28;}
+.s-table td.true {background:#62934a;}
+.s-table td.false {background:#b70303;}
+/*-----------------------------------------------------------------------------------------------------------BOTTOM*/
+.bottom {
+	width:830px;
+	height:50px;
+	margin:-50px auto 0 auto;
+	}
+.bottom-inner {width:830px; height:50px; font-size:11px; position:absolute;} 
+.b-txt1 {padding:10px 0 0 0; float:left;}
+.b-txt2 {padding:10px 0 0 0; float:right;}

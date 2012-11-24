@@ -1,0 +1,13 @@
+<div id="e-form">
+  <form id="edit_photo">
+    <p>{image_name}</p>
+    <input  class="required validate-alpha" type="text" name="Name"  value="" />
+    <p>{comment}</p>
+    <textarea  name="info" id="info"></textarea>
+
+    <p>{image}</p>
+    <div id="imageview"></div>
+    <input class="inp-b2" name="image" id="image" readonly />
+    <a class="button small" href="javascript:void(0)" title="Выбрать изображение"  onclick="xFileManager.selectFile('image')">{select}</a> <a class="button small iclear" href="javascript:void(0)" title="Очистить" onclick="javascript:$('image').value=''"><span></span>&nbsp;</a>
+  </form>
+  <a href="javascript:XTR_gallery.save_edited_photo();" class="button">{save}</a>  </div>

@@ -1,0 +1,35 @@
+
+{%section:_catalog_show_search%}
+<script>
+$(document).ready(function(){
+
+    $('#searchf').focus(function()
+    {
+                            
+            if($(this).val()=='введите поисковое слово')
+            {
+                this.value='';
+            }
+        
+    }).blur(function(){
+        
+             if(!$(this).val())
+            {
+                this.value='введите поисковое слово';
+            }
+        
+    });
+});
+</script>
+                <form method="POST" id="search-form" action="{%F:action%}">   
+               
+                  <input type="hidden" name="search[endleafs]" value="1">                                   
+                  <input type="hidden" name="search[ancestor][obj_type]" value="_CATOBJ">   
+                  
+                    <div><input id="searchf" type="text" name="search[like][Keywords]" class="search-field"  value="введите поисковое слово"></div>
+                    <div><input type="submit" value="" class="search-btn" name="search"></div>
+                </form>
+
+{%endsection:_catalog_show_search%} 
+
+ 

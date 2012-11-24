@@ -1,0 +1,48 @@
+{%F:control(C:input(|{name:"my",caption:"{page_name}",class:"inp required validate-alpha-ext",type:"password"}|))%}
+{%section:input%}
+
+    <div class="i1">
+             {%if('{F:caption}')%}<p>{%F:caption%}</p>  {%endif%}
+              <input  class="{%F:class%}" name="{%F:name%}"  {%if('{F:type}')%} type="{%F:type%}" {%else%} type="text" {%endif%} />
+
+    </div>
+    
+{%endsection:input%}
+
+
+{%section:select%}
+    <div class="i1">
+             {%if('{F:caption}')%}<p>{%F:caption%}</p>  {%endif%}
+              <select   class="{%F:class%}" name="{%F:name%}"/> </select>
+    </div>
+{%endsection:select%}
+
+
+
+
+
+
+
+
+<div class="i-ch">
+          <p><strong>{page_visibility}</strong></p>
+          <ul>
+            <li>
+              <input type="checkbox" name="Visible" />
+              {do_not_display_the_global_menu}</li>
+            <li>
+              <input type="checkbox" name="DisableGlobalLink" />
+              {disconnect_the_link_from_the_global_menu}</li>
+            <li>
+              <input type="checkbox" name="DisableMapLink" />
+              {disconnect_the_link_from_the_site_map}</li>
+            <li>
+              <input type="checkbox" name="DisablePath" />
+              {do_not_display_in_the_way_of_the_page} </li>
+            <li>
+              <input type="checkbox" name="DisableCache" />
+              {do_not_cache_this_page} </li>
+          </ul>
+        </div>
+ 
+{%F:my(C:checkboxes(|{caption:"{page_name}",checks:[{name:"Visible",caption:"{disconnect_the_link_from_the_global_menu}"},{name:"DisableGlobalLink",caption:"{disconnect_the_link_from_the_global_menu}"}]}|))%}

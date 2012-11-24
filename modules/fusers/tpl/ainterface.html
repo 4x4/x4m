@@ -1,0 +1,42 @@
+{%section:show_auth_panel%}
+<p>{template_authorize_the_withdrawal_of_the_panel}</p>
+<select id="Template" class="validate-selection">
+</select>
+<p>{page_the_user_control_panel}</p>
+<select id="UserPanelPage" class="validate-selection">
+</select>
+<a class="button" onclick="$('hideLinkAuth').show();" href="javascript:void(0)">{after_authorization_by_visiting}</a> <br />
+<br />
+<p style="font-weight:normal;">({default_will_moving_into_the_control_panel_user})</p>
+<div style="display:none" id="hideLinkAuth">
+  <input id="Link" class="inp-b1" />
+  <input id="LinkId" type="hidden" />
+  <a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a> </div>
+{%endsection:show_auth_panel%}
+
+
+{%section:user_panel%}
+<p>{template_to_display_the_pane_the_user}</p>
+<select id="Template" class="validate-selection">
+</select>
+<ul class="chk">
+  <li>
+    <input type="checkbox" id="UseEmailVerify" name="UseEmailVerify" />
+    {use_email_verify} </li>
+  <li>
+    <input type="checkbox" id="doNotVerifyUser" name="doNotVerifyUser" />
+    {do_not_verify_user} </li>
+</ul>
+<p><strong>{redirect}</strong></p>
+<ul class="chk">
+  <li>
+    <input type="checkbox" id="StayOnSamePage" name="StayOnSamePage" />
+    {after_authorization_to_remain_on_the_same_page} </li>
+</ul>
+<a class="button" onclick="$('hideLinkAuth').show();" href="javascript:void(0)">{after_authorization_go_to_page}</a> <br />
+<br />
+<div style="display:none" id="hideLinkAuth">
+  <input id="Link" class="inp-b1"/>
+  <input id="LinkId" type="hidden"/>
+  <a class="button small" href="javascript:void(0)" id="startXXlist">{select}</a> </div>
+{%endsection:user_panel%} 

@@ -1,0 +1,52 @@
+/********************************* LiveValidation *************************************/
+
+.LV_valid {
+    color:#00CC00;
+}
+    
+.LV_invalid {
+    color:#FF1818;
+}
+    
+.LV_validation_message{
+ width:auto;
+ padding: 0 194px 0 0;
+}
+
+.interview .form li .LV_validation_message { float:left !important;}
+    
+.LV_valid_field,
+input.LV_valid_field:hover, 
+input.LV_valid_field:active,
+textarea.LV_valid_field:hover, 
+textarea.LV_valid_field:active,
+.fieldWithErrors input.LV_valid_field,
+.fieldWithErrors textarea.LV_valid_field {
+    border: 1px solid #00CC00;
+}
+    
+.LV_invalid_field, 
+input.LV_invalid_field:hover, 
+input.LV_invalid_field:active,
+textarea.LV_invalid_field:hover, 
+textarea.LV_invalid_field:active,
+.fieldWithErrors input.LV_invalid_field,
+.fieldWithErrors textarea.LV_invalid_field {
+    border: 1px solid #FF1818;
+}
+
+
+/*-----------*/
+fieldset {
+  background:#f7f7f7;
+  padding:2%;
+  border:1px solid #e3e3e3;
+  margin:0;
+}
+
+legend {
+  font-weight:bold;
+  font-size: 120%; 
+  letter-spacing: -1px;
+  color:#666666;
+}

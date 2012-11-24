@@ -1,0 +1,71 @@
+{%section:webpay%}
+ {%if('{F:wsb_test_server}'=='1')%}
+        <form action="https://secure.sandbox.webpay.by:8843/" method="post">
+        {%else%}
+        <form action="https://secure.webpay.by/" method="post">
+        
+    {%endif%}
+    
+    <input type="hidden" name="*scart">
+    <input type="hidden" name="wsb_version" value="2">
+    <input type="hidden" name="wsb_language_id" value="russian">
+    <input type="hidden" name="wsb_currency_id" value="{%F:wsb_currency_id%}" >
+    
+    
+    {%if('{F:wsb_test}'=='1')%}
+        <input type="hidden" name="wsb_test" value="1">
+    {%endif%}
+    
+    <input type="hidden" name="wsb_storeid" value="{%F:wsb_storeid%}" >
+    <input type="hidden" name="wsb_store" value="{%F:wsb_store%}" >
+    <input type="hidden" name="wsb_order_num" value="{%F:wsb_order_num%}" >
+    
+    
+    
+    <input type="hidden" name="wsb_seed" value="{%F:wsb_seed%}">
+    <input type="hidden" name="wsb_return_url" value="{%F:wsb_return_url%}">
+    <input type="hidden" name="wsb_cancel_return_url" value="{%F:wsb_cancel_return_url%}">
+    <input type="hidden" name="wsb_notify_url" value="{%F:wsb_notify_url%}">
+    
+    <input type="hidden" name="wsb_email" value="" >
+    <input type="hidden" name="wsb_phone" value="" >
+
+    <!--{%F:webpay_ishop_currency%}-->
+    
+    {%each({F:cart_items},k,item)%}    
+        <input type="hidden" name="wsb_invoice_item_name[]" value="{%F:item>details>props>Name%}">
+        <input type="hidden" name="wsb_invoice_item_quantity[]" value="{%F:item>count%}">
+        <input type="hidden" name="wsb_invoice_item_price[]" value="{%F:@tprice(ishop:to_currency({F:item>details>props>price},,{F:webpay_ishop_currency}))%}">
+    {%endeach%}
+    
+    <input type="hidden" name="wsb_total" value="{%F:@wt(ishop:to_currency({F:wsb_total},,{F:webpay_ishop_currency}))%}" >
+    
+    <input type="hidden" name="wsb_signature" value="{%F:wsb_signature%}" >
+    
+    
+    
+    {%if('{F:wsb_tax}')%}
+        <input type="hidden" name="wsb_tax" value="">
+    {%endif%}
+    
+    {%if('{F:wsb_shipping_name}')%}
+        <input type="hidden" name="wsb_shipping_name" value="" >
+    {%endif%}
+    
+    {%if('{F:wsb_shipping_price}')%}
+    <input type="hidden" name="wsb_shipping_price" value="" >
+    {%endif%}
+    
+    {%if('{F:wsb_discount_name}')%}
+        <input type="hidden" name="wsb_discount_name" value="Скидка на товар" >
+    {%endif%}
+    
+    {%if('{F:wsb_discount_price}')%}    
+        <input type="hidden" name="wsb_discount_price" value="" >
+    {%endif%}
+    
+</form>
+
+{%endsection:webpay%}
+
+

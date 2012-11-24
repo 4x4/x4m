@@ -1,0 +1,325 @@
+{%section:_forms_group_list%}
+<script type="text/javascript" src="xjs/livevalidation.js"></script>
+<link href="css/lv.css" rel="stylesheet" type="text/css" />
+<script src="templates/_ares/js/swfupload/swfupload.js" type="text/javascript"></script>
+<script src="templates/_ares/js/swfupload/swfupload.queue.js" type="text/javascript"></script>
+<script src="templates/_ares/js/swfupload/fileprogress.js" type="text/javascript"></script>
+<script src="templates/_ares/js/swfupload/handlers.js" type="text/javascript"></script>
+<link href="css/swfobject.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+var RuinEn = {
+            ru : "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя ",
+            en : ['A','B','W','G','D','E','Jo','J','Z','I','I','K','L','M','N','O','P','R','S','T','U','F','H','Ch','Tsch','Sch','Sch','','I','','E','YU','Ya',
+                  'a','b','w','g','d','e','jo','j','z','i','i','k','l','m','n','o','p','r','s','t','u','f','h','ch','tsch','sch','sch','','i','','e','uy','ya','_'],
+            translit:function(str){
+                var tmpstr = "";
+                    for(var i = 0, l = str.length; i < l; i++){
+                        var s = str.charAt(i), n = this.ru.indexOf(s);
+                            if(n >= 0){tmpstr += this.en[n];} else {tmpstr += s;}
+                    }
+                return tmpstr;
+            }
+        }
+</script>
+    {%->:_forms_list_item%}
+{%endsection:_forms_group_list%}
+
+
+{%section:_forms_list_item->%}
+    {%->:form%}
+{%endsection:_forms_list_item%}
+
+
+
+
+{%section:form->%}
+{%F:#fid({F:form_id})%}
+
+                 
+
+<h1>{%F:Name%}</h1>              
+
+    <div id="alerts{%F:form_id%}" {%if('{F:msg}')%}style="color:red;"{%else%}style="display:none; color:red;"{%endif%}>{%F:msg%}</div>
+    <div id="msgsubmitted{%F:form_id%}" style="display:none; color:green">{%F:message_after%}</div>
+
+    <div style="float:left">
+    {%F:comment%}    
+    </div>
+    <form id="form{%F:form_id%}" method="post" action="" class="add-comment contacts">
+
+                
+    <div class="form" id="f{%F:form_id%}">
+            <ul>
+
+                {%->:fields%}
+                
+                
+                    
+                    {%if('{F:async}')%}
+                    
+                    {%else%}
+                            <input type="hidden" name="formId" readonly="readonly" value="{%F:form_id%}" />
+                        
+                    {%endif%}
+                
+                 <li>
+                                    <!--<input type="reset" value="" class="clear-btn">-->
+                                    <input id="submit{%F:form_id%}" value="Отправить форму"  type="submit" value="" class="send-btn">
+                 </li>
+
+                  <div class="formdescr"><span>*</span> <i>Поля обязательные для заполнения.</i></div>
+        </ul>
+        
+    </div>
+    </form>
+
+
+
+
+
+<script type="text/javascript">
+var object{%F:form_id%};
+var captcha{%F:form_id%} = false;
+var updateCaptcha{%F:form_id%};
+{%->:validate_script%}
+var formSubmit{%F:form_id%} = function(){
+    var async = {%if('{F:async}')%}true{%else%}false{%endif%};
+    var Submit = (object{%F:form_id%}) ? object{%F:form_id%}.form.onsubmit : function(){return true;};   
+            if(Submit()){
+                 if(async){
+                    var xforms = new fConnector('forms');
+                    var cForm = xoad.html.exportForm('form{%F:form_id%}');
+                        xforms.execute({recieve_message_async:{formsId:'{%F:form_id%}', data:cForm}});
+                            if(typeof xforms.result.send == 'boolean' && xforms.result.send == true){                                
+                                //document.getElementById('{%F:form_id%}').style.display = 'none';
+                                document.getElementById('alerts{%F:form_id%}').style.display = 'none'; 
+                                document.getElementById('msgsubmitted{%F:form_id%}').style.display = 'block';
+                                setTimeout("document.getElementById('msgsubmitted{%F:form_id%}').style.display = 'none';", 10000);
+                                    if(captcha{%F:form_id%}) {updateCaptcha{%F:form_id%}()};
+                            } else if(typeof xforms.result.send == 'number'){
+                                document.getElementById('alerts{%F:form_id%}').innerHTML = 'Вы часто отправляете сообщение. Подождите еще - ' + xforms.result.send + ' сек.';
+                                document.getElementById('alerts{%F:form_id%}').style.display = 'block';
+                                    if(captcha{%F:form_id%}) {updateCaptcha{%F:form_id%}()};
+                                return false;
+                            } else {
+                                document.getElementById('alerts{%F:form_id%}').innerHTML = 'Произошла непридвиденная ошибка при отправке сообщения. Попробуйте отправить сообщение еще раз.';
+                                document.getElementById('alerts{%F:form_id%}').style.display = 'block';
+                                setTimeout("document.getElementById('alerts{%F:form_id%}').style.display = 'none';", 10000);
+                                    if(captcha{%F:form_id%}) {updateCaptcha{%F:form_id%}()};
+                                return false;
+                            }
+                 } else {
+                     document.getElementById('form{%F:form_id%}').submit();
+                 }
+            }
+}
+document.getElementById('submit{%F:form_id%}').onclick = formSubmit{%F:form_id%};
+</script>
+{%endsection:form%}
+
+
+{%section:success->%}
+<div class="text">
+<strong>Спасибо. Мы свяжемся с вами в ближайшее время. </strong>
+</div>
+{%endsection:success%}
+
+
+{%section:failed->%}
+<div class="text">
+ <b style="color:red;">Ошибка - Проблема с отсылкой формы.</b>
+ </div>
+{%endsection:failed%}
+
+
+{%section:textfield->fields%}
+<li>
+    <p ><strong>{%F:Name%}</strong> {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p>
+    <input type="{%F:type%}" name="{%F:identifier%}" id="{%F:identifier%}" {%F:readonly%} value="{%F:value%}{%F:default_value%}"/>
+</li>
+{%endsection:textfield%}
+
+
+{%section:textarea->fields%}
+<li>
+    <p ><strong>{%F:Name%}</strong> {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p>
+    <textarea name="{%F:identifier%}" id="{%F:identifier%}" {%F:readonly%} cols="50" rows="6">{%F:value%}{%F:default_value%}</textarea>
+</li>
+{%endsection:textarea%}
+
+
+{%section:select->fields%}
+<li>
+    <p ><strong>{%F:Name%}</strong> {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p>
+    <select name="{%F:identifier%}" id="{%F:identifier%}">{%->:options%}</select>
+</li>
+{%endsection:select%}
+
+
+{%section:multiselect->fields%}
+{%F:#size(forms:values_count({F:values}))%}
+<li>
+    <p ><strong>{%F:Name%}</strong> {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p>
+    <select name="{%F:identifier%}[]" id="{%F:identifier%}" multiple size="{%F:size%}">{%->:options%}</select>
+</li>
+{%endsection:multiselect->fields%}
+
+
+{%section:option->options%}
+    <option {%F:selected%} value="{%F:value%}">{%F:name%}</option>
+{%endsection:option%}
+
+
+{%section:flag->fields%}
+<li>
+    <p ><strong>{%F:Name%}</strong> {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p>
+    <input type="checkbox" name="{%F:identifier%}" id="{%F:identifier%}" value="on" {%F:check%}/>
+</li>
+{%endsection:flag->fields%}
+
+
+{%section:file->fields%}
+<li>
+    <label for="{%F:identifier%}"><p>{%F:Name%} {%if('{F:file_types_for_users}')%}({%F:file_types_for_users%}){%endif%} {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p></label>
+    <input type="text" name="file{%F:identifier%}" id="file{%F:identifier%}" readonly="readonly" disabled="disabled" value="{%F:value%}" />
+    <input type="hidden" name="{%F:identifier%}" id="{%F:identifier%}" readonly="readonly" value="{%F:value%}" style="display:none;" />
+    <span id="spanButtonPlaceHolder"></span>
+    <!--<a href="javascript:void(0);" class="button">Обзор</a>-->
+    <input id="btnCancel" type="button" value="отмена" onclick="swfu{%F:identifier%}.cancelQueue();" style="display:none;" />
+    <div class="fieldset flash" id="fsUploadProgress"></div>
+    <script type="text/javascript">
+ if (window.onload){
+
+            var swfu{%F:identifier%} = new SWFUpload({
+                flash_url : "./../../../js/swfupload/flash/swfupload.swf",
+                upload_url: "./../../../swfupload.php",
+                post_params: {"PHPSESSID" : "file", "file_types" : "{%F:file_types%}"},
+                file_size_limit : "100 MB",
+                file_types : "{%if('{F:file_types_for_users}')%}{%F:file_types_for_users%}{%else%}*{%endif%}",
+                file_types_description : "",
+                file_upload_limit : 100,
+                file_queue_limit : 100,
+                custom_settings : {
+                    progressTarget : "fsUploadProgress",
+                    cancelButtonId : "btnCancel"
+                },
+                debug: false,
+
+                button_image_url: "",
+                button_width: "88",
+                button_height: "18",
+                button_placeholder_id: "spanButtonPlaceHolder",
+                button_text: "{%if('{F:button_name}')%}{%F:button_name%}{%else%}Обзор{%endif%}",
+                button_text_style: ".theFont {font-family:arial; font-size:10; font-weight:bold;}",
+                button_text_left_padding: 12,
+                button_text_top_padding: 1,
+                button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+                
+                file_queued_handler : fileQueued,
+                file_queue_error_handler : fileQueueError,
+                file_dialog_complete_handler : fileDialogComplete,
+                upload_start_handler : uploadStart,
+                upload_progress_handler : uploadProgress,
+                upload_error_handler : uploadError,
+                upload_success_handler : uploadSuccess,
+                upload_complete_handler : function(file, uploadComplete){
+                    file.name = RuinEn.translit(file.name);
+                    document.getElementById('file{%F:identifier%}').value = file.name;
+                    document.getElementById('{%F:identifier%}').value = '<a href="http://' + window.location.hostname + '/media/uploads/' + file.name+'" target="_blank">'+file.name+'</a>';
+                    //setTimeout(" $('div.progressWrapper').fadeOut();", 1000);
+                    return uploadComplete;
+                }
+                //queue_complete_handler : queueComplete    // Queue plugin event
+            });
+ }
+</script>
+</li>
+{%endsection:file%}
+
+
+
+{%section:data->fields%}
+<li>
+    <p ><strong>{%F:Name%}</strong> {%if('{F:compulsory_to_fill}')%}<span>*</span>{%endif%}</p>
+    <input type="text" name="{%F:identifier%}" id="{%F:identifier%}" value="{%F:value%}"/>
+</li>
+{%endsection:data%}
+
+
+
+{%section:captcha->fields%}
+<li>
+    <span><img id="captcha{%F:form_id%}" src="captcha.php?fid={%F:form_id%}" /></span>
+    <a class="ubutton" href="javascript:void(0)" id="updatecaptcha{%F:form_id%}">обновить</a>
+</li>
+<li>
+    >Код подтверждения({%F:Length%} символа (ов)) <span>*</span>
+    <input id="captcha_{%F:form_id%}" name="captcha_{%F:form_id%}" maxlength="{%F:Length%}" />
+    
+</li>
+{%endsection:captcha%}
+
+
+
+{%section:msg%}
+    {%if('{F:error_type}' == 'timer')%}
+        Вы часто отправляете сообщение. Подождите еще - {%F:time_left%} сек.
+    {%endif%}
+    {%if('{F:error_type}' == 'captcha')%}
+        Код подтверждения отсутствует, либо Вы ввели его неправильно.
+    {%endif%}
+    {%if('{F:error_type}' == 'undefined')%}
+        Произошла непридвиденная ошибка при отправке сообщения. Попробуйте отправить сообщение еще раз.
+    {%endif%}
+{%endsection:msg%}
+
+
+
+
+{%section:validate_script->%}
+    {%->:validation%}
+{%endsection:validate_script%}
+
+
+{%section:validation->%}
+
+        {%if('{F:compulsory_to_fill}' && '{F:validate_type}' != 'captcha')%}
+            var {%F:identifier%} = new LiveValidation('{%F:identifier%}', {validMessage:'{%F:valid_message%}'});
+                {%F:identifier%}.add(Validate.Presence, {failureMessage:'{%F:failure_message%}'});{%endif%}
+        {%if('{F:validate_type}' == 'email')%}
+                {%F:identifier%}.add(Validate.Email, {failureMessage:'{%F:additional_failure_message%}'});{%endif%}
+        {%if('{F:validate_type}' == 'url')%}
+                {%F:identifier%}.add(Validate.URL, {failureMessage:'{%F:additional_failure_message%}'});{%endif%}  
+        {%if('{F:validate_type}' == 'numerical')%}
+                {%F:identifier%}.add(Validate.Numericality, {notANumberMessage:'{%F:additional_failure_message%}'});{%endif%}
+        {%if('{F:validate_type}' == 'pattern' && '{F:compulsory_to_fill}')%}
+                {%F:identifier%}.add(Validate.Format, {pattern:{%F:pattern%}, failureMessage:'{%F:failure_message%}'});{%endif%}
+        {%if('{F:validate_type}' == 'flag')%}
+                {%F:identifier%}.add(Validate.Acceptance, {failureMessage:'{%F:additional_failure_message%}'});{%endif%}
+        {%if('{F:validate_type}' == 'multiselect')%}
+                {%F:identifier%}.add(Validate.Custom, {against: function(value){ return value; }, failureMessage:'{%F:additional_failure_message%}'});{%endif%}
+                
+        {%if('{F:validate_type}' == 'pattern' && !'{F:compulsory_to_fill}')%}
+            var {%F:identifier%} = new LiveValidation('{%F:identifier%}', {validMessage:'{%F:valid_message%}'});
+                {%F:identifier%}.add(Validate.Format, {pattern:{%F:pattern%}, failureMessage:'{%F:failure_message%}'});{%endif%}
+            
+        {%if('{F:validate_type}' == 'captcha')%}
+            var {%F:identifier%} = new LiveValidation('{%F:identifier%}', {validMessage:'Код верный!'});
+                {%F:identifier%}.add(Validate.Presence, {failureMessage:'Обязательно для заполнения'});
+                {%F:identifier%}.add(Validate.Length, {minimum:{%F:Length%}, maximum:{%F:Length%}, tooShortMessage:'Должно быть не менее {%F:Length%} символов!'});
+                {%F:identifier%}.add(Validate.Custom, {against: function(code){
+                    if(code.length == {%F:Length%}){
+                        var xcaptcha = new fConnector('forms');
+                            xcaptcha.execute({check_captcha_code:{formsId:'{%F:form_id%}', captcha:code}});
+                                if(xcaptcha.result.captcha == true){ return true; }
+                                else { return false;  }
+                    }
+                }, failureMessage: "Неверный код подтверждения!"});
+                captcha{%F:form_id%} = true;
+                updateCaptcha{%F:form_id%} = function(){document.getElementById('captcha{%F:form_id%}').src = 'captcha.php?fid={%F:form_id%}&rand='+ Math.floor(Math.random()*1000);}
+                    document.getElementById('updatecaptcha{%F:form_id%}').onclick = updateCaptcha{%F:form_id%};
+                    document.getElementById('captcha{%F:form_id%}').onclick = updateCaptcha{%F:form_id%};{%endif%}
+        
+        
+object{%F:form_id%} = {%F:identifier%};
+{%endsection:validation%}

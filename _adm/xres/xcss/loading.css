@@ -1,0 +1,80 @@
+#overlay{
+	background:#19191a;
+	position:fixed;
+	z-index:100;
+	left:0;
+	}
+.logo-light{
+	background:url(../ximg/loading/light.jpg) no-repeat;
+	width:557px;
+	height:249px;
+	}
+#logo-loading{
+	background:url(../ximg/loading/x3m_logo.png) no-repeat;
+	width:565px;
+	height:147px;
+	margin:53px 0 0 -4px;
+	float:left;
+ 	}
+#loadline{
+	width:560px;
+	height:26px;
+	border:1px solid #5e5b5b;
+	margin:20px 0 0 0;
+	text-align:left;
+	position:relative;
+    background:url(../ximg/loading/load_line_grad.gif) repeat-x;	
+    }    
+#loadline.progress_bar_inactive{background:none;}
+#loadline.progress_bar_active{background:url(../ximg/loading/load_line_grad.gif) repeat-x;}
+
+#loadline div{
+	background-color:#000;
+	color:#fff;
+	font:20px Tahoma;
+	}
+
+#percent{
+	color:#fff;
+	font:20px Tahoma;
+	padding:0 10px 0 0;
+	}
+#ll-txt{
+	width:560px;
+	text-align:left;
+	margin:5px 0 0 0;
+	font:12px Tahoma;
+	color:#FFF;		
+	}
+.small-loading{
+	float:left;
+	position:absolute;
+	top:10px;
+	left:10px;
+	color:#fff;
+    z-index:33;
+	}
+.sl-left{
+	background:url(../ximg/loading/bg_small_loading.png) no-repeat;
+	width:4px;
+	height:47px;
+	float:left;
+	}
+.sl-center{
+	background:url(../ximg/loading/bg_small_loading.png) 0 -47px repeat-x;
+	height:47px;
+	float:left;
+	}
+.sl-center .anim { background:url(../ximg/loading/ajax-loader.gif) no-repeat; width:32px; height:32px; float:left; margin:7px 7px 0 4px;}
+.sl-center p{color:#e1e1e1; float:left; font:normal 18px Arial; margin:12px 13px 0 0;}
+.sl-right{
+	background:url(../ximg/loading/bg_small_loading.png) 0 -94px  no-repeat;
+	width:4px;
+	height:47px;
+	float:left;
+	}
+.copyright{
+	padding:140px 0 0 0;
+	color:#aba6a6;
+	}
+.copyright a{color:#ccc5c5;}

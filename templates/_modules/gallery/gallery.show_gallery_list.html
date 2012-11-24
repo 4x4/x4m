@@ -1,0 +1,30 @@
+{%section:galleries%}
+<script type="text/javascript" src="{%F:_ARES%}js/shadowbox/shadowbox.js"></script>
+<link rel="stylesheet" type="text/css" href="{%F:_ARES%}js/shadowbox/shadowbox.css" />
+
+<h1>Фотогалерея</h1>
+<div class="gallery" id="gallery">  
+{%if('{F:gallery_short}')%}<div class="gallery-desc">{%F:gallery_short%}</div>{%endif%}
+    <ul class="self-gallery"><li><ul>{%->:item%}</ul></li></ul>
+</div>
+
+<script type="text/javascript">Shadowbox.init({ handleOversize: "drag", displayNav: true, handleUnsupported: "remove", autoplayMovies: true });</script>
+{%endsection:galleries%}
+
+{%section:item->%}
+{%F:#tmp(E:calc({F:_num}%3))%}
+{%if('{F:tmp}' == '0' && {F:_num} > 1 )%}</ul></li><li><ul>{%endif%} 
+    <li{%if('{F:Avatar}' == '')%} class="gallery-no-pic"{%endif%}>
+        {%if('{F:Avatar}')%}<a href="{%F:link%}"><img src="{%F:Avatar(E:image_transform(210,140,,,,,210:140))%}"></a>{%endif%}
+        <p><a href="{%F:link%}">{%F:Name%}</a> ({%F:counter%} фото)</p>
+    </li>
+{%endsection:item%}
+
+{%->:page_line%}
+
+
+
+{%section:gallery_empty%}
+<h1>Список фотоальбомов</h1>
+Список галерей пуст!!
+{%endsection:gallery_empty%}

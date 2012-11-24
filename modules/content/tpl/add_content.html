@@ -1,0 +1,24 @@
+<div id="e-form">  
+  <form id="add_content">
+    <p>{article_name}</p>
+    <!--<input  class="required validate-alpha-ext" type="text" name="basic"  value="">-->
+    <input  class="required validate-alpha-ext" type="text" id="Name" name="Name"  value="">
+    
+        <ul class="chk">
+          <li>
+            <input type="checkbox" id="Disable" name="Disable" /> {off_object}
+          </li>
+        </ul>
+    
+    <p>{category_article}</p>
+    <select id="category" onchange="javascript:XTR_content.change_category(this.options[this.selectedIndex].value)"></select>
+    
+    <p>{article_template}</p>
+    <select onchange="javascript:XTR_content.change_fields(this.options[this.selectedIndex].value)" id="Template"></select>
+    
+  </form>
+  <form id="inner_fields">
+    <div id="innerfields"></div>
+  </form>
+  <a class="button" href="javascript:void(0)" onclick="XTR_content.save_content(this)">{save}</a>
+  </div>

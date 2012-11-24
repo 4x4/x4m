@@ -1,0 +1,18 @@
+{%section:_menu%}    
+
+
+<div class="text">
+<h1>Общие прайсы</h1>
+  <ul class="list">
+   {%->:menu_buff%}
+  </ul>
+</div>
+  
+{%endsection:_menu%}
+
+{%section:_menu_item->menu_buff%}
+
+    <li> <a  href="{%F:link%}">{%F:caption%}</a> Размер:({%F:size%}) Обновлен:{%F:time%} </li>
+  
+  
+{%endsection:_menu_item%}
