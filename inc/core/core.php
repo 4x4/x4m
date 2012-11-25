@@ -1233,7 +1233,7 @@ interface xCommonInterface
 * Родительский класс  для common составляющей модулей
 */
                      
-class xCommon extends xSingleton
+class xModuleCommon extends xSingleton
   {              
     public $_moduleName;
     public $_tree;
@@ -1649,9 +1649,11 @@ class xCore
                 
                 if($plugin[1] =='xfront')
                 {
+                    
                     require_once (xConfig::get('PATH' ,'PLUGINS') .$loadPrefix. $plugin[0] . '/' . $plugin[0] . '.front.class.php');                                  } 
                     
-                $moduleInstancePath =xConfig::get('PATH' ,'PLUGINS') .$loadPrefix. $plugin[0] . '/' . $plugin[0] . '.'.$plugin[1].'.class.php';                       require_once ($moduleInstancePath);   
+                    $moduleInstancePath =xConfig::get('PATH' ,'PLUGINS') .$loadPrefix. $plugin[0] . '/' . $plugin[0] . '.'.$plugin[1].'.class.php';                       
+                    require_once ($moduleInstancePath);   
 
              
         
@@ -1990,6 +1992,30 @@ class xModule extends xModulePrototype
 }
 
 
+class xPDOExceptionHandler
+{
+
+    public function __construct(PDOException $e) 
+    {
+        if(method_exists($this,$method='code'.$e->getCode()))
+        {
+            return call_user_func_array(array(
+                $this,
+                $method
+            ), array($e));
+       
+        }else{
+            
+            die($e->getMessage());
+        }
+    }
+    
+    public function code1045()
+    {
+        die('could not connect to database login and password wrong');
+        
+    }
+}
 
 class xPDO extends PDO 
 {
@@ -2023,8 +2049,14 @@ class xPDO extends PDO
      
     public static function getInstance() {
         if (!self::$objInstance) {
+            try {
                 self::$objInstance = new PDO('mysql:host=' .self::$host . ';dbname=' . self::$dbname, self::$user, self::$password);
                 self::$objInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }catch (PDOException $e) {
+                new xPDOExceptionHandler($e);
+            } 
+                
+                
                 self::$objInstance->exec('SET CHARACTER SET ' . self::$encoding);
                 self::$objInstance->exec('set character_set_results=' . self::$encoding);
                 self::$objInstance->exec('SET NAMES ' . self::$encoding);
@@ -2332,8 +2364,9 @@ class xTreeEngine {
         $this->enableCache=$enable;
     }
     
-    function __construct($treeName, $PDO, $uniqType = 1) {
-        $this->PDO =& $PDO;
+    function __construct($treeName, &$PDO=null, $uniqType = 1) {
+        if(!$PDO)$PDO=xRegistry::get('xPDO');
+        $this->PDO = $PDO;
         $this->treeStructName = strtolower("_tree_" . $treeName . "_struct");
         $this->treeParamName  = strtolower("_tree_" . $treeName . "_param");
         $this->uniqType       = $uniqType;
@@ -2372,7 +2405,7 @@ class xTreeEngine {
                         $stopLevel=$this->levels;                        
                     }
 
-                     $sql[]= '( x' .$level . ' in ("' . implode($this->query['childsAncestor'],'","') . '") AND x'.($stopLevel).' IS NULL)';
+                     $sql[]= '( x' .$level . ' in ("' . implode($this->query['childsAncestor'],'","') . '") AND x'.($stopLevel).' IS NULL )';
                 }
                 
                  $sql= '('.implode($sql,' or ').')';
@@ -2384,8 +2417,8 @@ class xTreeEngine {
                 $sql      = 'x' . ($level + 1) . ' = ' . $this->query['childsAncestor'];
                 if ($this->query['childsLevel']) 
                 {
-                    $endlevel = $level + $this->query['childsLevel'];
-                    $sql .= 'and x' . $endlevel . '  IS NULL)';
+                    $endlevel = $level + $this->query['childsLevel']+1;
+                    $sql .= ' and x' . $endlevel . '  IS NULL';
                 }
             
             }
@@ -3282,6 +3315,7 @@ class xTreeEngine {
             return $result;
         }
     }
+    
     public function format($format = 'normal') {
         if (!method_exists($this, 'format_' . $format)) {
             trigger_error('defined format' . $format . ' is not exist');
@@ -3292,15 +3326,35 @@ class xTreeEngine {
         }
         return $this;
     }
+    
+    /**
+    * выбрать в виде дерева
+    * результат запроса будет в виде объекта-экземпляра xteTree
+    */
     public function asTree() {
         $this->query['astree'] = true;
         return $this;
     }
+    
+    /**
+    * выбрать дочерние элементы
+    * 
+    * @param int $ancestor -нода у которой необходимо выбрать дочерние
+    * @param int $level  - сколько уровней выбрать, при $level==0 выбор во всю глубину дерева
+    * @return xTreeEngine
+    */
     public function childs($ancestor, $level = 0) {
         $this->query['childsAncestor'] = $ancestor;
         $this->query['childsLevel']    = $level;
         return $this;
     }
+    
+    /**
+    * Выбрать структурные данные
+    * 
+    * @param mixed $selectFieldStruct - массив структурных параметров например array('id','obj_type'), либо '*' - все параметры 
+    * @return xTreeEngine
+    */
     public function selectStruct($selectFieldStruct) 
     {        
         if(is_array($selectFieldStruct) or $selectFieldStruct=='*')
@@ -3317,6 +3371,22 @@ class xTreeEngine {
         $this->query['selectParams'] = $selectFieldParams;
         return $this;
     }
+    
+    /**
+    *      where - метод устанавливающий условие выборки , работающий по принципу SQL оператора WHERE:
+    *      может принимать неограниченное количество аргументов - каждый аргумент относиться к последующему-логика "AND"
+    *     -знак '@' устанавливается только перед struct параметрами (например @id) 
+    *      все параметры передаются последовательно в виде массивов.
+    * 
+    *      в случае передачи вторым параметром ===true, первый параметер может быть полным where массивом     
+    * 
+    *      $this->_tree->selectStruct('*')->childs(1)->where(array('@obj_type','=','_MODULE'))->run();
+    *      вхождение в список значений:
+    *      $this->_tree->selectStruct('*')->childs(1)->where(array('@obj_type','=',array('_MODULE','_GROUP'))->run();
+    *      
+    *      
+    **/
+    
     public function where() {
         $arg_list             = func_get_args();
         
@@ -3328,6 +3398,10 @@ class xTreeEngine {
         }
         return $this;
     }
+    /**
+    * удаление выборки
+    * $this->_tree->delete()->childs(1)->where(array('@obj_type','=','_MODULE'))->run();
+    */
     public function delete() {
         $this->query['delete']       = true;
         $this->query['selectStruct'] = array(
@@ -3335,6 +3409,7 @@ class xTreeEngine {
         );
         return $this;
     }
+    
     public function limit($start, $offset) {
         $this->query['limit'] = array(
             $start,
@@ -3342,6 +3417,13 @@ class xTreeEngine {
         );
         return $this;
     }
+    /**
+    * Выбор пути basic 
+    * 
+    * @param mixed $separator сепаратор соединяющий путь  из basic' ов
+    * @param mixed $sortByAncestorLevel - порядок по возрастанию уровня вложенности если не указано другое
+    * @return xTreeEngine
+    */
     public function getBasicPath($separator = '/',$sortByAncestorLevel=false) {
         
         $this->query['sortByAncestorLevel']=$sortByAncestorLevel;

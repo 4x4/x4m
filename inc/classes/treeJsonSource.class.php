@@ -2,10 +2,11 @@
 class treeJsonSource
     {
     var $_options;
-    var $result;
     var $_tree;
+    var $result;
+    
 
-    public function treeJsonSource(&$tree) 
+    public function __construct($tree) 
     { 
         $this->result=null;
         $this->_tree=$tree;
@@ -41,7 +42,7 @@ class treeJsonSource
 
     function setOptions($options) { $this->_options=$options; }
 
-    function result_transformer($key_visual, $value)
+    function resultTransformer($key_visual, $value)
         {
         if (is_array($this->_options['transformResults']))
             {
@@ -65,31 +66,19 @@ class treeJsonSource
                 $this->result['data_set']['rows'][1]=array('data'=>$this->_options['emulate_root'],'xmlkids'=>1,'image'=>$this->_options['imageMap']['_ROOT']);
                 return;
         }
-        
-        
-            $childsNodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id)->run();
-        
-        
-        //функция возврата вверх
-        if ($id > 0)
-            {
-            /*$full_list
-                =array_merge(array_keys($this->_options['columnsAsStructs']),
-                             array_keys($this->_options['columnsAsParameters']));*/
-                  $anc=$this->source->GetAncestor($id);
-            }
+                     
 
             
-        if ($childsNodes)
+        if ($childsNodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id,1)->where()->run())
             {
-            while (list($id, $child_node)=each($childsNodes))
+            while (list($id, $childNode)=each($childsNodes))
                 {
                 //структуры в результат
-                if($id==1){$child_node['basic']='';}
+                if($id==1){$childNode['basic']='';}
                 
                 if (is_array($this->_options['endLeafs']))
                     {
-                    if (in_array($child_node['obj_type'], $this->_options['endLeafs']))
+                    if (in_array($childNode['obj_type'], $this->_options['endLeafs']))
                         {
                         $local_a['_E_']=1;
                         }
@@ -102,7 +91,7 @@ class treeJsonSource
                         {
                         //признак селективности
 
-                        if (($child_node[$t_value]) && ($this->_options['selectable'][$k_in_vis])&& (in_array($child_node[$t_value],
+                        if (($childNode[$t_value]) && ($this->_options['selectable'][$k_in_vis])&& (in_array($childNode[$t_value],
                                                                  $this->_options['selectable'][$k_in_vis])))
                             {
                             //selectable
@@ -119,9 +108,9 @@ class treeJsonSource
                             }
 
                     
-                        if (!($value=$this->result_transformer($k_in_vis, $child_node[$t_value])))
+                        if (!($value=$this->resultTransformer($k_in_vis, $childNode[$t_value])))
                             {
-                                $value=$child_node[$t_value];
+                                $value=$childNode[$t_value];
                             }                        
                             $local_a[$k_in_vis]=$value;                        
                             
@@ -130,9 +119,9 @@ class treeJsonSource
                         
                         if($this->_options['gridFormat'])
                         {                        
-                            $r=array('id'=>$id,'data'=>$local_a,'obj_type'=>$child_node['obj_type']);
+                            $r=array('id'=>$id,'data'=>$local_a,'obj_type'=>$childNode['obj_type']);
                             
-                            if(in_array($child_node['obj_type'],$this->_options['groups']))
+                            if(in_array($childNode['obj_type'],$this->_options['groups']))
                             {
                                 if($this->source->HasChild($id))
                                 {  
@@ -155,7 +144,7 @@ class treeJsonSource
                 while (list($k_in_vis, $t_value)=each($this->_options['columnsAsParameters']))
                     {
                         
-                    $local_a[$k_in_vis]=$child_node['params'][$t_value];
+                    $local_a[$k_in_vis]=$childNode['params'][$t_value];
                     
                     
                     if($this->_options['callfunc'][$t_value])
@@ -190,7 +179,7 @@ class treeJsonSource
                         
                         }
 
-                    if (($child_node[$t_value]) && ($this->_options['selectable'][$k_in_vis] == $child_node[$t_value]))
+                    if (($childNode[$t_value]) && ($this->_options['selectable'][$k_in_vis] == $childNode[$t_value]))
                         {
                         //selectable
                         $this->result['data_set'][$id]['_S_']=1;

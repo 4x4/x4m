@@ -1250,9 +1250,9 @@ class Common
         }
         
         
-        public static function createMark($marksource)
+        public static function createMark($markSource)
            {
-               return md5(var_export($marksource,true));
+               return md5(var_export($markSource,true));
            } 
            
         
@@ -1462,16 +1462,20 @@ public static function parse_nav_pages($obj_count, $chunk_size, $current, $link,
     }
 
 
-public static    function &inc_module_factory($classname,$do_not_call=false)
+public static function &classesFactory($classname,$args,$do_not_call=false)
         {
-        global $_PATH;
-
-        if (file_exists($filepath=$_PATH['INC'] . $classname . '.class.php'))
+                        
+        if (file_exists($filepath=xConfig::get('PATH','CLASSES') . $classname . '.class.php'))
             {
+            
             require_once ($filepath);
+            
             if(!$do_not_call)
                 {
-                    return new $classname;
+                    
+                    $class = new ReflectionClass($classname);
+                    $instance = $class->newInstanceArgs($args);
+                    return $instance;
                 }
             }
         }

@@ -1,6 +1,6 @@
 <?php
 class pagesCommon
-    extends xCommon implements xCommonInterface
+    extends xModuleCommon implements xCommonInterface
     {
         public $_useTree=true;
         public $nativeLangVersion=false;

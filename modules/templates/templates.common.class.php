@@ -10,7 +10,7 @@
 * 
 */
 
-class templatesCommon extends xCommon implements xCommonInterface
+class templatesCommon extends xModuleCommon implements xCommonInterface
 {
     var $registeredFields;
     var $changedMainTpls;
@@ -187,7 +187,6 @@ class templatesCommon extends xCommon implements xCommonInterface
                 //слоты шаблона
                 $name        = $TMS->AddFileSection($tplFullPath);
 
-            
             //если не относиться к главным шаблонам                
             if (!$tpl['main'])
             {

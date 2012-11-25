@@ -24,7 +24,7 @@ RewriteRule ^ /index.php?action=sitemap [L]
 RewriteCond %{REQUEST_FILENAME} /robots.txt$ [NC]
 RewriteRule ^ /index.php?action=robots [L]
 
-RewriteCond  %{REQUEST_URI} !^/xjs/_components/Xinha/*|index.html|admin.php|cron.php|upload.php|image.php|license|tree_xml_server.php|upl.php|install.php|login.php|php.php|jcompress.php|captcha.php|download.php|swfupload.php|^/backup/*|^/lz/*|^/media/*|^/uploads/*
+RewriteCond  %{REQUEST_URI} !^/tests/*|index.html|admin.php|cron.php|upload.php|image.php|license|tree_xml_server.php|upl.php|install.php|login.php|php.php|jcompress.php|captcha.php|download.php|swfupload.php|^/backup/*|^/lz/*|^/media/*|^/uploads/*
  
 
 
