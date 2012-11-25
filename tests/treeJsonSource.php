@@ -21,7 +21,7 @@ session_start();
 //xPDO
 xPDO::setSource(DB_HOST,DB_NAME,DB_USER,DB_PASS); 
 xRegistry::set('xPDO',xPDO::getInstance());
-debugbreak();
+
 $pages=new xTreeEngine('pages_container');
 $source=Common::classesFactory('treeJsonSource',array(&$pages));
 

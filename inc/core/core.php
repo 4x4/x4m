@@ -3390,9 +3390,10 @@ class xTreeEngine {
     public function where() {
         $arg_list             = func_get_args();
         
-        if($arg_list[1]===true)
+        if(($arg_list[1]===true))
         {
-            $this->query['where'] = $arg_list[0];
+           if($arg_list[0])$this->query['where'] = $arg_list[0];
+           
         }else{
             $this->query['where'] = $arg_list;
         }

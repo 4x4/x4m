@@ -59,67 +59,46 @@ class treeJsonSource
     function createView($id = 1)
         {
         
-        $sp['obj_type']=$this->_options['shownodesWithObjType'];
+                debugbreak();
 
         if($this->_options['emulate_root']&&$id==0)
         {
                 $this->result['data_set']['rows'][1]=array('data'=>$this->_options['emulate_root'],'xmlkids'=>1,'image'=>$this->_options['imageMap']['_ROOT']);
                 return;
         }
-                     
-
-            
-        if ($childsNodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id,1)->where()->run())
+        
+        if($this->_options['shownodesWithObjType'])$addWhere=array(array('@obj_type','=',$this->_options['shownodesWithObjType']));
+        
+        if ($childsNodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id,1)->where($addWhere,true)->run())
             {
             while (list($id, $childNode)=each($childsNodes))
                 {
                 //структуры в результат
                 if($id==1){$childNode['basic']='';}
                 
-                if (is_array($this->_options['endLeafs']))
-                    {
-                    if (in_array($childNode['obj_type'], $this->_options['endLeafs']))
-                        {
-                        $local_a['_E_']=1;
-                        }
-                    }
-
                 if (is_array($this->_options['columnsAsStructs']))
                     {
-                        $local_a=array();
-                        while (list($k_in_vis, $t_value)=each($this->_options['columnsAsStructs']))
+                        $localData=array();
+                        
+                        while (list($keyInVisibleModel, $tempValue)=each($this->_options['columnsAsStructs']))
                         {
-                        //признак селективности
-
-                        if (($childNode[$t_value]) && ($this->_options['selectable'][$k_in_vis])&& (in_array($childNode[$t_value],
-                                                                 $this->_options['selectable'][$k_in_vis])))
+                            if($this->_options['callfunc'][$tempValue])
                             {
-                            //selectable
-                            $local_a['_S_']=1;
-                            }
-
-
-                            if($this->_options['callfunc'][$t_value])
-                            {
-                            
-                                $context=$this->_options['callfunc'][$t_value][0];$func=$this->_options['callfunc'][$t_value][1];
-                                $local_a[$k_in_vis]=$context->$func($local_a[$k_in_vis],$id);
+                                $context=$this->_options['callfunc'][$tempValue][0];$func=$this->_options['callfunc'][$tempValue][1];
+                                $localData[$keyInVisibleModel]=$context->$func($localData[$keyInVisibleModel],$id);
                                 
                             }
-
                     
-                        if (!($value=$this->resultTransformer($k_in_vis, $childNode[$t_value])))
+                        if (!($value=$this->resultTransformer($keyInVisibleModel, $childNode[$tempValue])))
                             {
-                                $value=$childNode[$t_value];
+                                $value=$childNode[$tempValue];
                             }                        
-                            $local_a[$k_in_vis]=$value;                        
-                            
-                            
+                            $localData[$keyInVisibleModel]=$value;                        
                         }
                         
                         if($this->_options['gridFormat'])
                         {                        
-                            $r=array('id'=>$id,'data'=>$local_a,'obj_type'=>$childNode['obj_type']);
+                            $r=array('id'=>$id,'data'=>$localData,'obj_type'=>$childNode['obj_type']);
                             
                             if(in_array($childNode['obj_type'],$this->_options['groups']))
                             {
@@ -133,67 +112,60 @@ class treeJsonSource
                         
                         }else{
                         
-                            $this->result['data_set'][$id]=$local_a;
+                            $this->result['data_set'][$id]=$localData;
                         }
                         
                     reset ($this->_options['columnsAsStructs']);
                     }
 
                 //параметры  в результат 
-                $local_a=array(); 
-                while (list($k_in_vis, $t_value)=each($this->_options['columnsAsParameters']))
+                $localData=array(); 
+                
+                while (list($keyInVisibleModel, $tempValue)=each($this->_options['columnsAsParameters']))
                     {
-                        
-                    $local_a[$k_in_vis]=$childNode['params'][$t_value];
+
+                    $localData[$keyInVisibleModel]=$childNode['params'][$tempValue];
                     
-                    
-                    if($this->_options['callfunc'][$t_value])
+                    if($this->_options['callfunc'][$tempValue])
                     {
                     
-                        $context=$this->_options['callfunc'][$t_value][0];$func=$this->_options['callfunc'][$t_value][1];
-                        $local_a[$k_in_vis]=$context->$func($local_a[$k_in_vis],$id);
+                        $context=$this->_options['callfunc'][$tempValue][0];$func=$this->_options['callfunc'][$tempValue][1];
+                        $localData[$keyInVisibleModel]=$context->$func($localData[$keyInVisibleModel],$id);
                         
                     }
-                    
-                    
 
-                    if ($filter=$this->_options['filter'][$k_in_vis])
+                    if ($filter=$this->_options['filter'][$keyInVisibleModel])
                     {
 
                         switch ($filter['name'])
                             {
                                 case 'fromtimestamp':
                                 if($this->_options['gridFormat']){
-                                    $local_a[$k_in_vis]= date($filter['format'],$local_a[$k_in_vis]);
+                                    $localData[$keyInVisibleModel]= date($filter['format'],$localData[$keyInVisibleModel]);
                                 }else{                                                        
-                                $this->result['data_set'][$id][$k_in_vis]= date($filter['format'],$this->result['data_set'][$id][$k_in_vis]);
+                                    $this->result['data_set'][$id][$keyInVisibleModel]= date($filter['format'],$this->result['data_set'][$id][$keyInVisibleModel]);
                                 }
                     
                                 break;
                                 
                                 case 'cutwords':
-                           
-                                $this->result['data_set'][$id][$k_in_vis]=XSTRING::findncut_symbol_positon($this->result['data_set'][$id][$k_in_vis], " ", $filter['count']);
+                                $this->result['data_set'][$id][$keyInVisibleModel]=XSTRING::findncut_symbol_positon($this->result['data_set'][$id][$keyInVisibleModel], " ", $filter['count']);
                                 break;
                             }
                         
                         }
-
-                    if (($childNode[$t_value]) && ($this->_options['selectable'][$k_in_vis] == $childNode[$t_value]))
-                        {
-                        //selectable
-                        $this->result['data_set'][$id]['_S_']=1;
-                        }
+                    
                     }
                     
                     
                       if($this->_options['gridFormat'])
                         {          
-                            $vls=$local_a;
+                            $vls=$localData;
                             XARRAY:: array_merge_plus($this->result['data_set']['rows'][$id]['data'],$vls,true);                             
+                            
                         }else{
 
-                            $this->result['data_set'][$id]+=$local_a;
+                            $this->result['data_set'][$id]+=$localData;
                         } 
                         
                       if($this->_options['gridFormat']) 
