@@ -1,14 +1,17 @@
 <?php
-class TTreeSource
+class treeJsonSource
     {
-    var $Data;
     var $_options;
+    var $result;
+    var $_tree;
 
-    function TTreeSource() { $this->result=null;$this->_options['type']='AND'; }
+    public function treeJsonSource(&$tree) 
+    { 
+        $this->result=null;
+        $this->_tree=$tree;
+        $this->_options['imageMap']=array('_ROOT'=>'folder.gif');
+    }
 
-    function init_from_source(&$treeSource) { $this->source=$treeSource; }
-
-    function init_from_tree() { $this->source=new Tree($DBname, $TreeName, true); }
 
     /*  Установка опций
      
@@ -31,6 +34,7 @@ class TTreeSource
      $options['callfunc']=array('LastMod'=>array(context,func));   
      
      $this->_options['limitDown']= интервал начала выборки  
+     $this->_options['imageMap']=array('_GROUP'=>'folder.gif')
      $this->_options['count'] = количество(шаг) выборки
      $this->_options['type']= тип выборки AND и OR
     */
@@ -51,50 +55,34 @@ class TTreeSource
         }
 
     
-    function CreateView($id = 1,$useJmechanizm=false)
+    function createView($id = 1)
         {
+        
         $sp['obj_type']=$this->_options['shownodesWithObjType'];
-        
-        
+
         if($this->_options['emulate_root']&&$id==0)
         {
-                $this->result['data_set']['rows'][1]=array('data'=>$this->_options['emulate_root'],'xmlkids'=>1,'image'=>'folder.gif');
+                $this->result['data_set']['rows'][1]=array('data'=>$this->_options['emulate_root'],'xmlkids'=>1,'image'=>$this->_options['imageMap']['_ROOT']);
                 return;
         }
         
-        if(!$useJmechanizm)
-        {
-            $childs_nodes  =$this->source->GetChildsParam($id, '%', true, $sp);
-        }
-        else
-        {            
-            $childs_nodes  =JoinSearch($this->_options['columnsAsParameters'], $this->_options['columnsAsStructs'], $this->_options['type'], $this->_options['limitDown'], $this->_options['count']);
-        }
+        
+            $childsNodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id)->run();
+        
         
         //функция возврата вверх
         if ($id > 0)
             {
-            $full_list
+            /*$full_list
                 =array_merge(array_keys($this->_options['columnsAsStructs']),
-                             array_keys($this->_options['columnsAsParameters']));
-
-            $anc=$this->source->GetAncestor($id);
-
-            if (!$this->_options['preventDots'])
-                {
-                while (list($k, $k_in_vis)=each($full_list))
-                    {
-                        
-                            $this->result['data_set'][$anc][$k_in_vis]='..';                        
-                        
-                    }
-                }
+                             array_keys($this->_options['columnsAsParameters']));*/
+                  $anc=$this->source->GetAncestor($id);
             }
 
             
-        if ($childs_nodes)
+        if ($childsNodes)
             {
-            while (list($id, $child_node)=each($childs_nodes))
+            while (list($id, $child_node)=each($childsNodes))
                 {
                 //структуры в результат
                 if($id==1){$child_node['basic']='';}

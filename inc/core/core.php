@@ -1,106 +1,4 @@
 <?php
-
-class x3_chaincall
-{ 
-    var $scriptcall;
-    var $stop;
-    
-     public function stop()
-     {
-         $this->stop=true;
-     }
-     
-     function x3_chaincall($scriptcall)
-     {
-        $this->scriptcall=$scriptcall;       
-     } 
-     
-     
-     function _get($type,$host,$port='80',$path='/',$data='') 
-     {
-        if(!empty($data)) foreach($data AS $k => $v) $str .= urlencode($k).'='.urlencode($v).'&'; $str = substr($str,0,-1);
-        $fp = fsockopen($host,$port,$errno,$errstr,$timeout=30);
-        if(!$fp) die($_err.$errstr.$errno); else {
-            fputs($fp, "POST $path HTTP/1.1\r\n");
-            fputs($fp, "Host: $host\r\n");
-            fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
-            fputs($fp, "Content-length: ".strlen($str)."\r\n");
-            fputs($fp, "Connection: close\r\n\r\n");
-            fputs($fp, $str."\r\n\r\n");
-           
-            fgets($fp,1);
-            fclose($fp);
-        } return $d;
-    } 
-     
-     public function chain($gparams)
-     {
-         if(!$this->stop)
-         {
-             if($gparams)
-             {         
-                 foreach($gparams as $key=>$param)
-                 {
-                     $gp[]=$key.'='.$param;   
-                 }
-                 
-                 $gp='&'.implode('&',$gp);
-             }
-
-             
-             $callto='/'.$this->scriptcall.'?chaincall=1'.$gp;             
-
-             $this->_get('http',$_SERVER['HTTP_HOST'],'80',$callto);
-         }
-         
-         die();
-         
-     } 
-
-}
-
-class x3_file_session 
-{
-
-var $sessionid;
-var $data= Array();    
-
-
-    public function get_session_id()
-    {
-        return $this->sessionid;
-    }    
-
-    public function set_shutdown_serialize()
-    {
-        register_shutdown_function(array($this,"serialize_session"));        
-    }
-     
-     function x3_file_session($id=null)
-     {
-         
-         if(($id)or($_REQUEST['x3sid']))
-         {
-                $this->sessionid = (empty($_REQUEST['x3sid'])) ? $id : $_REQUEST['x3sid'];                
-                $this->data=xCache::serializedRead('session',$this->sessionid,0);               
-                
-         }else{
-                $this->sessionid=md5(time());                 
-         }
-            
-     }
-    /*
-     * shutdown will serialize all data 
-    */
-        function serialize_session()
-    {        
-            xCache::serializedWrite($this->data,'session',$this->sessionid);           
-    }
-
-
-}
-
-
 class connector
 {
      var $result;  
@@ -1439,7 +1337,7 @@ class xCommon extends xSingleton
            
         function setTree()
         {         
-            $this->_tree = new xte($this->_moduleName.'_container',xRegistry::get('xPDO'));
+            $this->_tree = new xTreeEngine($this->_moduleName.'_container',xRegistry::get('xPDO'));
         }
     
     
@@ -2403,7 +2301,7 @@ class xteTree {
     }
 }
 
-class xte {
+class xTreeEngine {
     public static $UNIQ_ANCESTOR = 1;
     public static $UNIQ_TREE = 2;    
     private $treeStructName;
