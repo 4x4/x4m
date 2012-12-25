@@ -464,7 +464,7 @@ var _templateHolder=new Class(
                 {
                     Object.each(this.connector.lct.templates,function (tplText,index)
                     {
-                        debugger;
+                        
                         this.setTpl(module,index,tplText,this.connector.lct.timers[index],true);
                     
                     }.bind(this));
@@ -480,26 +480,16 @@ var _templateHolder=new Class(
     
 });
 
-var _xModuleBack= new Class(
-{
-    initialize:function(moduleName)
-    {
-        this.connector= new Connector(moduleName);    
-    },
-    
-    CRUN: function (objType,action)
-    {        
-        this.connector.execute();
-    }    
-    
-});
-
-
 
 var _adminInterface = new Class(
 {
-
     Implements: Options,
+    Extends: Router,
+    
+    routes: 
+     {
+        '#e/:module/:action/*'    : 'moduleActionDispatch'
+     },
     
     initialize: function (options)
     {        
@@ -508,12 +498,50 @@ var _adminInterface = new Class(
         this.storedJs=new _storageProxy('js');
         this.calledModules={};
         this.loadedJs=[];
+        this.parent();
     },    
     
     
+    moduleActionDispatch:function()
+    {        
+            debug.info('trying to dispatch module action - params:',this.param,this.query);        
+     
+            if(this.currentModule)
+            {
+                if(this.currentModule.name!=this.param.module)
+                {
+                    this.currentModule.sleep('hashDispatch');
+                }
+                            
+            }
+        
+            if(module=this.loadModule(this.param.module,'normal',true))
+            {
+                module[this.param.action](this.query);                     
+                debug.info('action dispatched success:',this.param,this.query);
+            }
+            
+        
+    },
+    
+    navHashCreate:function(module,action,params)
+    {
+        return '#e/'+module+'/'+action+'/?'+jQuery.param(params);
+    },
+    
+    loadMultiJs:function(arrJs)
+    {
+         Array.each(arrJs,function (path,index)
+            {
+                this.loadJs(path);
+            });
+        
+    },
+    
     loadJs: function (path,store)
     {
-        
+
+        path=path.replace('*','/_adm/xjs/');
         hashPath=path.toHashCode()
         
         if (this.loadedJs.indexOf(hashPath)!=-1){return false;}
@@ -528,7 +556,7 @@ var _adminInterface = new Class(
               complete:function(data)
               {
                     code =data.responseText;
-                    this.storedJs.set(hashPath,code);
+                    if(store)this.storedJs.set(hashPath,code);
             
               }.bind(this)
               });
@@ -537,7 +565,7 @@ var _adminInterface = new Class(
             
             if(code.clean()=='')
             {
-                debug.warn(path+'  trying to load but javascript file is empty.');
+                debug.warn(path+' trying to load but javascript file is empty.');
                 return false;
                                
             }else{
@@ -555,62 +583,106 @@ var _adminInterface = new Class(
     
     loadModule: function (module, calltype,loadJs)
     {
-        xtr_name = "XTR_" + module;
-                                
-        if (typeof this.calledModules[xtr_name] != 'object')
+        x_name = "x_" + module;
+            
+        if (typeof this.calledModules[x_name] != 'object')
         {
             
             if(loadJs)
             {
-                if(!this.loadJs('/modules/'+module+'/js/'+module+'Back.js'))return;
+                if(!this.loadJs('/modules/'+module+'/js/'+module+'Back.js',true))return;
             }
             
-            run_str= xtr_name + "=new XTR" + module + "('"+module+"');";                        
-            eval(run_str);            
+            run_str= x_name + "=new " + module + "Back('"+module+"');";                        
+            eval(run_str);                      
+            debugger;
+                
             if (calltype == 'normal')
             {
-                this.currentModule =window[xtr_name];
+                this.currentModule =window[x_name];
+                
                 if(typeof this.currentModule.buildInterface == 'function')this.currentModule.buildInterface();                
-                this.calledModules[xtr_name] = this.currentModule;
+                this.calledModules[x_name] = this.currentModule;
             }
             else
             {
                 //кешируем silent модуль
-                this.calledModules[xtr_name] = window[xtr_name]
+                this.calledModules[x_name] = window[x_name]
             }
+            
         }
         else
         {
             if (calltype == 'normal')
             {
-                this.currentModule = this.calledModules[xtr_name];
-                this.currentModule.buildInterface();                   
+                this.currentModule = this.calledModules[x_name];
+                this.currentModule.buildInterface();  
+                
             }
         }
+        
+        return   this.calledModules[x_name];
     }
     
 });
 
+var _xModuleBack= new Class(
+{
+    
+    Implements: Options,
+    initialize:function()
+    {
+        this.connector= new Connector(this.name);    
+    },
+      
+    setName:function(name)
+    {
+          this.name=name;
+    },
+       
+    
+    //усыпление модуля при переключении : скрыть активные окна и т.д
+    sleep:function(status)
+    {
+        
+    },
+    
+    CRUN: function (objType,action)
+    {        
+        this.connector.execute();
+    }    
+    
+});
+
+
 
 $(document).ready(function(){
 
+   
 st=new _storage()
 st.clear();
 
 
+             
 
-            
 
+AI= new _adminInterface();
+//hc=AI.navHashCreate('pages','sleep',{a:'b',c:102});
+//AI.navigate(hc);
 
+/*
 TH =new _templateHolder();
 TH.getTpl('adminPanel','ainterface');
 
 
 AI= new _adminInterface();
+//AI.loadJs('*_components/mt.router/router.js');
+
+
 //AI.loadModule('content','normal',true);
 
+ */
 
- 
 
  
 /*

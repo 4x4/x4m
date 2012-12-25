@@ -1,21 +1,19 @@
-
-    
-XTRpages.prototype = Object.extend(new _modulePrototype(), 
+pagesBack= new Class(
     {
-    initialize: function()
+    Extends:_xModuleBack,
+    initialize: function(name)
         {
-        this.destructable = true;
-        this.current_node = null;
-        this.module_name = 'pages';
-        this.template_changed = false;
-        this.connector=null;
-        this.tree=null;
-        this.leaves_obj_type=new Array('_PAGE');  
-        this.init(); 
-        
+                     
+            this.setName(name);
+            this.parent();        
+            this.template_changed = false;
+            this.tree=null;
+            this.leavesObjType=new Array('_PAGE');  
+            
+        }
+    });
     
-        },
-    
+/*    
     action_by_obj_type:function(itemid,object_type)
     {
         switch (object_type)
@@ -28,7 +26,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
                 break;
 
             case "_ROOT":
-                this.show_edit_root(itemid);
+                this.show_edit_root(itemi  d);
                 break;
                                 
            case "_LINK":
@@ -1146,3 +1144,5 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
             if ((state==2)&&(value=="")) return false;
             return true;
          } 
+         
+*/         

@@ -1137,7 +1137,7 @@ provides: Event
 
 ...
 */
-             
+
 (function() {
 
 var _keys = {};
@@ -1374,7 +1374,7 @@ provides: [Class.Extras, Chain, Events, Options]
 
 ...
 */
-      
+
 (function(){
 
 this.Chain = new Class({
@@ -1475,136 +1475,7 @@ this.Options = new Class({
 		return this;
 	}
 
-}); 
-
-
-String.implement({
-
-    parseQueryString: function(decodeKeys, decodeValues){
-        if (decodeKeys == null) decodeKeys = true;
-        if (decodeValues == null) decodeValues = true;
-
-        var vars = this.split(/[&;]/),
-            object = {};
-        if (!vars.length) return object;
-
-        vars.each(function(val){
-            var index = val.indexOf('=') + 1,
-                value = index ? val.substr(index) : '',
-                keys = index ? val.substr(0, index - 1).match(/([^\]\[]+|(\B)(?=\]))/g) : [val],
-                obj = object;
-            if (!keys) return;
-            if (decodeValues) value = decodeURIComponent(value);
-            keys.each(function(key, i){
-                if (decodeKeys) key = decodeURIComponent(key);
-                var current = obj[key];
-
-                if (i < keys.length - 1) obj = obj[key] = current || {};
-                else if (typeOf(current) == 'array') current.push(value);
-                else obj[key] = current != null ? [current, value] : value;
-            });
-        });
-
-        return object;
-    },
-
-    cleanQueryString: function(method){
-        return this.split('&').filter(function(val){
-            var index = val.indexOf('='),
-                key = index < 0 ? '' : val.substr(0, index),
-                value = val.substr(index + 1);
-
-            return method ? method.call(null, key, value) : (value || value === 0);
-        }).join('&');
-    }
-
 });
 
-
-
 })();
-
-
-
-     
-
-/*
----
-
-name: JSON
-
-description: JSON encoder and decoder.
-
-license: MIT-style license.
-
-SeeAlso: <http://www.json.org/>
-
-requires: [Array, String, Number, Function]
-
-provides: JSON
-
-...
-*/
-
-if (typeof JSON == 'undefined') this.JSON = {};
-
-
-
-(function(){
-
-var special = {'\b': '\\b', '\t': '\\t', '\n': '\\n', '\f': '\\f', '\r': '\\r', '"' : '\\"', '\\': '\\\\'};
-
-var escape = function(chr){
-    return special[chr] || '\\u' + ('0000' + chr.charCodeAt(0).toString(16)).slice(-4);
-};
-
-JSON.validate = function(string){
-    string = string.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
-                    replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-                    replace(/(?:^|:|,)(?:\s*\[)+/g, '');
-
-    return (/^[\],:{}\s]*$/).test(string);
-};
-
-JSON.encode = JSON.stringify ? function(obj){
-    return JSON.stringify(obj);
-} : function(obj){
-    if (obj && obj.toJSON) obj = obj.toJSON();
-
-    switch (typeOf(obj)){
-        case 'string':
-            return '"' + obj.replace(/[\x00-\x1f\\"]/g, escape) + '"';
-        case 'array':
-            return '[' + obj.map(JSON.encode).clean() + ']';
-        case 'object': case 'hash':
-            var string = [];
-            Object.each(obj, function(value, key){
-                var json = JSON.encode(value);
-                if (json) string.push(JSON.encode(key) + ':' + json);
-            });
-            return '{' + string + '}';
-        case 'number': case 'boolean': return '' + obj;
-        case 'null': return 'null';
-    }
-
-    return null;
-};
-
-JSON.decode = function(string, secure){
-    if (!string || typeOf(string) != 'string') return null;
-
-    if (secure || JSON.secure){
-        if (JSON.parse) return JSON.parse(string);
-        if (!JSON.validate(string)) throw new Error('JSON could not decode the input; security is enabled and the value is not secure.');
-    }
-
-    return eval('(' + string + ')');
-};
-
-})();
-
-       
-
-
-
 
