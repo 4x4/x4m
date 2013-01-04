@@ -595,8 +595,7 @@ var _adminInterface = new Class(
             
             run_str= x_name + "=new " + module + "Back('"+module+"');";                        
             eval(run_str);                      
-            debugger;
-                
+
             if (calltype == 'normal')
             {
                 this.currentModule =window[x_name];

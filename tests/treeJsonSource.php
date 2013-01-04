@@ -25,6 +25,21 @@ xRegistry::set('xPDO',xPDO::getInstance());
 $pages=new xTreeEngine('pages_container');
 $source=Common::classesFactory('treeJsonSource',array(&$pages));
 
+$p=array('pp');
+
+
+                    
+$opt=array(
+    'columns'=>array('id'=>array(),
+                     'obj_type'=>array('name'=>'objType','transformList'=>array('_GROUP'=>'og.gif'))                    
+                     ,'>StartPage'=>array('onAttribute'=>treeJsonSource::$fromTimeStamp->__invoke($source)
+                        
+                    
+                     ))
+
+);
+
+$source->setOptions($opt);
 $source->createView();
 
 
