@@ -28,23 +28,22 @@ $source=Common::classesFactory('treeJsonSource',array(&$pages));
 $p=array('pp');
 
 
-                    
-$opt=array(
-    'columns'=>array('id'=>array(),
-                     'obj_type'=>array('name'=>'objType','transformList'=>array('_GROUP'=>'og.gif'))                    
-                     ,'>StartPage'=>array('onAttribute'=>treeJsonSource::$fromTimeStamp->__invoke($source)
-                        
-                    
-                     ))
 
-);
+$opt=array(
+    'nested'=>array('_GROUP','_DOMAIN','_LVERSION'),
+    'columns'=>array('id'=>array(),
+                     'obj_type'=>array('name'=>'objType'),
+                     '>StartPage'=>array()
+                     ));
 
 $source->setOptions($opt);
-$source->createView();
+
+$r=$source->createView(1);
+
+
 
 
         
 
 
-die();
 ?>

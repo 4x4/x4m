@@ -14,10 +14,10 @@
                                 array('name'=>'LastModified',  //имя в визуальной модели если не задано берется имя заданное в параметрах
                                       'transformList'=>array('_GROUP'=>'og.gif');          // массив трансформинга переменной в случае если нужно преобразование данных
                                       'onAttribute'=>function($realDataValue,$id) use ($params) { return $transformedData}   //функция преобразования переменной , можно использовать базовые функции класса
-                                      
+                                      'onAttributeParams'=>array('')   //массив параметров для функции onattribute
                                 );         
      
-     $options['onRecord']=function($record){}  // функция  выполняема на уровне трансформинга записи(все аттрибуты)
+     $options['onRecord']=function($record) use ($params){}  // функция  выполняема на уровне трансформинга записи(все аттрибуты)
     
     
      $this->_options['limitDown']= интервал начала выборки       
@@ -34,30 +34,16 @@ class treeJsonSource
     
     //статичексая базовая функция преобразование даты
     public static $fromTimeStamp;
-    
     //статичексая базовая функция обрезка до нужного количества слов
+    public static $cutWords;
+    
 
     
-    public function __call($name, $arguments) {
-     
-            debugbreak();
-        if($this->$name instanceof Closure){
-            return call_user_func_array($this->$name, array_merge(array($this), $arguments));
-        }
-    }
     
     public function __construct($tree) 
     { 
-        $this->result=null;
         $this->_tree=$tree;
-        
-        $this->cutWords=function($params,$value)
-        {
-            
-            return  XSTRING::findncut_symbol_positon($value, " ", $params['count']);
-        };
     }
-
 
    
     function setOptions($options) { $this->_options=$options; }
@@ -67,17 +53,21 @@ class treeJsonSource
 
         if($this->_options['emulate_root']&&$id==0)
         {
-                $this->result['data_set']['rows'][1]=array('data'=>$this->_options['emulate_root']['data'],'xmlkids'=>1,'image'=>$this->_options['emulate_root']['image']);
-                return;
+                $result['data_set']['rows'][1]=array('data'=>$this->_options['emulate_root']['data'],'xmlkids'=>1,'image'=>$this->_options['emulate_root']['image']);
+                return $result;
         }
         
         if($this->_options['shownodesWithObjType'])$addWhere=array(array('@obj_type','=',$this->_options['shownodesWithObjType']));
         
-        if ($childsNodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id,2)->where($addWhere,true)->asTree()->run())
+        $addWhereNest=array(array('@obj_type','=',$this->_options['nested']));
+        
+        $childsNodes  =$this->_tree->selectStruct('*')->childs($id,2)->where($addWhereNest,true)->asTree()->run();
+        
+
+     
+        if ($nodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id,1)->where($addWhere,true)->run())
             {
-            
-                                                
-            while (list($id, $childNode)=$childsNodes->fetch($id))
+             foreach ($nodes as $id=>$node)
                 {                
                     if (is_array($this->_options['columns']))
                     {
@@ -85,7 +75,6 @@ class treeJsonSource
                         
                         while (list($key, $tempValue)=each($this->_options['columns']))
                         {
-                            
                             
                                 if($key[0] == '>'){$paramedKey=true; $key=substr($key, 1);}else{$paramedKey=false;}
                                 
@@ -95,7 +84,7 @@ class treeJsonSource
                                     $tempValue['name']=$key;
                                 }
                                 
-                                $extData[$tempValue['name']]=($paramedKey)?$childNode['params'][$key]:$childNode[$key];
+                                $extData[$tempValue['name']]=($paramedKey)?$node['params'][$key]:$node[$key];
                                 
                                 //трансформ по листу
                                 if($tempValue['transformList'])
@@ -106,17 +95,22 @@ class treeJsonSource
                                
                                 //трансформ по функции
                                 if($tempValue['onAttribute'])
-                                {       
-                                    debugbreak();                     
-                                    $extData[$tempValue['name']]=$tempValue['onAttribute']($extData[$tempValue['name']],$id);
+                                {                                           
+                                    $extData[$tempValue['name']]=$tempValue['onAttribute']($tempValue['onAttributeParams'],$extData[$tempValue['name']],$id);
                                 } 
                            
                                                         
                         }
                         
+                        
+                        if($this->_options['onRecord'])
+                        {
+                          $extData=$this->_options['onRecord']($extData);
+                        }
+                        
                         if($this->_options['gridFormat'])
                         {                        
-                            $r=array('id'=>$id,'data'=>$extData,'obj_type'=>$childNode['obj_type']);                        
+                            $r=array('id'=>$id,'data'=>$extData,'obj_type'=>$node['obj_type']);                        
                             
                             if($childsNodes->HasChild($id))
                                 {  
@@ -124,25 +118,35 @@ class treeJsonSource
                                 }
                                 
 
-                            $this->result['data_set']['rows'][$id]=$r;
+                            $result['data_set']['rows'][$id]=$r;
                         
                         }else{
                         
-                            $this->result['data_set'][$id]=$extData;
+                            $result['data_set'][$id]=$extData;
                         }
                     }
                     
             }
+            
+            return $result;
         }
         }
+        
+        
     } //endclass
     
     
-  treeJsonSource::$fromTimeStamp=function($params,$value)
+  treeJsonSource::$fromTimeStamp=function($params,$value,$id)
     {
-
-        debugbreak();
         return date($params['format'],$value);
     };
+    
+    
+  treeJsonSource::$cutWords=function($params,$value)
+    {        
+        return  XSTRING::findncut_symbol_positon($value, " ", $params['count']);
+    }
+    
+
     
 ?>
