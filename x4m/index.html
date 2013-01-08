@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1, user-scalable=no" charset="utf-8" />
+<title>X4M</title>
+<link rel="stylesheet" href="css/global.css" />
+<style>
+
+
+        
+        </style>
+<script  src="/_adm/xjs/debug.js"></script>
+<script  src="/_adm/xjs/_core/mootools-core.js"></script>
+<script  src="/_adm/xjs/_core/jquery.min.js"></script>
+<script  src="/inc/ext/xoad/js/xoad_optimized.js"></script>
+<script  src="/_adm/xjs/_components/mt.router/router.js"></script>
+<script  src="/_adm/xjs/_components/jq.sortable/sortable.js"></script>
+<script  src="/_adm/xjs/adminInterface2.js"></script>
+<script  src="/_adm/xjs/_components/slotz/slotz.js"></script>
+
+
+<script>
+
+$(document).ready(function(){
+   
+    
+    
+    
+});
+
+</script>
+
+</head>
+<body>
+<div class="minWidth" id="globalObserve">
+  <header>
+    <div class="minWidthP"> <span class="logo"></span> <a href="" class="button modules"><span class="arrow"></span> Модули системы</a><span class="dev"></span><a href="" class="button structure"><span class="icon"></span>Структура</a> <a href="" class="button file-manager"><span class="icon"></span>Файл-менеджер</a>
+      <div class="editor">
+        <div><span style="left:29px"></span> <a href="">on</a> <a href="" class="selected">off</a></div>
+        <span>Сайт-редактор</span> </div>
+      <span class="dev"></span> <a href="" class="button settings"><span class="icon"></span><span class="arrow"></span>Настройки</a> <a href="" class="button basket"><span class="icon"></span>Корзина</a> <a href="" class="button exit"><span class="icon"></span>Выход</a> </div>
+  </header>
+  <div class="middle">
+    <div class="minWidthP">
+      <div class="col1">
+        <ul class="tabs">
+          <li><a href="" class="button selected">Структура сайта</a></li>
+          <li><a href="" class="button"><span class="arrow"></span>Дополнения</a></li>
+          <li><a href="" class="search button"><span class="icon"></span></a></li>
+        </ul>
+        <div class="col1-inner"></div>
+      </div>
+      <div class="col2">
+        <ul id="tabs" class="tabs">
+          <li><a href="" class="button selected">Добавить страницу</a></li>
+          <li><a href="" class="button">Добавить папку</a></li>
+          <li><a href="" class="button">Добавить ссылку</a></li>
+          <li><a href="" class="button">Доп.меню</a></li>
+          <li><a href="" class="button">Роуты</a></li>
+        </ul>
+        <div class="col2-inner">
+          <div class="form-block">
+            <ul>
+              <li>
+                <p class="title">Название страницы</p>
+                <input value="Главная страница сайта" class="inp" />
+                <p class="tx">Название страницы отображается в меню</p>
+              </li>
+              <li>
+                <p class="title">Ссылка на страницу</p>
+                <input value="main-page" class="inp" />
+                <p class="tx">для ввода ссылки используйте латиницу, без пробелов</p>
+              </li>
+              <li>
+                <p class="title">Шаблон страницы</p>
+                <select class="inp">
+                  <option>Главная страница</option>
+                  <option>Главная страница</option>
+                </select>
+                <p class="tx">От шаблона страницы зависит расположение слотов</p>
+              </li>
+              <li>
+                <div class="c-blok">
+                  <p class="c-title"><span></span>Настройка видимости страницы</p>
+                   <div class="c-blok-inner" style="display:none">
+                    <ul>
+                      <li>
+                        <p class="title">Заголовок страницы(title)</p>
+                        <textarea class="inp">11</textarea>
+                      </li>
+                      </ul>
+                      </div>
+                </div>
+              </li>
+              <li>
+                <div class="c-blok">
+                  <p class="c-title up"><span></span>SEO параметры страницы</p>
+                  <div class="c-blok-inner">
+                    <ul>
+                      <li>
+                        <p class="title">Заголовок страницы(title)</p>
+                        <textarea class="inp"></textarea>
+                      </li>
+                      <li>
+                        <p class="title">Ключевые слова(keywords)</p>
+                        <textarea class="inp"></textarea>
+                      </li>
+                      <li>
+                        <p class="title">Описание(description)</p>
+                        <textarea class="inp"></textarea>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <a href="" class="green-button">Сохранить</a> <a href="" class="button-light"><span></span>Посмотреть страницу на сайте</a> </div>
+          <div class="slots-block">
+            <div id="slotzcontainer">
+              <div id="slotz">
+                <div class="def-slot" id="1">
+                  <div class="def-name-cont">
+                    <p class="title"><b>Шапка:</b> Шапка сайта</p>
+                    <a href="javascript:void(0)" class="button add-mod"><span></span>Добавить</a></div>
+                  <ul id="modulec_top" style="position: relative;">
+                  </ul>
+                </div>
+                <div class="def-slot"  id="2">
+                  <div class="def-name-cont">
+                    <h1></h1>
+                    <p class="title"><b>Блок:</b> Левая часть сайта</p>
+                    <a href="javascript:void(0)" class="button add-mod"><span></span>Добавить</a></div>
+                  <ul id="modulec_footer" style="position: relative;">
+                  </ul>
+                </div>
+                <div class="def-slot"  id="3">
+                  <div class="def-name-cont">
+                    <p class="title"><b>Блок:</b> Левая часть сайта</p>
+                    <a href="#" class="button add-mod"><span></span>Добавить</a></div>
+                  <ul id="modulec_right-side" style="position: relative;">
+                   
+                   
+                    <li id="m_153101" style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                      
+                    <li id="m_15310" style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                       <li id="m_153" style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                       <li id="m_310" style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                      
+                  </ul>
+                </div>
+                <div class="def-slot">
+                  <div class="def-name-cont">
+                    <p class="title"><b>page-path</b> Шапка сайта</p>
+                    <a href="javascript:void(0)" class="button add-mod"><span></span>Добавить</a></div>
+                  <ul id="modulec_page-path" style="position: relative;">
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

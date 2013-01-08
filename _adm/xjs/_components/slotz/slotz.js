@@ -1,13 +1,22 @@
-var _slotz = Class.create(
-{
+
+var Slotz = new Class({
     
-    initialize: function (options)
+        Implements: Options,
+        
+        initialize:function(options)
         {
-            this.options = {}
-            Object.extend(this.options,options || {});
-        }
+           this.setOptions(options);
+           this.initiateSlotz();
+            
+        },
         
-        
+        initiateSlotz:function()
+        {
+            $('.def-slot ul').sortable({
+                connectWith: '.def-slot ul'
+            });
+            
+        }  
         
     
 });

@@ -22,6 +22,9 @@ return this;
 };
 };
 
+
+
+
  var xConnector = {
     "lct": null,
     "result": null,
@@ -655,16 +658,117 @@ var _xModuleBack= new Class(
 
 
 
+
+
+var cardeonMonitor = new Class({
+    
+    Implements: [Options, Events], 
+
+        options: {
+            container:'.c-blok', 
+            header:'.c-title'            
+        },
+
+    jQuery: 'cardeonMonitor',
+
+    initialize: function(options){
+        this.setOptions(options); // inherited from Options like jQuery.extend();
+        
+        this.options.clickTarget=this.options.container+' '+this.options.header;
+        this.proxied = 
+        {
+          click: jQuery.proxy(this.clickHandler, this)
+          
+        };
+        
+             
+        jQuery(this.options.clickTarget).live('click', this.proxied.click);
+        
+        $(window).on('mutate',function(){
+           
+           this.autoShow();
+
+        }.bind(this));
+
+    },
+    
+
+    clickHandler: function(event)
+    {
+        event.preventDefault();
+        element=event.target;
+        if(jQuery(element).next().is(':visible'))
+        {
+            jQuery(element).removeClass('up');
+            jQuery(element).next().slideUp();
+            
+        }else{
+            jQuery(element).addClass('up');
+            jQuery(element).next().slideDown();
+        }
+        
+    },
+
+    autoShow: function()
+    {
+        jQuery(this.options.container+' input,'+this.options.container+' textarea').each(function(n,e)
+        {
+            if($(e).val())
+            {
+                $(e).parents("div").show();
+            }
+        }); 
+    }
+
+});
+
+
+
+
 $(document).ready(function(){
+
+    
+var e = jQuery.Event("mutate");
+
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+// define a new observer
+var obs = new MutationObserver(function(mutations, observer) {
+    for(var i=0; i<mutations.length; ++i) {
+        // look through all added nodes of this mutation
+        for(var j=0; j<mutations[i].addedNodes.length; ++j) {
+                                         
+            // was a child added with ID of 'bar'?
+            if(!$(mutations[i].addedNodes[j]).hasClass('firebugResetStyles'))
+            {
+                $(window).trigger('mutate');
+            }
+        }
+    } 
+
+    
+});
+
+
+
+
+
+// have the observer observe foo for changes in children
+obs.observe($("body").get(0), {childList: true,subtree: true});
+
+
+
+
 
    
 st=new _storage()
 st.clear();
 
 
-             
+var cr= new cardeonMonitor();
 
 
+var slotz = new Slotz({id:'slotz'}); 
+          
 AI= new _adminInterface();
 //hc=AI.navHashCreate('pages','sleep',{a:'b',c:102});
 //AI.navigate(hc);
