@@ -14,7 +14,7 @@
 <script  src="/_adm/xjs/_core/jquery.min.js"></script>
 <script  src="/inc/ext/xoad/js/xoad_optimized.js"></script>
 <script  src="/_adm/xjs/_components/mt.router/router.js"></script>
-<script  src="/_adm/xjs/_components/jq.sortable/sortable.js"></script>
+<script  src="/_adm/xjs/sortable.js"></script>
 <script  src="/_adm/xjs/adminInterface2.js"></script>
 <script  src="/_adm/xjs/_components/slotz/slotz.js"></script>
 
@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 </head>
 <body>
-<div class="minWidth" id="globalObserve">
+<div class="minWidth" id="globalObserve">                                                              
   <header>
     <div class="minWidthP"> <span class="logo"></span> <a href="" class="button modules"><span class="arrow"></span> Модули системы</a><span class="dev"></span><a href="" class="button structure"><span class="icon"></span>Структура</a> <a href="" class="button file-manager"><span class="icon"></span>Файл-менеджер</a>
       <div class="editor">
@@ -122,7 +122,7 @@ $(document).ready(function(){
                   <div class="def-name-cont">
                     <p class="title"><b>Шапка:</b> Шапка сайта</p>
                     <a href="javascript:void(0)" class="button add-mod"><span></span>Добавить</a></div>
-                  <ul id="modulec_top" style="position: relative;">
+                  <ul id="modulec_top" class="connectedSortable" style="position: relative;">
                   </ul>
                 </div>
                 <div class="def-slot"  id="2">
@@ -130,41 +130,68 @@ $(document).ready(function(){
                     <h1></h1>
                     <p class="title"><b>Блок:</b> Левая часть сайта</p>
                     <a href="javascript:void(0)" class="button add-mod"><span></span>Добавить</a></div>
-                  <ul id="modulec_footer" style="position: relative;">
+                    <ul id="modulec_footer"  class="connectedSortable" style="position: relative;">
+                   
+                    <li style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 1</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                       
+                       <li style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 1</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                      
+                       <li  style="position: relative;">
+                      <div class="tp forms"></div>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 1</a>
+                        <p>Вывести группу форм или одну форму</p>
+                        <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
+                      </div>
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
+                      
                   </ul>
                 </div>
                 <div class="def-slot"  id="3">
                   <div class="def-name-cont">
                     <p class="title"><b>Блок:</b> Левая часть сайта</p>
                     <a href="#" class="button add-mod"><span></span>Добавить</a></div>
-                  <ul id="modulec_right-side" style="position: relative;">
+                  <ul id="modulec_right_side" class="connectedSortable" style="position: relative;">
                    
                    
-                    <li id="m_153101" style="position: relative;">
+                    <li  style="position: relative;">
                       <div class="tp forms"></div>
-                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 1</a>
                         <p>Вывести группу форм или одну форму</p>
                         <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
                       </div>
                       <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
                       
-                    <li id="m_15310" style="position: relative;">
+                    <li  style="position: relative;">
                       <div class="tp forms"></div>
-                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 2</a>
                         <p>Вывести группу форм или одну форму</p>
                         <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
                       </div>
                       <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
-                       <li id="m_153" style="position: relative;">
+                       <li  style="position: relative;">
                       <div class="tp forms"></div>
-                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 3</a>
                         <p>Вывести группу форм или одну форму</p>
                         <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
                       </div>
-                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a></li>
-                       <li id="m_310" style="position: relative;">
+                      <a class="b-show" href="javascript:void(0)"></a><a class="b-del" href="javascript:void(0)"></a>
+                      
+                      </li>
+                       <li  style="position: relative;">
                       <div class="tp forms"></div>
-                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм</a>
+                      <div class="slot-name"><a href="javascript:void(0)">Конструктор форм 4</a>
                         <p>Вывести группу форм или одну форму</p>
                         <p><span><a href="javascript:void(0)">Формы/Форма обратной связи</a></span></p>
                       </div>
