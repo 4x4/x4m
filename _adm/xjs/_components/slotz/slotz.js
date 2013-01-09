@@ -12,16 +12,15 @@ var Slotz = new Class({
         
         initiateSlotz:function()
         {
-            $('#modulec_footer,#modulec_right_side').sortable({
+            $('#modulec_top,#modulec_footer,#modulec_right_side').sortable({
                placeholder: "placeholder",
-                tolerance: "intersect",
-             axis: "y",
-            forceHelperSize: true,
-                cursorAt:{top:1,left:1},
-                revert:true,
-                 
-                       connectWith: ".connectedSortable"
+               axis: "y",
+           //     handle: ".handle" ,
+                 revert:200,   
               
+                cursorAt:{bottom:1},
+       
+                connectWith: ".connectedSortable"
             }).disableSelection();
                            
                            

@@ -727,7 +727,7 @@ var cardeonMonitor = new Class({
 
 $(document).ready(function(){
 
-    
+
 var e = jQuery.Event("mutate");
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -747,7 +747,7 @@ var obs = new MutationObserver(function(mutations, observer) {
 
     
 });
-
+   
 
 
 
