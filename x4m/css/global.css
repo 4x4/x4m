@@ -97,21 +97,23 @@ background: linear-gradient(to bottom, #323233 0%,#464646 47%,#575757 60%,#54535
     
        background: none repeat scroll 0 0 #494450;
     clear: left;
-    position: relative;
+
 }
 .def-slot ul {
     background-color: #3F4047;
-    position:relative;
+
     
-    
-    height:4px;
+       border: 1px solid red;
+    min-height:5px;
     
 
 }
 
 .def-slot ul li {background: #ededed;
 
-width:300px; padding:9px 12px;  float:left;margin-top:2px;
+width:300px; padding:9px 12px; 
+ 
+ margin-top:2px;
 
 
 

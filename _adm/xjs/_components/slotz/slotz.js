@@ -12,20 +12,21 @@ var Slotz = new Class({
         
         initiateSlotz:function()
         {
-            $('#modulec_top,#modulec_footer,#modulec_right_side').sortable({
+            $('.def-slot ul').sortable({
                placeholder: "placeholder",
                axis: "y",
            //     handle: ".handle" ,
-                 revert:200,   
+                 revert:100,   
               
-                cursorAt:{bottom:1},
-       
-                connectWith: ".connectedSortable"
+                cursorAt:{bottom:1}
             }).disableSelection();
+            
+            
+           
                            
                            
                            
-            //$( "#modulec_footer,#modulec_right_side" ).sortable( "option", "connectWith", ".connectedSortable" );
+            $( ".def-slot ul" ).sortable( "option", "connectWith", ".connectedSortable" );
             
                               
             
