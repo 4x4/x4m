@@ -6,33 +6,33 @@ var Slotz = new Class({
         initialize:function(options)
         {
            this.setOptions(options);
-           this.initiateSlotz();
+           this.initiateSelectors();
             
         },
         
-        initiateSlotz:function()
+        initiateSelectors:function()
         {
             $('.def-slot ul').sortable({
-               placeholder: "placeholder",
-               axis: "y",
-           //     handle: ".handle" ,
-                 revert:100,   
-              
-                cursorAt:{bottom:1}
-            }).disableSelection();
-            
-            
-           
+                
+               placeholder: 'placeholder',
+               axis: 'y',
+               revert:100,   
+               cursorAt:{bottom:1}
+               
+               }).disableSelection();
                            
-                           
-                           
-            $( ".def-slot ul" ).sortable( "option", "connectWith", ".connectedSortable" );
-            
-                              
-            
-            
-            
-        }  
+            $('.def-slot ul' ).sortable( 'option', 'connectWith', '.connectedSortable' );
+            $('.def-slot ul li').on('dblclick tap',this.slotClick.bind(this));
+                        
+        },  
+        
+        slotClick:function(e)
+        {
+          alert('hello');
+        }
+        
+        
+        
         
     
 });
