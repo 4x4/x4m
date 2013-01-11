@@ -3,10 +3,10 @@
 MooTools: the javascript framework
 
 web build:
- - http://mootools.net/core/dce97d7a88c57a1b0474a9a90f0687e1
+ - http://mootools.net/core/f9591b5b82a9e438f46326437075942d
 
 packager build:
- - packager build Core/Core Core/Array Core/String Core/Number Core/Function Core/Object Core/Class Core/Class.Extras Core/JSON
+ - packager build Core/Core Core/Array Core/String Core/Number Core/Function Core/Object Core/Event Core/Browser Core/Class Core/Class.Extras
 
 ...
 */
@@ -930,6 +930,321 @@ Object.extend({
 /*
 ---
 
+name: Browser
+
+description: The Browser Object. Contains Browser initialization, Window and Document, and the Browser Hash.
+
+license: MIT-style license.
+
+requires: [Array, Function, Number, String]
+
+provides: [Browser, Window, Document]
+
+...
+*/
+
+(function(){
+
+var document = this.document;
+var window = document.window = this;
+
+var ua = navigator.userAgent.toLowerCase(),
+	platform = navigator.platform.toLowerCase(),
+	UA = ua.match(/(opera|ie|firefox|chrome|version)[\s\/:]([\w\d\.]+)?.*?(safari|version[\s\/:]([\w\d\.]+)|$)/) || [null, 'unknown', 0],
+	mode = UA[1] == 'ie' && document.documentMode;
+
+var Browser = this.Browser = {
+
+	extend: Function.prototype.extend,
+
+	name: (UA[1] == 'version') ? UA[3] : UA[1],
+
+	version: mode || parseFloat((UA[1] == 'opera' && UA[4]) ? UA[4] : UA[2]),
+
+	Platform: {
+		name: ua.match(/ip(?:ad|od|hone)/) ? 'ios' : (ua.match(/(?:webos|android)/) || platform.match(/mac|win|linux/) || ['other'])[0]
+	},
+
+	Features: {
+		xpath: !!(document.evaluate),
+		air: !!(window.runtime),
+		query: !!(document.querySelector),
+		json: !!(window.JSON)
+	},
+
+	Plugins: {}
+
+};
+
+Browser[Browser.name] = true;
+Browser[Browser.name + parseInt(Browser.version, 10)] = true;
+Browser.Platform[Browser.Platform.name] = true;
+
+// Request
+
+Browser.Request = (function(){
+
+	var XMLHTTP = function(){
+		return new XMLHttpRequest();
+	};
+
+	var MSXML2 = function(){
+		return new ActiveXObject('MSXML2.XMLHTTP');
+	};
+
+	var MSXML = function(){
+		return new ActiveXObject('Microsoft.XMLHTTP');
+	};
+
+	return Function.attempt(function(){
+		XMLHTTP();
+		return XMLHTTP;
+	}, function(){
+		MSXML2();
+		return MSXML2;
+	}, function(){
+		MSXML();
+		return MSXML;
+	});
+
+})();
+
+Browser.Features.xhr = !!(Browser.Request);
+
+// Flash detection
+
+var version = (Function.attempt(function(){
+	return navigator.plugins['Shockwave Flash'].description;
+}, function(){
+	return new ActiveXObject('ShockwaveFlash.ShockwaveFlash').GetVariable('$version');
+}) || '0 r0').match(/\d+/g);
+
+Browser.Plugins.Flash = {
+	version: Number(version[0] || '0.' + version[1]) || 0,
+	build: Number(version[2]) || 0
+};
+
+// String scripts
+
+Browser.exec = function(text){
+	if (!text) return text;
+	if (window.execScript){
+		window.execScript(text);
+	} else {
+		var script = document.createElement('script');
+		script.setAttribute('type', 'text/javascript');
+		script.text = text;
+		document.head.appendChild(script);
+		document.head.removeChild(script);
+	}
+	return text;
+};
+
+String.implement('stripScripts', function(exec){
+	var scripts = '';
+	var text = this.replace(/<script[^>]*>([\s\S]*?)<\/script>/gi, function(all, code){
+		scripts += code + '\n';
+		return '';
+	});
+	if (exec === true) Browser.exec(scripts);
+	else if (typeOf(exec) == 'function') exec(scripts, text);
+	return text;
+});
+
+// Window, Document
+
+Browser.extend({
+	Document: this.Document,
+	Window: this.Window,
+	Element: this.Element,
+	Event: this.Event
+});
+
+this.Window = this.$constructor = new Type('Window', function(){});
+
+this.$family = Function.from('window').hide();
+
+Window.mirror(function(name, method){
+	window[name] = method;
+});
+
+this.Document = document.$constructor = new Type('Document', function(){});
+
+document.$family = Function.from('document').hide();
+
+Document.mirror(function(name, method){
+	document[name] = method;
+});
+
+document.html = document.documentElement;
+if (!document.head) document.head = document.getElementsByTagName('head')[0];
+
+if (document.execCommand) try {
+	document.execCommand("BackgroundImageCache", false, true);
+} catch (e){}
+
+/*<ltIE9>*/
+if (this.attachEvent && !this.addEventListener){
+	var unloadEvent = function(){
+		this.detachEvent('onunload', unloadEvent);
+		document.head = document.html = document.window = null;
+	};
+	this.attachEvent('onunload', unloadEvent);
+}
+
+// IE fails on collections and <select>.options (refers to <select>)
+var arrayFrom = Array.from;
+try {
+	arrayFrom(document.html.childNodes);
+} catch(e){
+	Array.from = function(item){
+		if (typeof item != 'string' && Type.isEnumerable(item) && typeOf(item) != 'array'){
+			var i = item.length, array = new Array(i);
+			while (i--) array[i] = item[i];
+			return array;
+		}
+		return arrayFrom(item);
+	};
+
+	var prototype = Array.prototype,
+		slice = prototype.slice;
+	['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift', 'concat', 'join', 'slice'].each(function(name){
+		var method = prototype[name];
+		Array[name] = function(item){
+			return method.apply(Array.from(item), slice.call(arguments, 1));
+		};
+	});
+}
+/*</ltIE9>*/
+
+
+
+})();
+
+
+/*
+---
+
+name: Event
+
+description: Contains the Event Type, to make the event object cross-browser.
+
+license: MIT-style license.
+
+requires: [Window, Document, Array, Function, String, Object]
+
+provides: Event
+
+...
+*/
+             
+(function() {
+
+var _keys = {};
+
+var DOMEvent = this.DOMEvent = new Type('DOMEvent', function(event, win){
+	if (!win) win = window;
+	event = event || win.event;
+	if (event.$extended) return event;
+	this.event = event;
+	this.$extended = true;
+	this.shift = event.shiftKey;
+	this.control = event.ctrlKey;
+	this.alt = event.altKey;
+	this.meta = event.metaKey;
+	var type = this.type = event.type;
+	var target = event.target || event.srcElement;
+	while (target && target.nodeType == 3) target = target.parentNode;
+	this.target = document.id(target);
+
+	if (type.indexOf('key') == 0){
+		var code = this.code = (event.which || event.keyCode);
+		this.key = _keys[code];
+		if (type == 'keydown'){
+			if (code > 111 && code < 124) this.key = 'f' + (code - 111);
+			else if (code > 95 && code < 106) this.key = code - 96;
+		}
+		if (this.key == null) this.key = String.fromCharCode(code).toLowerCase();
+	} else if (type == 'click' || type == 'dblclick' || type == 'contextmenu' || type == 'DOMMouseScroll' || type.indexOf('mouse') == 0){
+		var doc = win.document;
+		doc = (!doc.compatMode || doc.compatMode == 'CSS1Compat') ? doc.html : doc.body;
+		this.page = {
+			x: (event.pageX != null) ? event.pageX : event.clientX + doc.scrollLeft,
+			y: (event.pageY != null) ? event.pageY : event.clientY + doc.scrollTop
+		};
+		this.client = {
+			x: (event.pageX != null) ? event.pageX - win.pageXOffset : event.clientX,
+			y: (event.pageY != null) ? event.pageY - win.pageYOffset : event.clientY
+		};
+		if (type == 'DOMMouseScroll' || type == 'mousewheel')
+			this.wheel = (event.wheelDelta) ? event.wheelDelta / 120 : -(event.detail || 0) / 3;
+
+		this.rightClick = (event.which == 3 || event.button == 2);
+		if (type == 'mouseover' || type == 'mouseout'){
+			var related = event.relatedTarget || event[(type == 'mouseover' ? 'from' : 'to') + 'Element'];
+			while (related && related.nodeType == 3) related = related.parentNode;
+			this.relatedTarget = document.id(related);
+		}
+	} else if (type.indexOf('touch') == 0 || type.indexOf('gesture') == 0){
+		this.rotation = event.rotation;
+		this.scale = event.scale;
+		this.targetTouches = event.targetTouches;
+		this.changedTouches = event.changedTouches;
+		var touches = this.touches = event.touches;
+		if (touches && touches[0]){
+			var touch = touches[0];
+			this.page = {x: touch.pageX, y: touch.pageY};
+			this.client = {x: touch.clientX, y: touch.clientY};
+		}
+	}
+
+	if (!this.client) this.client = {};
+	if (!this.page) this.page = {};
+});
+
+DOMEvent.implement({
+
+	stop: function(){
+		return this.preventDefault().stopPropagation();
+	},
+
+	stopPropagation: function(){
+		if (this.event.stopPropagation) this.event.stopPropagation();
+		else this.event.cancelBubble = true;
+		return this;
+	},
+
+	preventDefault: function(){
+		if (this.event.preventDefault) this.event.preventDefault();
+		else this.event.returnValue = false;
+		return this;
+	}
+
+});
+
+DOMEvent.defineKey = function(code, key){
+	_keys[code] = key;
+	return this;
+};
+
+DOMEvent.defineKeys = DOMEvent.defineKey.overloadSetter(true);
+
+DOMEvent.defineKeys({
+	'38': 'up', '40': 'down', '37': 'left', '39': 'right',
+	'27': 'esc', '32': 'space', '8': 'backspace', '9': 'tab',
+	'46': 'delete', '13': 'enter'
+});
+
+})();
+
+
+
+
+
+
+/*
+---
+
 name: Class
 
 description: Contains the Class Function for easily creating, extending, and implementing reusable Classes.
@@ -1059,7 +1374,7 @@ provides: [Class.Extras, Chain, Events, Options]
 
 ...
 */
-
+      
 (function(){
 
 this.Chain = new Class({
@@ -1160,10 +1475,58 @@ this.Options = new Class({
 		return this;
 	}
 
+}); 
+
+
+String.implement({
+
+    parseQueryString: function(decodeKeys, decodeValues){
+        if (decodeKeys == null) decodeKeys = true;
+        if (decodeValues == null) decodeValues = true;
+
+        var vars = this.split(/[&;]/),
+            object = {};
+        if (!vars.length) return object;
+
+        vars.each(function(val){
+            var index = val.indexOf('=') + 1,
+                value = index ? val.substr(index) : '',
+                keys = index ? val.substr(0, index - 1).match(/([^\]\[]+|(\B)(?=\]))/g) : [val],
+                obj = object;
+            if (!keys) return;
+            if (decodeValues) value = decodeURIComponent(value);
+            keys.each(function(key, i){
+                if (decodeKeys) key = decodeURIComponent(key);
+                var current = obj[key];
+
+                if (i < keys.length - 1) obj = obj[key] = current || {};
+                else if (typeOf(current) == 'array') current.push(value);
+                else obj[key] = current != null ? [current, value] : value;
+            });
+        });
+
+        return object;
+    },
+
+    cleanQueryString: function(method){
+        return this.split('&').filter(function(val){
+            var index = val.indexOf('='),
+                key = index < 0 ? '' : val.substr(0, index),
+                value = val.substr(index + 1);
+
+            return method ? method.call(null, key, value) : (value || value === 0);
+        }).join('&');
+    }
+
 });
+
+
 
 })();
 
+
+
+     
 
 /*
 ---
@@ -1192,51 +1555,56 @@ if (typeof JSON == 'undefined') this.JSON = {};
 var special = {'\b': '\\b', '\t': '\\t', '\n': '\\n', '\f': '\\f', '\r': '\\r', '"' : '\\"', '\\': '\\\\'};
 
 var escape = function(chr){
-	return special[chr] || '\\u' + ('0000' + chr.charCodeAt(0).toString(16)).slice(-4);
+    return special[chr] || '\\u' + ('0000' + chr.charCodeAt(0).toString(16)).slice(-4);
 };
 
 JSON.validate = function(string){
-	string = string.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
-					replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
-					replace(/(?:^|:|,)(?:\s*\[)+/g, '');
+    string = string.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@').
+                    replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']').
+                    replace(/(?:^|:|,)(?:\s*\[)+/g, '');
 
-	return (/^[\],:{}\s]*$/).test(string);
+    return (/^[\],:{}\s]*$/).test(string);
 };
 
 JSON.encode = JSON.stringify ? function(obj){
-	return JSON.stringify(obj);
+    return JSON.stringify(obj);
 } : function(obj){
-	if (obj && obj.toJSON) obj = obj.toJSON();
+    if (obj && obj.toJSON) obj = obj.toJSON();
 
-	switch (typeOf(obj)){
-		case 'string':
-			return '"' + obj.replace(/[\x00-\x1f\\"]/g, escape) + '"';
-		case 'array':
-			return '[' + obj.map(JSON.encode).clean() + ']';
-		case 'object': case 'hash':
-			var string = [];
-			Object.each(obj, function(value, key){
-				var json = JSON.encode(value);
-				if (json) string.push(JSON.encode(key) + ':' + json);
-			});
-			return '{' + string + '}';
-		case 'number': case 'boolean': return '' + obj;
-		case 'null': return 'null';
-	}
+    switch (typeOf(obj)){
+        case 'string':
+            return '"' + obj.replace(/[\x00-\x1f\\"]/g, escape) + '"';
+        case 'array':
+            return '[' + obj.map(JSON.encode).clean() + ']';
+        case 'object': case 'hash':
+            var string = [];
+            Object.each(obj, function(value, key){
+                var json = JSON.encode(value);
+                if (json) string.push(JSON.encode(key) + ':' + json);
+            });
+            return '{' + string + '}';
+        case 'number': case 'boolean': return '' + obj;
+        case 'null': return 'null';
+    }
 
-	return null;
+    return null;
 };
 
 JSON.decode = function(string, secure){
-	if (!string || typeOf(string) != 'string') return null;
+    if (!string || typeOf(string) != 'string') return null;
 
-	if (secure || JSON.secure){
-		if (JSON.parse) return JSON.parse(string);
-		if (!JSON.validate(string)) throw new Error('JSON could not decode the input; security is enabled and the value is not secure.');
-	}
+    if (secure || JSON.secure){
+        if (JSON.parse) return JSON.parse(string);
+        if (!JSON.validate(string)) throw new Error('JSON could not decode the input; security is enabled and the value is not secure.');
+    }
 
-	return eval('(' + string + ')');
+    return eval('(' + string + ')');
 };
 
 })();
+
+       
+
+
+
 

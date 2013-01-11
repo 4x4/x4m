@@ -1,40 +1,12 @@
 <?php
-class pages_module_back
+class pagesBack  extends xModuleBack
     {
-    var $lct;
-    var $result;
-    //privates
-    var $_module_name;
-    //class linker
-    var $_tree;
-    var $_common_obj;
 
-    function pages_module_back() { $this->_module_name='pages'; }
+    function __construct() 
+    { 
+        parent::__construct(__CLASS__);  
+    }
 
-    function common_call()
-        {
-            
-        $this->_common_obj=&pages_module_common::getInstance();
-        //proxy for tree
-        $this->_tree      =&$this->_common_obj->obj_tree;
-        }
-
-    function execute($action, $parameters = null)
-        {
-            
-        $this->common_call();
-        return $this->_common_obj->execute(&$this, $action, $parameters);
-        }
-        
-        
-        function executex($action,$acontext)
-        {
-            
-            $this->common_call();
-            $this->_common_obj->execute(&$this, $action);
-            $acontext->lct=$this->lct;   
-            $acontext->result=$this->result;
-        }
 
     function create_outer_link($isOuterLink,$destinationPage,$link,$external_link,$name)
      {     
@@ -423,8 +395,6 @@ class pages_module_back
                         {
                             if ($modules_crotch=$this->_tree->get_anc_multiply_childs(array_keys($mk), array('_MODULE'), true))
                             {
-                            
-                                
                                foreach  ($modules_crotch as $id=>$module)
                                {
 
@@ -437,8 +407,6 @@ class pages_module_back
                                         $module['params']=$mi->_common_obj->$method($module['params']);
                                        
                                    }
-   
-                                   
                                    
                                    $this->result['modules'][$mk[$module['ancestor']]][$id]=$module;
                                }
@@ -818,8 +786,24 @@ class pages_module_back
                 
         function pages_table($params)
     {
+        $source=Common::classesFactory('treeJsonSource',array($this->_tree));
+        $opt=array(
+            //'emulateRoot'=>array('image'=>'folder.gif','data'=>array('root','2','3')),
+            'gridFormat'=>true,
+            'nested'=>array('_GROUP','_DOMAIN','_LVERSION'),
+            'columns'=>array('id'=>array(),
+                     'obj_type'=>array('name'=>'objType'),
+                     '>StartPage'=>array()
+                     ));
+
+        $source->setOptions($opt);
+                             
+
+        $this->result=$source->createView($params['id']);
+
         
-            $TD = Common::inc_module_factory('TTreeSource');
+            /*$TD = Common::classesFactory('TTreeSource');
+            
             $options['startNode'] = $params['id'];
             $options['shownodesWithObjType'] = array('_PAGE','_GROUP','_ROOT','_LINK');
             $options['groups'] = array('_GROUP','_ROOT');
@@ -837,7 +821,7 @@ class pages_module_back
 
             $TD->CreateView($params['id']);
             
-            $this->result=$TD->result;
+            $this->result=$TD->result;     */
     }
 
 

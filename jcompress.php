@@ -1,7 +1,9 @@
 <?php
-
 require_once('inc/core/helpers.php');
 require_once ("conf/init.php");
+
+
+
 
 function IE()
 {
@@ -48,13 +50,14 @@ function compress_file($file, $cmp = true, $level = 9)
 
     function compress_mass_js($compress_scheme)
     {
+
         if ($pathes=explode(',',$compress_scheme))
             {
                 $cjs='';
         
                 foreach ($pathes as $path)
                     {               
-                        if(file_exists(PATH_ . $path.'.js'))
+                        if(file_exists($p=PATH_ . $path.'.js'))
                         {
                            $cjs.=file_get_contents(PATH_ . $path.'.js',false)."\r\n";
                         }

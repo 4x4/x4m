@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-Control" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Lang" content="en">
+<meta name="author" content="">
+<meta http-equiv="Reply-to" content="@.com">
+<meta name="generator" content="PhpED 5.8">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<meta name="creation-date" content="01/01/2009">
+<meta name="revisit-after" content="15 days">
+
+<script  src="debug.js"></script>
+<script  src="_core/mootools-core.js"></script>
+<script  src="_components/mt.router/router.js"></script>
+
+<script  src="_core/jquery.min.js"></script>
+<script  src="_components/jq.sortable/sortable.js"></script>
+
+<script  src="/inc/ext/xoad/js/xoad_optimized.js"></script>
+<script  src="_components/slotz/slotz.js"></script>
+
+    <script>
+$(document).ready(function(){
+              
+    
+          var slotz = new Slotz({id:'slotz'}); 
+            
+        });
+    </script>
+    
+    <style>
+        header, section {
+            display: block;
+        }
+     
+     
+        .module-container, .sortable, .exclude, .handles {
+            margin: auto;
+            padding: 0;
+            width: 310px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    
+        .module-container li, .sortable li, .exclude li, .handles li {
+            list-style: none;
+            border: 1px solid #CCC;
+            background: #F6F6F6;
+            font-family: "Tahoma";
+            color: #1C94C4;
+            margin: 5px;
+            padding: 5px;
+            height: 22px;
+        }
+        .handles span {
+            cursor: move;
+        }
+        li.disabled {
+            opacity: 0.5;
+        }
+        .sortable.grid li {
+            line-height: 80px;
+            float: left;
+            width: 80px;
+            height: 80px;
+            text-align: center;
+        }
+        li.highlight {
+            background: #FEE25F;
+        }
+        #module-container {
+            width: 440px;
+            overflow: hidden;
+            margin: auto;
+        }
+        .module-container {
+            float: left;
+            width: 200px;
+        }
+        .module-container.no2 {
+            float: right;
+        }
+        li.sortable-placeholder {
+            border: 1px dashed #CCC;
+            background: none;
+        }
+    </style>
+
+
+
+<title>Untitled</title>
+<link rel="stylesheet" type="text/css" href="my.css">
+</head>
+<body>
+
+
+<section id="slotz">
+   
+        <ul class="module-container list">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+            <li>Item 6</li>
+        </ul>
+        <ul class="module-container list no2">
+            <li class="highlight">Item 1</li>
+            <li class="highlight">Item 2</li>
+            <li class="highlight">Item 3</li>
+            <li class="highlight">Item 4</li>
+            <li class="highlight">Item 5</li>
+            <li class="highlight">Item 6</li>
+        </ul>
+    </section>
+    
+    
+  
+</body>
+</html>
+

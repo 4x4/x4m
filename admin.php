@@ -34,6 +34,10 @@ require_once(xConfig::get('PATH','XOAD') . 'xoad.php');
 require_once(xConfig::get('PATH','ADM') . 'logger.class.php');
 require_once(xConfig::get('PATH','ADM') . 'adm.class.php');
 
+xRegistry::set('EVM',xEventMachine::getInstance());
+xCore::pluginEventDetector();  
+
+
 if ($_REQUEST['xoadCall'])
     {
     ob_start();

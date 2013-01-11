@@ -480,7 +480,7 @@ var _templateHolder=Class.create(
     
 });
 
-*/
+
 
 var _adminInterface = Class.create(
 {

@@ -1,5 +1,3 @@
-var XTRpages = Class.create();
-var XTR_pages;
 
     
 XTRpages.prototype = Object.extend(new _modulePrototype(), 
@@ -149,7 +147,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
         
         if(!this.xtr_slots.is_slotz_template_cached('_allslotz_'))
         {
-            //слоты и модули
+            //СЃР»РѕС‚С‹ Рё РјРѕРґСѓР»Рё
             this.connector.execute({get_cslotz:{node_id: 1,load_all_tpl_slotz:true}});        
             
             if(this.connector.result)this.xtr_slots.import_slotz('_allslotz_',this.connector.result.slotz);
@@ -246,7 +244,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
                 
         if(!this.xtr_slots.is_slotz_template_cached('_allslotz_'))
         {
-            //слоты и модули
+            //СЃР»РѕС‚С‹ Рё РјРѕРґСѓР»Рё
             this.connector.execute({get_cslotz:{node_id: itemId,load_all_tpl_slotz:true}});        
             this.xtr_slots.import_slotz('_allslotz_',this.connector.result.slotz);
         
@@ -380,7 +378,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
         
         xlist = this.group_dialog(Xpop.tool_tip.id);
         
-        //Передача контекста Xpop
+        //РџРµСЂРµРґР°С‡Р° РєРѕРЅС‚РµРєСЃС‚Р° Xpop
         xlist.connectXpop(Xpop);
 
         if((!Object.isUndefined(pd.initTemplate))&&(pd.initTemplate!=''))
@@ -452,7 +450,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
 
          if(!this.xtr_slots.is_slotz_template_cached('_allslotz_'))
         {
-            //слоты и модули
+            //СЃР»РѕС‚С‹ Рё РјРѕРґСѓР»Рё
             this.connector.execute({get_cslotz:{load_all_tpl_slotz:true}});        
             this.xtr_slots.import_slotz('_allslotz_',this.connector.result.slotz);        
         }else{this.xtr_slots.import_slotz('_allslotz_')}
@@ -469,7 +467,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
             delta_y: 0
             });
         
-        //слоты    
+        //СЃР»РѕС‚С‹    
         xlist = this.group_dialog(Xpop.tool_tip.id);
         xlist.connectXpop(Xpop);
 
@@ -513,7 +511,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
         
          if(!this.xtr_slots.is_slotz_template_cached(template))
         {
-            //слоты и модули
+            //СЃР»РѕС‚С‹ Рё РјРѕРґСѓР»Рё
             this.connector.execute({get_cslotz:{node_id:itemId}}, null);        
             if(this.connector.result)
             this.xtr_slots.import_slotz(template,this.connector.result.slotz);        
@@ -544,7 +542,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
         if(_tpl!=null){
           if(!this.xtr_slots.is_slotz_template_cached(_tpl))
         {
-            //слоты и модули
+            //СЃР»РѕС‚С‹ Рё РјРѕРґСѓР»Рё
             
             this.connector.execute({get_cslotz:{tpl_name:_tpl}});                        
             this.xtr_slots.import_slotz(_tpl,this.connector.result.slotz);                    
@@ -821,7 +819,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
             
          xlist = this.page_dialog(Xpop.tool_tip.id);
 
-        //Передача контекста Xpop
+        //РџРµСЂРµРґР°С‡Р° РєРѕРЅС‚РµРєСЃС‚Р° Xpop
         xlist.connectXpop(Xpop);
         
         this.current_node = itemId;         
@@ -871,7 +869,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
             });
             
         xlist_g = this.group_dialog(X_pop.tool_tip.id);
-        //Передача контекста Xpop
+        //РџРµСЂРµРґР°С‡Р° РєРѕРЅС‚РµРєСЃС‚Р° Xpop
         xlist_g.connectXpop(X_pop);
        
        
@@ -1028,7 +1026,7 @@ XTRpages.prototype = Object.extend(new _modulePrototype(),
     ,
      build_interface: function()
         {
-        //дерево
+        //РґРµСЂРµРІРѕ
         
         toggle_main_menu(true);
         if(!this.tree)

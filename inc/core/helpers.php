@@ -1221,10 +1221,7 @@ class Common
         public static $page_nav_view='pages';
         public static $page_move_chunk=0;
             
-
-        
-        
-      public static  function is_file_exists($file)
+      public static  function isFileExists($file)
         {             
             if(file_exists(PATH_.$file)&&$file)
             {

@@ -214,17 +214,22 @@ xNameSpaceHolder::addCallModel('module', function($params)
     
         case 'xfront':
             
-        $xfrontModuleInstance=xCore::moduleFactory($params[1].'.'.$params[2]);
-        xNameSpaceHolder::addObjectToNS('module.'.$params[1].'.xfront',$xfrontModuleInstance);
-        $xfrontModuleInstance->initiateXfrontPlugins();
+        if($xfrontModuleInstance=xCore::moduleFactory($params[1].'.'.$params[2]))
+        {
+            xNameSpaceHolder::addObjectToNS('module.'.$params[1].'.xfront',$xfrontModuleInstance);
+            $xfrontModuleInstance->initiateXfrontPlugins();
+        }
             
         break;
         
         
         case 'back':
-            
-            $backmoduleInstance=xCore::moduleFactory($params[1].'.'.$params[2]);
-            $backModuleInstance->initiateBackPlugins();
+
+            if($backModuleInstance=xCore::moduleFactory($params[1].'.'.$params[2]))
+            {
+                xNameSpaceHolder::addObjectToNS('module.'.$params[1].'.back',$backModuleInstance);
+                $backModuleInstance->initiateBackPlugins();
+            }
             
         break;
 
@@ -2494,13 +2499,22 @@ class xTreeEngine {
            if(isset($pdoResult['params']))$nRes['params'] = $pdoResult['params'];
             
             unset($pdoResult['id'], $pdoResult['params']);
-            $nRes['path'] = $levelsPath = array_filter(array_values(array_splice($pdoResult, 3, 1 + $this->levels)));
-            if (isset($this->query['basicpath']) && $levelsPath) {
-                $this->query['pathCache'] = array_merge($this->query['pathCache'], $levelsPath);
+            
+            if(is_array($pdoResult))
+            {
+            
+                $nRes['path'] = $levelsPath = array_filter(array_values(array_splice($pdoResult, 3, 1 + $this->levels)));
+                
+                
+                if (isset($this->query['basicpath']) && $levelsPath) {
+                    $this->query['pathCache'] = array_merge($this->query['pathCache'], $levelsPath);
+                }
+                
+                $nRes['ancestor']      = end($levelsPath);
+                $nRes['ancestorLevel'] = count($levelsPath);
+                return $nRes;
             }
-            $nRes['ancestor']      = end($levelsPath);
-            $nRes['ancestorLevel'] = count($levelsPath);
-            return $nRes;
+            
         } else {
             foreach ($this->query['selectStruct'] as $field_key) {
                 $result[$field_key] = $pdoResult[$field_key];

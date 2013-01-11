@@ -25,11 +25,25 @@ xRegistry::set('xPDO',xPDO::getInstance());
 $pages=new xTreeEngine('pages_container');
 $source=Common::classesFactory('treeJsonSource',array(&$pages));
 
-$source->createView();
+$p=array('pp');
+
+
+
+$opt=array(
+    'nested'=>array('_GROUP','_DOMAIN','_LVERSION'),
+    'columns'=>array('id'=>array(),
+                     'obj_type'=>array('name'=>'objType'),
+                     '>StartPage'=>array()
+                     ));
+
+$source->setOptions($opt);
+
+$r=$source->createView(1);
+
+
 
 
         
 
 
-die();
 ?>

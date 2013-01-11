@@ -24,15 +24,10 @@ RewriteRule ^ /index.php?action=sitemap [L]
 RewriteCond %{REQUEST_FILENAME} /robots.txt$ [NC]
 RewriteRule ^ /index.php?action=robots [L]
 
-RewriteCond  %{REQUEST_URI} !^/tests/*|index.html|admin.php|cron.php|upload.php|image.php|license|tree_xml_server.php|upl.php|install.php|login.php|php.php|jcompress.php|captcha.php|download.php|swfupload.php|^/backup/*|^/lz/*|^/media/*|^/uploads/*
- 
-
-
-
-
-RewriteCond  %{REQUEST_FILENAME} !\.(xls|rar|zip|tar|ico|jpg|jpeg|gif|png|htc|css|pdf|js|rar|html|xml|png|swf|JPG|JPEG|GIF|PNG|txt|html)$  
-RewriteRule  ^(.*)$ _run.php
-DirectoryIndex _run.php
+#RewriteCond  %{REQUEST_URI} ^/x4m/*|!^/tests/*|index.html|admin.php|cron.php|upload.php|image.php|license|tree_xml_server.php|install.php|login.php|php.php|jcompress.php|captcha.php|download.php|swfupload.php|^/backup/*|^/media/*|^/uploads/*
+#RewriteCond  %{REQUEST_FILENAME} !\.(js|xls|rar|zip|tar|ico|jpg|jpeg|gif|png|htc|css|pdf|js|rar|html|xml|png|swf|JPG|JPEG|GIF|PNG|txt|html)$  
+#RewriteRule  ^(.*)$ _run.php
+#DirectoryIndex _run.php
 
 #php_flag eaccelerator.enable off
 #php_value session.bug_compat_42 1
