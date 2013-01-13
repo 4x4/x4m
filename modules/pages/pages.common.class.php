@@ -68,7 +68,7 @@ class pagesCommon
                     'DisableAccess',
                     'DisablePath',
                     'DisableMapLink'
-                ),array('_ROOT','_GROUP','_LVERSION'));
+                ),array('_GROUP','_LVERSION'));
 
             $this->_tree->setObject('_PAGE', array
                 (
@@ -89,10 +89,11 @@ class pagesCommon
                     'Meta',
                     'Description',
                     'DisableAccess'
-                ),array('_ROOT','_GROUP','_LVERSION'));
+                ),array('_GROUP','_LVERSION'));
 
             
-            $this->_tree->setObject('_MODULE', null, array('_PAGE','_LVERSION','_GROUP','_DOMAIN','_ROOT'));
+            $this->_tree->setObject('_SLOT', array('Active'), array('_PAGE','_LVERSION','_GROUP','_DOMAIN','_ROOT'));
+            $this->_tree->setObject('_MODULE', null, array('_SLOT'));
             
             }
     

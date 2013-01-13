@@ -19,6 +19,7 @@ dhtmlXGridObject.prototype._updateTGRState=function(z){
 
 
 dhtmlXGridObject.prototype.doExpand=function(obj){  
+
 	this.editStop();
 
     var row = obj.parentNode.parentNode.parentNode;
@@ -472,9 +473,9 @@ eXcell_tree.prototype = new eXcell;
 			_tgc.plus=_tgc.imst+"plus.gif"+_tgc.imact;
 			_tgc.minus=_tgc.imst+"minus.gif"+_tgc.imact;
 			_tgc.blank=_tgc.imst+"blank.gif"+_tgc.imact;
-			_tgc.start="<div class='treegrid_cell' style='overflow:hidden; white-space : nowrap; height:"+(_isIE?20:18)+"px;'>";
+			_tgc.start="<div class='treegrid_cell' style='overflow:hidden; white-space : nowrap; height:"+(_isIE?22:20)+"px;'>";
 			
-			_tgc.itemim="' align='absmiddle' "+(this.grid._img_height?(" height=\""+this.grid._img_height+"\""):"")+(this.grid._img_width?(" width=\""+this.grid._img_width+"\""):"")+" ><span "+((_isFF||_isOpera)?"style='position:relative; top:2px;'":"")+"id='nodeval'>";
+			_tgc.itemim="'  align='absmiddle' "+(this.grid._img_height?(" height=\""+this.grid._img_height+"\""):"")+(this.grid._img_width?(" width=\""+this.grid._img_width+"\""):"")+" ><span "+((_isFF||_isOpera)?"style='position:relative; left:6px;top:3px;'":"")+"id='nodeval'>";
 			_tgc.close="</span></div>";
 			this.grid._tgc=_tgc;
 		}

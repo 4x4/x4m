@@ -2251,7 +2251,7 @@ class xteTree {
      */
     function hasChilds($id)
     {
-             if($this->tree[$id])return true;
+             if(isset($this->tree[$id]))return true;
     }
     
     /**
@@ -2919,6 +2919,7 @@ class xTreeEngine {
             if(!$this->filter[$objectType])return $data;
             
             $extKeys=array_intersect(array_keys($data), $this->filter[$objectType]);
+            $extKeys[]='__nodeChanged';
             
             foreach ($extKeys as $key)
                 {
@@ -2957,7 +2958,8 @@ class xTreeEngine {
                     {
                         $this->setStructData($id,'basic',$newbasic);
                     }
-                    $node=$this->getNodeStruct($id);                    
+                    $node=$this->getNodeStruct($id);   
+                    $nodeData['__nodeChanged']=time();                 
                     $this->setTreeOBJData($id,$nodeData,$nodeData['obj_type']);//!                
         } 
 
@@ -2974,6 +2976,7 @@ class xTreeEngine {
             if(!$ancestor)return;
             try{
                     $id=$this->addBasic($ancestor,$basic,$objType);
+                    $nodeData['__itemChanged']=time();
                     $this->setTreeObjData($id,$nodeData,$objType);
                     return $id;
                 
@@ -3814,11 +3817,6 @@ class tPageAgregator
             //вызов модуля страниц        
             
             $pages = xCore::moduleFactory('pages.front');
-            
-
-            
-            
-            
 
         //    $pages->createTest();
             
@@ -3838,12 +3836,12 @@ class tPageAgregator
             
 
             
-           $templates->refreshMainTpls();
+           // $templates->refreshMainTpls();
                         
      
             $this->mainTemplate                          = $templates->getTpl($pages->page['params']['Template'], HTTP_HOST);
             
-            $slotzCrotch                       = $pages->getSlotzCrotch($this->mainTemplate ['slotz']);
+            $slotzCrotch                       = $pages->getSlotzCrotch($this->mainTemplate['slotz']);
             
             //добываем модули слотов ветвления
             if (!empty($pages->modulesOrder))
@@ -3864,11 +3862,6 @@ class tPageAgregator
                     }
                 }
             }
-            
-            
-            global $time;
-            $y=Common::getmicrotime();
-            echo $y-$time.' modules ready ';
             
             
             while (list($slot, $modules) = each($slotzCrotch))

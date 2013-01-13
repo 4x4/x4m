@@ -12,7 +12,8 @@ class pagesFront extends xModule
     function __construct()
     {
         parent::__construct(__CLASS__);
-        $this->_tree->enableCache(true);           
+        $this->_tree->enableCache(true);      
+        $this->createTest();
     }
     
     public function createTest()
@@ -20,49 +21,56 @@ class pagesFront extends xModule
         return;
         //          $this->_tree->delete()->childs(1)->where(array('@obj_type','=','_MODULE'))->run();
         
-      //  $this->_tree->delete()->childs(1)->run();
+     
+        $this->_tree->delete()->childs(1)->run();
         
         
         
         $root = $this->_tree->initTreeObj(1, 'x4.bi', '_DOMAIN', array(
-            'StartPage' => ''
+            'StartPage' => '',
+            'Name' => 'Домен сайта x4 '
         ));
         $id   = $this->_tree->initTreeObj($root, 'ru', '_LVERSION', array(
-            'StartPage' => ''
+            'StartPage' => '',
+            'Name' => 'Русская версия'
         ));
         
         $grId = $this->_tree->initTreeObj($id, 'group', '_GROUP', array(
-            'Template' => '_index.html'
+            'Template' => '_index.html',
+            'Name' => 'Группа 1'
         ));
         
         $id   = $this->_tree->initTreeObj($grId, 'mypageSecond', '_PAGE', array(
             'Template' => '_index.html',
-            'name' => 'second'
+            'Name' => 'Страница'
         ));
         $id   = $this->_tree->initTreeObj($grId, 'mypageThird', '_PAGE', array(
             'Template' => '_index.html',
-            'name' => 'third'
+            'Name' => 'Название Страницы'
         ));
         $inGR = $this->_tree->initTreeObj($grId, 'groupInner', '_GROUP', array(
             'Template' => '_index.html',
-            'name' => 'groupInner'
+            'Name' => 'Группа внутри'
         ));
         $id   = $this->_tree->initTreeObj($grId, 'mypage', '_PAGE', array(
             'Template' => '_index.html',
-            'name' => 'third'
+            'Name' => 'Длинное название этой стратегической страницы'
+        ));
+        
+        
+        $id=$this->_tree->initTreeObj($id, '%SAMEASID%', '_SLOT', array(
+            'Active' =>1,            
         ));
         
         $this->_tree->initTreeObj($id, '%SAMEASID%', '_MODULE', array(
             'Action' => 'showLevelMenu',
-            '_Slot' => 'center',
             'showGroupId' => 1,
             'Type' => 'pages',
             'Template' => 'menu_left.show_level_menu.html',
             'Priority' => 1
         ));
         $this->_tree->initTreeObj($id, '%SAMEASID%', '_MODULE', array(
-            'Action' => 'showPath',
-            '_Slot' => 'left-side',
+            'Action' => 'showPath',            
             'Type' => 'pages',
             'Priority' => 2,
             'Template' => 'path_tpl.show_path.html'
@@ -71,7 +79,14 @@ class pagesFront extends xModule
         
         
         $id = $this->_tree->initTreeObj($root, 'eng', '_LVERSION', array(
-            'StartPage' => ''
+            'StartPage' => '',
+            'Name' => 'English version'
+        ));
+        
+        
+            $root2 = $this->_tree->initTreeObj(1, 'mobile4.bi', '_DOMAIN', array(
+            'StartPage' => '',
+            'Name' => 'Домен сайта mobile'
         ));
         
     }
@@ -238,7 +253,8 @@ class pagesFront extends xModule
                 '@obj_type',
                 '=',
                 array(
-                    '_MODULE'
+                    '_MODULE',
+                    '_SLOT'
                 )
             ))->asTree()->run();
             

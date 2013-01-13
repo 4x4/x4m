@@ -4696,6 +4696,7 @@ dhtmlXGridObject.prototype={
     _process_tree_json:function(data,top,pid)
     {
         
+        
     this._parsing=true;
     var main=false;
     if (!top){
@@ -4712,6 +4713,9 @@ dhtmlXGridObject.prototype={
     if (top.rows) 
     for (id in top.rows)
     {
+     
+         if(typeof top.rows[id]!='function')
+            {
             //var id = top.rows[i].id;
             var row=this._h2.add(id,pid);
             row.buff={ idd:id, data:top.rows[id], _parser: this._process_json_row, _locator:this._get_json_data};
@@ -4720,6 +4724,7 @@ dhtmlXGridObject.prototype={
             
             this.rowsAr[id]=row.buff;
             this._process_tree_json(top.rows[id],top.rows[id],id);
+            }
     }
     
     if (main){ 

@@ -1,0 +1,29 @@
+<form name="access" id="access">
+  <p>{page_name}</p>
+  <input readonly name="Name" type="text" />
+  <ul class="chk">
+    <li>
+      <input type="checkbox" name="DisableAccess" />
+      {accsess_after_registration}</li>
+  </ul>
+  <!--<a href="javascript:void(0)" onclick="$('redirect').toggle()">{automatic_transfer_to_another_page_on_your_site}</a>-->
+  <p>{automatic_transfer_to_another_page_on_your_site}</p>
+  <div id="redirect">
+    <input id="Link" class="inp required" readonly />
+    <input id="LinkId" type="hidden" value="0" />
+    <a class="button small" href="javascript:void(0)" id="startXlist">{select}</a> <a class="button small" href="javascript:void(0)" onclick="javascript:$('LinkId').value=0;$('Link').value=''" >{clean} </a> 
+  </div>
+    <p>{usercps}</p>
+    <select id="NoAuthRedirId" name="NoAuthRedirId"></select>
+
+</form>
+
+
+
+<p>{open_access_to_the_page_for_users_belonging_to_the_following_groups}</p>
+<p>{access_rules_for_groups_of_pages_on_the_subject_of_child_elements}</p>
+<form name="fuserrights" id="fuserrights">
+  <div id="fusersgroups"> </div>
+</form>
+<a class="button" href="javascript:XTR_pages.save_access_rights()">{save}</a>
+<div id="result_container" style="display:none"> </div>

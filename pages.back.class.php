@@ -1,12 +1,40 @@
 <?php
-class pagesBack  extends xModuleBack
+class pages_module_back
     {
+    var $lct;
+    var $result;
+    //privates
+    var $_module_name;
+    //class linker
+    var $_tree;
+    var $_common_obj;
 
-    function __construct() 
-    { 
-        parent::__construct(__CLASS__);  
-    }
+    function pages_module_back() { $this->_module_name='pages'; }
 
+    function common_call()
+        {
+            
+        $this->_common_obj=&pages_module_common::getInstance();
+        //proxy for tree
+        $this->_tree      =&$this->_common_obj->obj_tree;
+        }
+
+    function execute(&$action, $parameters = null)
+        {
+            
+        $this->common_call();
+        return $this->_common_obj->execute($this, $action, $parameters);
+        }
+        
+        
+        function executex(&$action,$acontext)
+        {
+            
+            $this->common_call();
+            $this->_common_obj->execute($this, $action);
+            $acontext->lct=$this->lct;   
+            $acontext->result=$this->result;
+        }
 
     function create_outer_link($isOuterLink,$destinationPage,$link,$external_link,$name)
      {     
@@ -89,7 +117,7 @@ class pagesBack  extends xModuleBack
             {
             foreach ($parameters['modules'] as $slot_name => $slotz)
                 {
-                //Ð¸Ð·Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¾ ÑÐ¾Ð·Ð´Ð°Ð½Ð½Ñ‹Ðµ ÑÐ»Ð¾Ñ‚Ñ‹ Ð¸ Ð¼Ð¾Ð´ÑƒÐ»Ð¸ Ð°ÐºÑ‚Ð¸Ð²Ð½Ñ‹ 
+                //èçíà÷àëüíî ñîçäàííûå ñëîòû è ìîäóëè àêòèâíû 
                 $slot_data['Active'] = 1;
                 $slot_id             =$this->init_slot($id, $slot_name, $slot_data);
 
@@ -104,7 +132,7 @@ class pagesBack  extends xModuleBack
 
       function save_slotz($id, $modules)
         {
-        //ÑƒÐ´Ð°Ð»ÑÐµÐ¼ ÑÑ‚Ð°Ñ€Ñ‹Ðµ ÑÐ»Ð¾Ñ‚Ñ‹    
+        //óäàëÿåì ñòàðûå ñëîòû    
 
         if ($childs=$this->_tree->GetChilds($id, 'ASC', 0, 0, '_SLOT'))
             {
@@ -118,7 +146,7 @@ class pagesBack  extends xModuleBack
         if (is_array($modules))
             {
 
-            //Ð²ÑÑ‚Ð°Ð²Ð»ÑÐµÐ¼ Ð½Ð¾Ð²Ñ‹Ðµ
+            //âñòàâëÿåì íîâûå
             foreach ($modules as $slot_name => $slotz)
                 {
                 $slot_data['Active'] = 1;
@@ -246,7 +274,7 @@ class pagesBack  extends xModuleBack
 
         
         
-    //Ð²ÐºÐ»ÑŽÑ‡ÐµÐ½Ð° Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð´ÑƒÐ±Ð»Ð¸Ñ€ÑƒÑŽÑ‰Ð¸Ð¹ basic
+    //âêëþ÷åíà ïðîâåðêà íà äóáëèðóþùèé basic
     $this->result['dragOK']=$this->_tree->ChangeAncestorUniqs($parameters['id'], $parameters['ancestor'],
                                                               $parameters['relative']); }
 
@@ -270,7 +298,7 @@ class pagesBack  extends xModuleBack
         }
 
 
-    //Ð¸Ð·Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ ÑˆÐ°Ð±Ð»Ð¾Ð½ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹
+    //èçìåíèòü øàáëîí ñòðàíèöû
     //function change_template($parameters) { $this->get_slotz($parameters['page_id'], $parameters['tpl']); }
 
         function  create_new_route($params)
@@ -303,7 +331,7 @@ class pagesBack  extends xModuleBack
                   x3_message::push( $this->_common_obj->translate('saved'),$this->_module_name);
                  
                 }else{
-                    x3_error::push( $this->_common_obj->translate('save_error'),$this->_module_name);
+                x3_error::push( $this->_common_obj->translate('save_error'),$this->_module_name);
             }   
     }
     
@@ -313,9 +341,9 @@ class pagesBack  extends xModuleBack
         $TDB->query('delete from routes where id="'.$params['id'].'"');
     }
    
-    function delete_obj($data)
+    function delete_obj(&$data)
         {
-            $this->_common_obj->delete_obj(&$this,$data);          
+            $this->_common_obj->delete_obj($this,$data);          
             if ($this->result['deleted']) {
                 $this->result['deleted'] = array($data['id']);
             }
@@ -349,7 +377,7 @@ class pagesBack  extends xModuleBack
             
             if($params['node_id'])
             {        
-                //Ð´Ð»Ñ ÑƒÐ¼ÐµÐ½ÑŒÑˆÐµÐ½Ð¸Ñ Ð¾Ð±ÑŠÐµÐ¼Ð° Ð²Ñ‹Ð±Ð¾Ñ€ÐºÐ¸ Ð¿Ð¾ Ð¼Ð¾Ð´ÑƒÐ»ÑÐ¼
+                //äëÿ óìåíüøåíèÿ îáúåìà âûáîðêè ïî ìîäóëÿì
                 $node_slots=$this->_common_obj->get_page_slotz($params['node_id']);
                 $slotz_in_page=array();
                 $slotz_in_page=array_intersect(XARRAY::askeyval($node_slots, 'basic'), XARRAY::askeyval($tpl_slotz, 'basic'));
@@ -362,7 +390,7 @@ class pagesBack  extends xModuleBack
             {
             
             $i=0;
-            //cÐ±Ð¾Ñ€ÐºÐ° ÑÐ»Ð¾Ñ‚Ð¾Ð²
+            //cáîðêà ñëîòîâ
             reset ($tpl_slotz);
             while (list($id, $tpl_slot)=each($tpl_slotz))
                 {
@@ -377,7 +405,7 @@ class pagesBack  extends xModuleBack
                 if (($fkey=array_search($tpl_slot['basic'], $slotz_in_page)) !== false)
                     {
                         
-                    //Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ° Ð½Ð° Ð¼Ð¾Ð´ÑƒÐ»Ð¸            
+                    //ïðîâåðêà íà ìîäóëè            
                  
                     //if ((!$params['tpl_name'])&&(!$params['get_slotz_only']))
                       //  {
@@ -395,6 +423,8 @@ class pagesBack  extends xModuleBack
                         {
                             if ($modules_crotch=$this->_tree->get_anc_multiply_childs(array_keys($mk), array('_MODULE'), true))
                             {
+                            
+                                
                                foreach  ($modules_crotch as $id=>$module)
                                {
 
@@ -407,6 +437,8 @@ class pagesBack  extends xModuleBack
                                         $module['params']=$mi->_common_obj->$method($module['params']);
                                        
                                    }
+   
+                                   
                                    
                                    $this->result['modules'][$mk[$module['ancestor']]][$id]=$module;
                                }
@@ -422,6 +454,8 @@ class pagesBack  extends xModuleBack
         
     function get_access($params)
     {    
+
+
         Common::call_common_instance('fusers');  
                 $fusers=fusers_module_common::getInstance();         
               
@@ -518,7 +552,7 @@ class pagesBack  extends xModuleBack
                 }
             }
 
-        //Ð½ÐµÐºÑ€Ð°ÑÐ¸Ð²Ð¾Ðµ Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ
+        //íåêðàñèâîå ðåøåíèå
         if ($return_slotz)
             {
             return $all_slotz;
@@ -560,7 +594,7 @@ class pagesBack  extends xModuleBack
         $this->result['page_data']['basic']=$page['basic'];
         $this->result['page_data']['VTemplate']         =$page['params']['Template'];
         
-        //Ð²ÑÐµ ÐºÐ¾Ñ€Ð½ÐµÐ²Ñ‹Ðµ ÑˆÐ°Ð±Ð»Ð¾Ð½Ñ‹    
+        //âñå êîðíåâûå øàáëîíû    
         $this->pg_initial_data($page['params']['Template'], 'page_data');
 
         $this->_tree->GetFullBonesUp($parameters['page_id']);
@@ -614,7 +648,7 @@ class pagesBack  extends xModuleBack
         //$this->get_slotz(1, null, true);
         }
 
-    //ÑÐ¿ÐµÑ†Ð¸Ð°Ð»ÑŒÐ½Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ ÑÐµÑ€Ð²ÐµÑ€ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð´Ð»Ñ xlist  Ð´Ð»Ñ Ð²Ñ‹Ð±Ð¾Ñ€ÐºÐ¸ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ñ Ð´ÐµÑ€ÐµÐ²Ð°
+    //ñïåöèàëüíàÿ ôóíêöèÿ ñåðâåð äàííûõ äëÿ xlist  äëÿ âûáîðêè äàííûõ ñ äåðåâà
     function load_xlist_data($parameters)
         {
         $TD                  =Common::inc_module_factory('TTreeSource');
@@ -642,7 +676,7 @@ class pagesBack  extends xModuleBack
             '_ROOT'
             ));
 
-        //obj_tree ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¿Ñ€ÑÐ¼Ñ‹Ð¼ Ð¿Ð¾Ñ‚Ð¾Ð¼ÐºÐ¾Ð¼ Tree Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ ÐµÐ³Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð±Ð¾ÑÐ½Ð¾Ð²Ð°Ð½Ð¾
+        //obj_tree ÿâëÿåòñÿ ïðÿìûì ïîòîìêîì Tree ïîýòîìó åãî èñïîëüçîâàíèå îáîñíîâàíî
         $this->result['data_set']=null;
         $TD->init_from_source($this->_tree);
         $TD->setOptions($options);
@@ -684,7 +718,7 @@ class pagesBack  extends xModuleBack
             '_ROOT'
             ));
 
-        //obj_tree ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¿Ñ€ÑÐ¼Ñ‹Ð¼ Ð¿Ð¾Ñ‚Ð¾Ð¼ÐºÐ¾Ð¼ Tree Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ ÐµÐ³Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð±Ð¾ÑÐ½Ð¾Ð²Ð°Ð½Ð¾
+        //obj_tree ÿâëÿåòñÿ ïðÿìûì ïîòîìêîì Tree ïîýòîìó åãî èñïîëüçîâàíèå îáîñíîâàíî
         $this->result['data_set']=null;
         $TD->init_from_source($this->_tree);
         $TD->setOptions($options);
@@ -729,7 +763,7 @@ class pagesBack  extends xModuleBack
                     $this->result['xlist']                             =true;
                     $this->result['action_properties_form']['Template']=XHTML::arr_select_opt(
                                                                             XARRAY::combine($files, $files), $se, true);
-                    $this->lct['action_properties']                    =$TMS->parseSection($parameters['Action']);
+                    $this->lct['action_properties']                    =$TMS->ParseSection($parameters['Action']);
                     break;
                     
                     
@@ -741,7 +775,7 @@ class pagesBack  extends xModuleBack
                     $this->result['xlist']                             =true;
                     $this->result['action_properties_form']['Template']=XHTML::arr_select_opt(
                                                                             XARRAY::combine($files, $files), $se, true);
-                    $this->lct['action_properties']                    =$TMS->parseSection($parameters['Action']);
+                    $this->lct['action_properties']                    =$TMS->ParseSection($parameters['Action']);
                 break;
 
 
@@ -751,7 +785,7 @@ class pagesBack  extends xModuleBack
                     $files                                             =Common::get_module_template_list('menu',array('.'.$parameters['Action'].'.html'));
                     $this->result['action_properties_form']['Template']=XHTML::arr_select_opt(
                                                                             XARRAY::combine($files, $files), $se, true);
-                    $this->lct['action_properties']                    =$TMS->parseSection($parameters['Action']);
+                    $this->lct['action_properties']                    =$TMS->ParseSection($parameters['Action']);
                     break;
 
                 case 'show_user_menu':
@@ -759,7 +793,7 @@ class pagesBack  extends xModuleBack
                $this->result['action_properties'] =true;               
                $files=Common::get_module_template_list('menu',array('.show_level_menu.html','.'.$parameters['Action'].'.html'));
                $this->result['action_properties_form']['Template']=XHTML::arr_select_opt(XARRAY::combine($files, $files),$se, true); 
-               $this->lct['action_properties']=$TMS->parseSection($parameters['Action']);
+               $this->lct['action_properties']=$TMS->ParseSection($parameters['Action']);
                
                $this->result['action_properties_form']['menu']= $this->generate_select_umenus();
                 
@@ -774,7 +808,7 @@ class pagesBack  extends xModuleBack
 
                     $this->result['action_properties_form']['Template']=XHTML::arr_select_opt(
                                                                             XARRAY::combine($files, $files), $se, true);
-                    $this->lct['action_properties']                    =$TMS->parseSection($parameters['Action']);
+                    $this->lct['action_properties']                    =$TMS->ParseSection($parameters['Action']);
                 }
             }
         }
@@ -786,41 +820,26 @@ class pagesBack  extends xModuleBack
                 
         function pages_table($params)
     {
-        $source=Common::classesFactory('treeJsonSource',array($this->_tree));
-        $opt=array(
-            'imagesIcon'=>array('_DOMAIN'=>'folderDomain.png','_LVERSION'=>'folderLang.png','_GROUP'=>'folder.gif'),
-            'gridFormat'=>true,
-            'nested'=>array('_ROOT','_GROUP','_DOMAIN','_LVERSION'),
-            'columns'=>array('>Name'=>array(),
-                             'basic'=>array('name'=>'objType'),
-                     ));
-
-        $source->setOptions($opt);
-                             
-
-        $this->result=$source->createView($params['id']);
-
         
-            /*$TD = Common::classesFactory('TTreeSource');
-            
-            $options['startNode'] = $params['id'];
-            $options['shownodesWithObjType'] = array('_PAGE','_GROUP','_ROOT','_LINK');
-            $options['groups'] = array('_GROUP','_ROOT');
-            $options['columnsAsParameters'] = array('name' => 'Name','visible'=>'Visible');
-            $options['preventDots'] = true;
-            $options['columnsAsStructs'] = array('basic'=>'basic');
-            $options['sequence'] = array('name','basic','visible');
-            
-            $this->result['data_set'] = array();
-            $options['gridFormat']=1;
-            
-            $TD->init_from_source($this->_tree);
+        $TD = Common::inc_module_factory('TTreeSource');
+        $options['startNode'] = $params['id'];
+        $options['shownodesWithObjType'] = array('_PAGE','_GROUP','_ROOT','_LINK');
+        $options['groups'] = array('_GROUP','_ROOT');
+        $options['columnsAsParameters'] = array('name' => 'Name','visible'=>'Visible');
+        $options['preventDots'] = true;
+        $options['columnsAsStructs'] = array('basic'=>'basic');
+        $options['sequence'] = array('name','basic','visible');
+        
+        $this->result['data_set'] = array();
+        $options['gridFormat']=1;
+        
+        $TD->init_from_source($this->_tree);
 
-            $TD->setOptions($options);
+        $TD->setOptions($options);
 
-            $TD->CreateView($params['id']);
-            
-            $this->result=$TD->result;     */
+        $TD->CreateView($params['id']);
+        
+        $this->result=$TD->result;
     }
 
 
@@ -867,7 +886,7 @@ class pagesBack  extends xModuleBack
     }
     
 
-    //Ð³ÐµÐ½ÐµÑ€Ð°Ñ†Ð¸Ñ Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð² Ð´ÐµÑ€ÐµÐ²Ð°
+    //ãåíåðàöèÿ îáúåêòîâ äåðåâà
 
     function set_root_data($site_name, $root_data)
         {
@@ -978,7 +997,7 @@ class pagesBack  extends xModuleBack
         $options['columns']=array('id','basic');
 
 
-        //obj_tree ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¿Ñ€ÑÐ¼Ñ‹Ð¼ Ð¿Ð¾Ñ‚Ð¾Ð¼ÐºÐ¾Ð¼ Tree Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ ÐµÐ³Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð±Ð¾ÑÐ½Ð¾Ð²Ð°Ð½Ð¾
+        //obj_tree ÿâëÿåòñÿ ïðÿìûì ïîòîìêîì Tree ïîýòîìó åãî èñïîëüçîâàíèå îáîñíîâàíî
         $this->result['data_set']=null;
         $options['sequence']=array('id','basic');
         $TTS->setOptions($options);
@@ -1016,7 +1035,7 @@ class pagesBack  extends xModuleBack
         $options['columns']=array('*');
 
         
-        //obj_tree ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¿Ñ€ÑÐ¼Ñ‹Ð¼ Ð¿Ð¾Ñ‚Ð¾Ð¼ÐºÐ¾Ð¼ Tree Ð¿Ð¾ÑÑ‚Ð¾Ð¼Ñƒ ÐµÐ³Ð¾ Ð¸ÑÐ¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ð½Ð¸Ðµ Ð¾Ð±Ð¾ÑÐ½Ð¾Ð²Ð°Ð½Ð¾
+        //obj_tree ÿâëÿåòñÿ ïðÿìûì ïîòîìêîì Tree ïîýòîìó åãî èñïîëüçîâàíèå îáîñíîâàíî
         $this->result['data_set']=null;
         $options['sequence']=array('id','from','to','is301');
         $TTS->setOptions($options);
@@ -1039,9 +1058,9 @@ class pagesBack  extends xModuleBack
             $w='id="' . $params['id'] . '"';
             }
             
-        if($res=$TDB->query('delete from user_menu where '.$w))
+        if($TDB->get_results('delete from user_menu where '.$w))
         {
-            $this->result['isDel'] =$res;
+            $this->result['isDel'] = $TDB->result;
         }else{
             x3_error::push('error delete',$this->_module_name);
         }
@@ -1114,19 +1133,7 @@ class pagesBack  extends xModuleBack
     }
 
 
-    function set_routes_to_server($page_id, $action)
-    {
-    //$pages=Common::module_factory('pages.back');
-    $url=$this->_get_page_url($page_id);
-    $this->create_new_route(array
-    (
-        'from' => '/' . $url . '/(?!~)(.*?)',
-        'to' => '/' . $url . '/~' . $action . '$1/',
-        'is301' => '0'
-    ));
-    }
 
-    
 
 
     }

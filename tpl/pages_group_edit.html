@@ -1,0 +1,68 @@
+
+
+<div id="e-form">
+  <form id="group_edit">
+  
+   
+          <p>{group_name}</p>
+          <input  class="required validate-alpha-ext" name="Name" type="text" />
+        
+          <p><strong>{link}</strong></p>
+          <input type="text" name="basic"  value="" />
+        
+        
+    <p>{template_page_group_default}</p>
+    <select id="Template">
+    </select>
+    <p>{home_page_group}</p>
+    <select id="StartPage">
+    </select>
+    <p>{group_visibility}</p>
+    <ul class="chk">
+      <li>
+        <input type="checkbox" name="Visible" />
+        {do_not_display_the_global_menu}</li>
+        
+        
+      <!--<li>
+        <p>
+            {short_name}
+            <br/>
+            <input type="text" name="ShortName" />
+            <br/>
+        </p>  
+      </li> -->
+
+                
+      <!--<li>
+        <input type="checkbox" name="TopMenuVisible" />
+        {do_not_display_top_menu}</li>-->
+      <!--<li>
+        <input type="checkbox" name="UseHash" />
+        {use_hash}</li>-->
+      <li>      
+        <input type="checkbox" name="DisableGlobalLink" />
+        {disconnect_the_link_from_the_global_menu}</li>
+      <li>
+        <input type="checkbox" name="DisableMapLink" />
+        {disconnect_the_link_from_the_site_map}</li>
+      <li>
+        <input type="checkbox" name="DisablePath" />
+        {do_not_display_in_the_way_of_the_page}</li>
+    </ul>
+    
+   
+    <p>{Icon}</p>     
+    <input class="inp-b2" id="Icon" name="Icon">
+    <a onclick="xFileManager.selectImage('Icon')" href="javascript:void(0)" class="button small">{select}</a>
+
+    <p>{Comment}</p>   
+    <textarea name="Comment" id="Comment" ondblclick="XTR_main.apply_weditor(this)"></textarea>
+
+  </form>
+  <a class="button" href="javascript:void(0)" onclick="XTR_pages.save_edited_group(this)">{save}</a>
+  <div id="result_container" style="display:none"> </div>
+</div>
+<div id="slotzcontainer">
+  <div id="slotz"></div>
+</div>

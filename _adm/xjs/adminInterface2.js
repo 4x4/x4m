@@ -98,6 +98,7 @@ var Connector = new Class({
 
     execute: function (data,func)
     {
+        
         d = new Array();
         d[this.module+'.back'] = data;
         this.result = null;
@@ -115,9 +116,11 @@ var Connector = new Class({
 
             }
         
-            this.lct = xConnector.lct;            
+            this.lct =  xConnector.lct;   
+            
             this.result = xConnector.result;
             
+        
             if(!func)return this.result;
         }
   
@@ -700,11 +703,13 @@ var cardeonMonitor = new Class({
         if(jQuery(element).next().is(':visible'))
         {
             jQuery(element).removeClass('up');
-            jQuery(element).next().slideUp();
+            jQuery(element).next().slideUp(300);
+          
             
         }else{
             jQuery(element).addClass('up');
-            jQuery(element).next().slideDown();
+            jQuery(element).next().slideDown(300);
+          
         }
         
     },
@@ -737,7 +742,7 @@ var obs = new MutationObserver(function(mutations, observer) {
         // look through all added nodes of this mutation
         for(var j=0; j<mutations[i].addedNodes.length; ++j) {
                                          
-            // was a child added with ID of 'bar'?
+            
             if(!$(mutations[i].addedNodes[j]).hasClass('firebugResetStyles'))
             {
                 $(window).trigger('mutate');

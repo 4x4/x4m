@@ -3,11 +3,12 @@
 
  /*  Установка опций
      
-     $options['startNode'] - стартовая нода обхода дерева,она же топовая нода
+     
      
      $options['shownodesWithObjType'] - массив нод разрешенных для показа с определенным objType     
      $options['emulateRoot']=array('data'=>'','image');
      $options['endLeafs'] ->array('OBJTYPE')
+     $options['imagesIcon']=array('_GROUP'=>'folder.gif');
      
      
      $options['columns']=array('>LastMod'=>                       //для параметров в params используем >paramName для структуры без стрелки
@@ -51,6 +52,7 @@ class treeJsonSource
     function createView($id = 1)
         {
 
+            
         if($this->_options['emulateRoot']&&$id==0)
         {
                 $result['data_set']['rows'][1]=array('data'=>$this->_options['emulateRoot']['data'],'xmlkids'=>1,'image'=>$this->_options['emulateRoot']['image']);
@@ -61,18 +63,21 @@ class treeJsonSource
         
         $addWhereNest=array(array('@obj_type','=',$this->_options['nested']));
         
-        $childsNodes  =$this->_tree->selectStruct('*')->childs($id,2)->where($addWhereNest,true)->asTree()->run();
-        
-
+        if($id==0){$curId=1;$lev=1;}else{$curId=$id;$lev=2;}
+        $childsNodes  =$this->_tree->selectStruct('*')->childs($curId,$lev)->where($addWhereNest,true)->asTree()->run();
      
         if ($nodes  =$this->_tree->selectParams('*')->selectStruct('*')->childs($id,1)->where($addWhere,true)->run())
             {
-             foreach ($nodes as $id=>$node)
-                {                
+             foreach ($nodes as $node)
+                {             
+                   
+                    $nodeId=$node['id'];
+                   
                     if (is_array($this->_options['columns']))
                     {
-                        $localData=array();
                         
+                        
+                        reset($this->_options['columns']);
                         while (list($key, $tempValue)=each($this->_options['columns']))
                         {
                             
@@ -96,7 +101,7 @@ class treeJsonSource
                                 //трансформ по функции
                                 if($tempValue['onAttribute'])
                                 {                                           
-                                    $extData[$tempValue['name']]=$tempValue['onAttribute']($tempValue['onAttributeParams'],$extData[$tempValue['name']],$id);
+                                    $extData[$tempValue['name']]=$tempValue['onAttribute']($tempValue['onAttributeParams'],$extData[$tempValue['name']],$nodeId);
                                 } 
                            
                                                         
@@ -112,20 +117,20 @@ class treeJsonSource
                         
                         if($this->_options['gridFormat'])
                         {                   
-                        debugbreak();     
-                            $r=array('id'=>$id,'data'=>array_values($extData),'obj_type'=>$node['obj_type']);                        
+                         
+                            $r=array('id'=>$nodeId,'image'=>$this->_options['imagesIcon'][$node['obj_type']],'data'=>array_values($extData),'obj_type'=>$node['obj_type']);                        
                             
-                            if($childsNodes->hasChilds($id))
+                            if($childsNodes->hasChilds($nodeId))
                                 {  
                                     $r['xmlkids']=1;
                                 }
                                 
 
-                            $result['data_set']['rows'][$id]=$r;
+                            $result['data_set']['rows'][$nodeId]=$r;
                         
                         }else{
                         
-                            $result['data_set'][$id]=$extData;
+                            $result['data_set'][$nodeId]=$extData;
                         }
                     }
                     

@@ -267,6 +267,9 @@ continue;
 methodArgs[methodArgs.length] = callArguments[iterator];
 }
 
+if(obj['result'])delete obj['result'];
+if(obj['lct'])delete obj['lct'];
+
 var xmlHttp = xoad.getXmlHttp();
 var requestBody = {
 source : obj,

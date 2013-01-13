@@ -46,7 +46,7 @@ div.gridbox table.obj th, div.gridbox table.hdr th{
 	}
 
 div.gridbox table.row20px tr  td{
-    height:20px;
+    height:28px;
     white-space: nowrap;
     padding:0px;
 }
@@ -55,7 +55,7 @@ div.gridbox .objbox {
 	position:relative;
 	}
 div.gridbox table.obj td span.space, div.gridbox table.obj td img.space{
-	width:18px;
+	width:16px;
 	}
 div.gridbox table.obj tr.rowselected td.cellselected, div.gridbox table.obj td.cellselected {
 	background-color:#d8d8d8;
@@ -163,11 +163,11 @@ div.gridbox_xp{
 	border:1px solid lightgrey;
 }
 div.gridbox_xp .xhdr{
-	background-image:url('xres/ximg/grid/imgs/header_bg_60.gif');
+	background-image:url('_adm/xres/ximg/grid/imgs/header_bg_60.gif');
 }
 div.gridbox_xp table.hdr td {
 	color:#616161;
-	background-image:url('xres/ximg/grid/imgs/header_bg_60.gif');
+	background-image:url('_adm/xres/ximg/grid/imgs/header_bg_60.gif');
 	border:0px;
 	text-align: center;
 	margin:0px;
@@ -226,7 +226,7 @@ div.gridbox_mt .dhx_sub_row
 	background-color:transparent;
 }
 div.gridbox_mt .xhdr{
-	background-image:url('xres/ximg/grid/imgs/header_bg.gif');
+	background-image:url('_adm/xres/ximg/grid/imgs/header_bg.gif');
 }
 div.gridbox_mt .xhdr_last{
 	border:0px;
@@ -240,7 +240,7 @@ div.gridbox_mt table.hdr td {
 	border-left: 1px solid lightgrey;
 	text-align: center;
 	margin:0px;
-	background-image:url('xres/ximg/grid/imgs/header_bg.gif');
+	background-image:url('_adm/xres/ximg/grid/imgs/header_bg.gif');
 	padding: 0px 0px 0px 0px;
 	-moz-user-select:none;
 	-moz-user-select:-moz-none;    
@@ -337,14 +337,14 @@ div.gridbox_modern .dhx_sub_row
 	background-color:transparent;
 }
 div.gridbox_modern .xhdr{
-	background-image:url(xres/ximg/grid/imgs/skin_modern_header.png);
+	background-image:url(_adm/xres/ximg/grid/imgs/skin_modern_header.png);
 }
 div.gridbox_modern .xhdr_last{
 	border: 1px solid;
 	border-color : #FDFDFD #B5B5B5 #B5B5B5 #FDFDFD;
 }
 div.gridbox_modern table.hdr{
-	background-image:url(xres/ximg/grid/imgs/skin_modern_header.png);
+	background-image:url(_adm/xres/ximg/grid/imgs/skin_modern_header.png);
 }
 
 div.gridbox_modern table.hdr td {
@@ -428,7 +428,7 @@ div.gridbox_clear div.topMumba{
 	 left:0px;
 	 width:100%;
 	 height:3px;
-	 background-image:url(xres/ximg/grid/imgs/skinC_header.png);
+	 background-image:url(_adm/xres/ximg/grid/imgs/skinC_header.png);
 	 overflow:hidden;
 	 padding:0px;
 	 margin:0px;
@@ -438,7 +438,7 @@ div.gridbox_clear div.bottomMumba{
 	 left:0px;
 	 width:100%;
 	 height:3px;
-	 background-image:url(xres/ximg/grid/imgs/skinD_header.png);
+	 background-image:url(_adm/xres/ximg/grid/imgs/skinD_header.png);
 	 overflow:hidden;
 }
 div.gridbox_clear div.bottomMumba img,div.gridbox_clear div.topMumba img{
@@ -613,30 +613,30 @@ div.gridbox_sbdark .odd_sbdark {
  }
 div.gridbox_dhx_skyblue div.ftr td{
 	text-align:right;
-	background-image:url(./xres/ximg/grid/imgs/sky_blue_grid.gif);
+	background-image:url(./_adm/xres/ximg/grid/imgs/sky_blue_grid.gif);
 	border-color:#A4BED4;
 }
 
 
 div.gridbox_dhx_skyblue .xhdr{
-/*	background-image:url(/xres/ximg/grid/imgs/sky_blue_grid.gif);	*/
+/*	background-image:url(/_adm/xres/ximg/grid/imgs/sky_blue_grid.gif);	*/
 }
 
 div.gridbox_dhx_skyblue table.hdr tr{
-/*	background-image:url(/xres/ximg/grid/imgs/sky_blue_grid.gif);
+/*	background-image:url(/_adm/xres/ximg/grid/imgs/sky_blue_grid.gif);
 	background-position:0px -1px\9;*/
 	background:#58555d;
 	background:-moz-linear-gradient(center top, #605c68 45%, #58555d 80%);	
 	background:-webkit-gradient(linear, 0% 45%, 0% 80%, from(#605c68), to(#58555d));
 }
 body:nth-of-type(1) div.gridbox_dhx_skyblue table.hdr tr{
-/*	background-image:url(/xres/ximg/grid/imgs/sky_blue_grid.gif);
+/*	background-image:url(/_adm/xres/ximg/grid/imgs/sky_blue_grid.gif);
 	background-position:0px -1px;*/
 }
 
 div.gridbox_dhx_skyblue table.obj tr td{
 	font-family:Arial;
-	font-size:11px;
+	font-size:12px;
 	border-width:0px 0px 0px 0px;
 	padding-right:4px;
 	padding-left:4px;
@@ -680,6 +680,10 @@ div.gridbox table.obj tr  td.editable div.treegrid_cell{
 	padding-left:4px;
 	padding-top:1px;
 }
+
+div.gridbox div.treegrid_cell .ticon{
+    margin-left: 4px;
+}
 div.gridbox_dhx_skyblue table.obj tr.rowselected{
 	background-color:#FFF1CC;
 }
@@ -687,19 +691,19 @@ div.gridbox_dhx_skyblue table.obj tr.rowselected td{
 	background-color:#FFF1CC;
 	background-repeat:repeat-x;
 	background-position:0px 0px;	
-	background-image:url(/xres/ximg/grid/imgs/sky_blue_sel2.png);
+	background-image:url(/_adm/xres/ximg/grid/imgs/sky_blue_sel2.png);
 }
 div.gridbox_dhx_skyblue table.obj.row20px tr.rowselected td{
 	background-repeat:repeat-x;
 	background-position:0px 0px;	
-	background-image:url(/xres/ximg/grid/imgs/sky_blue_sel.png);	
+	background-image:url(/_adm/xres/ximg/grid/imgs/sky_blue_sel.png);	
 }
 
 div.gridbox_dhx_skyblue table.obj tr.rowselected td.cellselected {
 	background-color:#FFF1CC;
 }
 div.gridbox_dhx_skyblue .odd_dhx_skyblue{
-	background-color:#fafafa;
+	background-color:#fcfbfc;
 }
 .dhx_combo_select, .gridbox_dhx_skyblue .dhx_combo_edit, .gridbox_dhx_skyblue .dhx_textarea{
     font-family:Arial;

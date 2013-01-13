@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1, user-scalable=no" charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8 user-scalable=no" charset="utf-8" />
 <title>X4M</title>
 <link rel="stylesheet" type="text/css" href="css/global.css" />
 <link rel="stylesheet" type="text/css" href="/_adm/xjs/_components/dhtmlx/windows/dhtmlxwindows.css">
@@ -28,6 +28,39 @@
 <script>
 
 $(document).ready(function(){
+    
+    
+ var   dynXLS=function(id)
+            {
+             
+                 pconnector.execute({pages_table:{id:id}});            
+                 if(pconnector.result)
+                {
+                    tree.json_dataset=pconnector.result.data_set;
+                }
+      
+                    return true;
+            }
+   
+/*  tap
+   var el = this.getFirstParentOfType(_isIE ? ev.srcElement : ev.target, "TD");
+
+        if (el){
+            var rowId = el.parentNode.idd;
+            return this.callEvent("onRowDblClicked", [
+                rowId,
+                el._cellIndex
+            ]);
+        }
+        
+        
+*/
+        
+   var  tree_object_clicked=function(id)
+   {
+       alert(id);
+   }
+   
    
           var   pconnector =new Connector('pages');
     
@@ -35,28 +68,32 @@ $(document).ready(function(){
             
             tree.selMultiRows = true;
             tree.imgURL = "/_adm/xres/ximg/green/";
-            tree.setHeader(_lang_pages['page_name']+','+_lang_pages['link']+','+_lang_pages['no_display']);
-            tree.setInitWidths("280,*,*");
-            tree.setColAlign("left,left,center");
-            tree.setColTypes("tree,ed,ch");
-            tree.enableDragAndDrop(true);
-            tree.enableEditEvents(false,false,true);
+            tree.setHeader(_lang_pages['page_name']+','+_lang_pages['link']);
+            tree.setInitWidths("330,*");
+            tree.setColAlign("left,left");
+            tree.setColTypes("tree,ed");
+       //     tree.enableDragAndDrop(true);
+         //   tree.enableEditEvents(false,false,true);
             //tree.attachEvent("onDrag",this.on_treegrid_drag.bind(this));
             //tree.setDragBehavior('complex-next');
             
             //tree.setSelectFilterLabel(2,_select_filter_yes_no);
 
-            tree.enableMultiselect(true);
+          //  tree.enableMultiselect(true);
       //      tree.enableContextMenu(menu);
-            tree.attachHeader("#text_search,#text_search,#select_filter");
+            tree.attachHeader("#text_search,#text_search");
             tree.init();
             tree.kidsXmlFile=1;
      
             //tree.attachEvent("onCheckbox",this.switch_page.bind(this)); 
             tree.attachEvent("onDynXLS",dynXLS);
             tree.setSkin("dhx_skyblue");
-          //  tree.attachEvent("onRowDblClicked", tree_object_clicked.bind(this));
-            pconnector.execute({pages_table:{id:1}});            
+           
+            tree.attachEvent("onRowDblClicked", tree_object_clicked);
+           
+            
+            
+            pconnector.execute({pages_table:{id:0}});            
             
             if(pconnector.result)
                     {
@@ -67,16 +104,7 @@ $(document).ready(function(){
             tree.openItem(1);
             
             
-         var   dynXLS=function()
-            {
-                
-                 pconnector.execute({pages_table:{id:id}});            
-                 if(pconnector.result)
-                {
-                    tree.json_dataset=pconnector.result.data_set;
-                }
-                    return true;
-            }
+           
             
     
 });
